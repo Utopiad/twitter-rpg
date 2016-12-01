@@ -52,7 +52,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'rspec'
 gem 'rspec-rails'
-<<<<<<< HEAD
 
 gem 'materialize-sass'
 platforms :mswin do
@@ -60,5 +59,3 @@ platforms :mswin do
 end
 
 ruby "2.3.1"
-=======
->>>>>>> adding rspec and devise
