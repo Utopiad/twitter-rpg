@@ -51,5 +51,6 @@ gem 'devise'
 gem 'rspec'
 gem 'rspec-rails'
 
+gem 'materialize-sass'
 
 ruby "2.3.1"

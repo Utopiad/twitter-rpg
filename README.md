@@ -1,3 +1,8 @@
+# Routine
+Un p'tit coup de  ``bundle install` quand on met son code à jour.
+// TO DO
+// Alias pour git rebase origin/develop && bundle install
+
 # Workflow
 
 Pour ce projet où nous serons nombreux à développer, je propose qu'on mette en place le gitflow tel que j'ai pu le voir chez Sketchfab. Ce repo a trois types de branches :
