@@ -1,0 +1,10 @@
+<h1><%= @world.name %></h1>
+
+<p>user : <%= @world.user.email %></p>
+
+
+<p><%= @world.public == 1 ? "public" : "privé" %></p>
+<% if @world.public == 1 %>
+  <%= link_to "Create character", :controller => :world, :action => :new_character, id: @world.id %>
+
+<% end %>
