@@ -10,10 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203171618) do
+ActiveRecord::Schema.define(version: 20161206174512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "characters", force: :cascade do |t|
+    t.integer  "world_id"
+    t.integer  "classe_id"
+    t.integer  "user_id"
+    t.text     "name"
+    t.integer  "total_experience", default: 0
+    t.integer  "bonus_attack_min", default: 0
+    t.integer  "bonus_attack_max", default: 0
+    t.integer  "bonus_armor",      default: 0
+    t.integer  "bonus_life",       default: 0
+    t.integer  "malus_life",       default: 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "classes", force: :cascade do |t|
+    t.integer  "world_id"
+    t.text     "name"
+    t.integer  "attack_min"
+    t.integer  "attack_max"
+    t.integer  "armor"
+    t.integer  "life"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fights", force: :cascade do |t|
+    t.string   "attacker_type"
+    t.integer  "attacker_id"
+    t.string   "defender_type"
+    t.integer  "defender_id"
+    t.integer  "attacker_attack_min"
+    t.integer  "attacker_attack_max"
+    t.integer  "attacker_armor"
+    t.integer  "attacker_life"
+    t.integer  "attacker_malus_life"
+    t.integer  "defender_attack_min"
+    t.integer  "defender_attack_max"
+    t.integer  "defender_armor"
+    t.integer  "defender_life"
+    t.integer  "defender_malus_life"
+    t.integer  "hit"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["attacker_type", "attacker_id"], name: "index_fights_on_attacker_type_and_attacker_id", using: :btree
+    t.index ["defender_type", "defender_id"], name: "index_fights_on_defender_type_and_defender_id", using: :btree
+  end
+
+  create_table "monsters", force: :cascade do |t|
+    t.integer  "world_id"
+    t.text     "name"
+    t.integer  "attack_min"
+    t.integer  "attack_max"
+    t.integer  "armor"
+    t.integer  "life"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,6 +89,14 @@ ActiveRecord::Schema.define(version: 20161203171618) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "worlds", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "name"
+    t.integer  "public"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
