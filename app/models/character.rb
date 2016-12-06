@@ -11,8 +11,12 @@ class Character < ApplicationRecord
     self.save
   end
 
-  def life
+  def current_life
     self.classe.life + self.bonus_life - self.malus_life
+  end
+
+  def life
+    self.classe.life + self.bonus_life
   end
 
   def armor
