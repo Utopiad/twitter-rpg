@@ -1,4 +1,5 @@
 class Character < ApplicationRecord
+  include Combat
   belongs_to :user
   belongs_to :world
   belongs_to :classe
