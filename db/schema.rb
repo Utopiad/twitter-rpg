@@ -70,8 +70,9 @@ ActiveRecord::Schema.define(version: 20161206174512) do
     t.integer  "attack_max"
     t.integer  "armor"
     t.integer  "life"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "malus_life", default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|
