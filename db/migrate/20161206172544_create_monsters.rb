@@ -7,7 +7,7 @@ class CreateMonsters < ActiveRecord::Migration[5.0]
       t.integer :attack_max
       t.integer :armor
       t.integer :life
-      t.integer :malus_life
+      t.integer :malus_life, default: 0
 
       t.timestamps
     end

@@ -9,19 +9,7 @@ class Monster < ApplicationRecord
     self.save
   end
 
-  def life
+  def current_life
     self.life - self.malus_life
-  end
-
-  def armor
-    self.armor
-  end
-
-  def attack_min
-    self.attack_min
-  end
-
-  def attack_max
-    self.attack_max
   end
 end
