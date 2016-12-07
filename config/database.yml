@@ -25,6 +25,17 @@ development:
   <<: *default
   database: twitter-rpg_development
 
+# Docker environment : link with a postgres container
+docker: &docker
+  adapter: postgresql
+  encoding: utf8
+  database: postgres
+  username: postgres
+  password:
+  host: db
+  port: 5432
+  pool: 5
+
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
