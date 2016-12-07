@@ -8,7 +8,7 @@ class CharacterController < ApplicationController
       :classe_id, :user_id, :total_experience, :bonus_attack_min,
       :bonus_attack_max, :bonus_armor, :bonus_life))
 
-    world_id = cookies[:current_world_id]
+    world_id = params[:world_id]
     current_user_id = current_user.id
 
     @character.world = World.where(id: world_id).first

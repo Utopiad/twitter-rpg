@@ -1,6 +1,7 @@
 class WorldController < ApplicationController
   def show
     @world = World.where(id: params[:id]).first
+    @messages = @world.messages
     head 404 and return unless @world
   end
 
@@ -9,11 +10,6 @@ class WorldController < ApplicationController
       redirect_to controller: "devise/sessions", action: "new"
     end
     @world = World.new
-  end
-
-  def new_character
-    cookies[:current_world_id] = World.where(id: params[:id]).first.id
-    redirect_to controller: "character", action: "new"
   end
 
   def create
