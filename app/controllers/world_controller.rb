@@ -1,6 +1,7 @@
 class WorldController < ApplicationController
   def show
     @world = World.where(id: params[:id]).first
+    @messages = @world.messages
     head 404 and return unless @world
   end
 

@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207190444) do
+
+ActiveRecord::Schema.define(version: 20161207193327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +75,14 @@ ActiveRecord::Schema.define(version: 20161207190444) do
     t.datetime "updated_at",          null: false
     t.index ["attacker_type", "attacker_id"], name: "index_fights_on_attacker_type_and_attacker_id", using: :btree
     t.index ["defender_type", "defender_id"], name: "index_fights_on_defender_type_and_defender_id", using: :btree
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "character_id"
+    t.integer  "world_id"
+    t.text     "message"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "monsters", force: :cascade do |t|
