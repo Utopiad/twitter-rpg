@@ -11,11 +11,6 @@ class WorldController < ApplicationController
     @world = World.new
   end
 
-  def new_character
-    cookies[:current_world_id] = World.where(id: params[:id]).first.id
-    redirect_to controller: "character", action: "new"
-  end
-
   def create
     @world = World.new(params.require(:world).permit(:name, :public))
     @world.user = current_user

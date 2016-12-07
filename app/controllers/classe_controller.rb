@@ -7,7 +7,7 @@ class ClasseController < ApplicationController
     @classe = Classe.new(params.require(:classe).permit(:name, :world_id,
       :attack_min, :attack_max, :armor, :life))
 
-    world_id = cookies[:current_world_id]
+    world_id = params[:world_id]
     @classe.world = World.where(id: world_id).first
     if @classe.save
       redirect_to action: "show", id: @classe.id
