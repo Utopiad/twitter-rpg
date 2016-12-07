@@ -5,6 +5,7 @@ class Character < ApplicationRecord
   belongs_to :classe
   has_many :fights, as: :attacker
   has_many :fights, as: :defender
+  has_many :message
 
   def malus_life=(malus_life)
     self[:malus_life] = malus_life
