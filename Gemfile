@@ -52,5 +52,6 @@ gem 'rspec'
 gem 'rspec-rails'
 
 gem 'materialize-sass'
+gem 'wdm'
 
 ruby "2.3.1"

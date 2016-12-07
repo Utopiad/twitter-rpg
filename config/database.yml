@@ -24,6 +24,13 @@ default: &default
 development:
   <<: *default
   database: twitter-rpg_development
+henry:
+  <<: *default
+  database: twitter-rpg
+  encoding: utf8
+  username: postgres
+  password: root
+  port: 5432
 
 # Docker environment : link with a postgres container
 docker: &docker
