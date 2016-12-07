@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20161207193327) do
+ActiveRecord::Schema.define(version: 20161207200034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chapters", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "image"
+    t.integer  "world_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["world_id"], name: "index_chapters_on_world_id", using: :btree
+  end
 
   create_table "characters", force: :cascade do |t|
     t.integer  "world_id"
@@ -53,6 +62,16 @@ ActiveRecord::Schema.define(version: 20161207193327) do
     t.string   "name"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "image"
+    t.integer  "chapter_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["chapter_id"], name: "index_events_on_chapter_id", using: :btree
   end
 
   create_table "fights", force: :cascade do |t|
@@ -122,4 +141,6 @@ ActiveRecord::Schema.define(version: 20161207193327) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "chapters", "worlds"
+  add_foreign_key "events", "chapters"
 end

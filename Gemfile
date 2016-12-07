@@ -53,6 +53,8 @@ gem 'rspec'
 gem 'rspec-rails'
 
 gem 'materialize-sass'
-gem 'wdm'
+platforms :mswin do
+  gem "wdm", :group => [:development, :test]
+end
 
 ruby "2.3.1"
