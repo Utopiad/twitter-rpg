@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20161207193327) do
 
   # These are extensions that must be enabled in order to support this database
@@ -39,6 +40,19 @@ ActiveRecord::Schema.define(version: 20161207193327) do
     t.integer  "life"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "event_monsters", force: :cascade do |t|
+    t.integer  "world_id"
+    t.integer  "monster_id"
+    t.integer  "bonus_attack_min", default: 0
+    t.integer  "bonus_attack_max", default: 0
+    t.integer  "bonus_life",       default: 0
+    t.integer  "bonus_armor",      default: 0
+    t.integer  "malus_life",       default: 0
+    t.string   "name"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "fights", force: :cascade do |t|
