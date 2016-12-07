@@ -7,7 +7,7 @@ class MonsterController < ApplicationController
     @monster = Monster.new(params.require(:monster).permit(:name,
       :attack_min, :attack_max, :armor, :life))
 
-    world_id = cookies[:current_world_id]
+    world_id = params[:world_id]
 
     @monster.world = World.where(id: world_id).first
 
@@ -20,5 +20,6 @@ class MonsterController < ApplicationController
 
   def show
     @monster = Monster.where(id: params[:id]).first
+    head 404 and return unless @monster
   end
 end

@@ -4,5 +4,5 @@
   <p><%= f.submit "Create" %></p>
 <% end %>
 
-<%= link_to "Create classe", :controller => :classe, :action => :new %>
-<%= link_to "Create monster", :controller => :monster, :action => :new %>
+<%= link_to "Create classe", :controller => :classe, :action => :new, :world_id => @world.id %>
+<%= link_to "Create monster", :controller => :monster, :action => :new, :world_id => @world.id %>
