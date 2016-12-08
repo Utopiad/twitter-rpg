@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208012737) do
+ActiveRecord::Schema.define(version: 20161208094726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,22 +25,7 @@ ActiveRecord::Schema.define(version: 20161208012737) do
     t.index ["world_id"], name: "index_chapters_on_world_id", using: :btree
   end
 
-  create_table "characters", force: :cascade do |t|
-    t.integer  "world_id"
-    t.integer  "classe_id"
-    t.integer  "user_id"
-    t.text     "name"
-    t.integer  "total_experience", default: 0
-    t.integer  "bonus_attack_min", default: 0
-    t.integer  "bonus_attack_max", default: 0
-    t.integer  "bonus_armor",      default: 0
-    t.integer  "bonus_life",       default: 0
-    t.integer  "malus_life",       default: 0
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-  end
-
-  create_table "classes", force: :cascade do |t|
+  create_table "character_types", force: :cascade do |t|
     t.integer  "world_id"
     t.text     "name"
     t.integer  "attack_min"
@@ -49,6 +34,21 @@ ActiveRecord::Schema.define(version: 20161208012737) do
     t.integer  "life"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "characters", force: :cascade do |t|
+    t.integer  "world_id"
+    t.integer  "character_type_id"
+    t.integer  "user_id"
+    t.text     "name"
+    t.integer  "total_experience",  default: 0
+    t.integer  "bonus_attack_min",  default: 0
+    t.integer  "bonus_attack_max",  default: 0
+    t.integer  "bonus_armor",       default: 0
+    t.integer  "bonus_life",        default: 0
+    t.integer  "malus_life",        default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "event_monsters", force: :cascade do |t|

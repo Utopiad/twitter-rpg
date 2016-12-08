@@ -5,7 +5,7 @@ class CharacterController < ApplicationController
 
   def create
     @character = Character.new(params.require(:character).permit(:name, :world_id,
-      :classe_id, :user_id, :total_experience, :bonus_attack_min,
+      :character_type_id, :user_id, :total_experience, :bonus_attack_min,
       :bonus_attack_max, :bonus_armor, :bonus_life))
 
     world_id = params[:world_id]

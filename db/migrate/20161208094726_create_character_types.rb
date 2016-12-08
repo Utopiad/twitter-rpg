@@ -1,6 +1,6 @@
-class CreateClasses < ActiveRecord::Migration[5.0]
+class CreateCharacterTypes < ActiveRecord::Migration[5.0]
   def change
-    create_table :classes do |t|
+    create_table :character_types do |t|
       t.integer :world_id
       t.text :name
       t.integer :attack_min
