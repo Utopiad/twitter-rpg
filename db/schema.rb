@@ -96,6 +96,15 @@ ActiveRecord::Schema.define(version: 20161208094726) do
     t.index ["defender_type", "defender_id"], name: "index_fights_on_defender_type_and_defender_id", using: :btree
   end
 
+  create_table "inventories", force: :cascade do |t|
+    t.integer  "character_id"
+    t.integer  "stuff_id"
+    t.integer  "used"
+    t.integer  "equiped"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer  "character_id"
     t.integer  "world_id"
@@ -114,6 +123,17 @@ ActiveRecord::Schema.define(version: 20161208094726) do
     t.integer  "malus_life", default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "stuffs", force: :cascade do |t|
+    t.integer  "world_id"
+    t.integer  "bonus_attack_min"
+    t.integer  "bonus_attack_max"
+    t.integer  "bonus_armor"
+    t.integer  "bonus_life"
+    t.string   "name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "users", force: :cascade do |t|

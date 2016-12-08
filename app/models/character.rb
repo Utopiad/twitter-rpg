@@ -6,6 +6,9 @@ class Character < ApplicationRecord
   has_many :fights, as: :attacker
   has_many :fights, as: :defender
   has_many :messages
+  has_many :inventories, dependent: :destroy
+  has_many :stuffs, through: :inventories
+
 
   def malus_life=(malus_life)
     self[:malus_life] = malus_life
