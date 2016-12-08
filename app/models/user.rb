@@ -12,6 +12,7 @@ class User < ApplicationRecord
   end
 
   def joined_world_id?(world_id)
+    puts self.joined_worlds_id
     self.joined_worlds_id.include?(world_id)
   end
 end

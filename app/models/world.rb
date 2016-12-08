@@ -3,7 +3,7 @@ class World < ApplicationRecord
 
   belongs_to :user
 
-  has_many :character_type, dependent: :destroy
+  has_many :character_types, dependent: :destroy
   has_many :monsters, dependent: :destroy
   has_many :chapters, dependent: :destroy
 
