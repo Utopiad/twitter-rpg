@@ -79,19 +79,9 @@ ActiveRecord::Schema.define(version: 20161208143326) do
     t.integer  "attacker_id"
     t.string   "defender_type"
     t.integer  "defender_id"
-    t.integer  "attacker_attack_min"
-    t.integer  "attacker_attack_max"
-    t.integer  "attacker_armor"
-    t.integer  "attacker_life"
-    t.integer  "attacker_malus_life"
-    t.integer  "defender_attack_min"
-    t.integer  "defender_attack_max"
-    t.integer  "defender_armor"
-    t.integer  "defender_life"
-    t.integer  "defender_malus_life"
     t.integer  "hit"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["attacker_type", "attacker_id"], name: "index_fights_on_attacker_type_and_attacker_id", using: :btree
     t.index ["defender_type", "defender_id"], name: "index_fights_on_defender_type_and_defender_id", using: :btree
   end
