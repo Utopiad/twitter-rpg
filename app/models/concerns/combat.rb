@@ -1,4 +1,6 @@
 module Combat
+  extend ActiveSupport::Concern
+
   def fight(defender:)
     fight = Fight.new(attacker: self, defender: defender)
     fight.save
@@ -23,4 +25,8 @@ module Combat
     fight.hit = hit
     fight.save
   end
+
+  # def heal(target:, amount:)
+  #   target.malus_life = target.malus_life - amount < 0 ? 0 : target.malus_life - amount
+  # end
 end
