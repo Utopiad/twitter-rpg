@@ -4,20 +4,23 @@ class World < ApplicationRecord
   belongs_to :user
 
   has_many :character_type, dependent: :destroy
-  # has_many :characters, dependent: :destroy
   has_many :monsters, dependent: :destroy
   has_many :chapters, dependent: :destroy
-  # has_many :events, through: :chapters
-  # has_many :messages
+
+  has_many :characters, through: :character_type
+  has_many :events, through: :chapters
+  has_many :messages, through: :characters
 
   validates :name, presence: true
 
-  delegate :events, :to => :chapters
-
-  def events
-    self.chapters.map{ |chapter| chapter.events.all}
+  def activate_chapter(chapter)
+    return false unless chapter.world.id == self.id
+    self.chapters.active.map{ |chapter| chapter.deactivate! }
+    chapter.activate!
   end
-  # def current_event
-  #   self.events.where("active? = ?", true)
-  # end
+
+  def current_event
+    self.events.active
+  end
+
 end

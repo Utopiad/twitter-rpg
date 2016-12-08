@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208114642) do
+ActiveRecord::Schema.define(version: 20161208143326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(version: 20161208114642) do
     t.text     "description"
     t.string   "image"
     t.integer  "world_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "active",      default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "character_types", force: :cascade do |t|
@@ -45,12 +46,14 @@ ActiveRecord::Schema.define(version: 20161208114642) do
     t.integer  "bonus_armor",       default: 0
     t.integer  "bonus_life",        default: 0
     t.integer  "malus_life",        default: 0
+    t.integer  "has_played",        default: 0
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
 
   create_table "event_monsters", force: :cascade do |t|
     t.integer  "monster_id"
+    t.integer  "event_id"
     t.integer  "bonus_attack_min", default: 0
     t.integer  "bonus_attack_max", default: 0
     t.integer  "bonus_life",       default: 0
@@ -66,8 +69,9 @@ ActiveRecord::Schema.define(version: 20161208114642) do
     t.text     "description"
     t.string   "image"
     t.integer  "chapter_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "active",      default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "fights", force: :cascade do |t|
@@ -111,10 +115,10 @@ ActiveRecord::Schema.define(version: 20161208114642) do
   create_table "monsters", force: :cascade do |t|
     t.integer  "world_id"
     t.text     "name"
-    t.integer  "attack_min"
-    t.integer  "attack_max"
-    t.integer  "armor"
-    t.integer  "life"
+    t.integer  "attack_min", default: 0
+    t.integer  "attack_max", default: 0
+    t.integer  "armor",      default: 0
+    t.integer  "life",       default: 0
     t.integer  "malus_life", default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -137,6 +141,13 @@ ActiveRecord::Schema.define(version: 20161208114642) do
     t.string   "name"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "turns", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "finished"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

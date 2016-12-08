@@ -5,6 +5,7 @@ class CreateChapters < ActiveRecord::Migration[5.0]
       t.text :description
       t.string :image
       t.integer :world_id
+      t.integer :active, default: 0
 
       t.timestamps
     end

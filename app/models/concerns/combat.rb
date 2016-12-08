@@ -11,10 +11,15 @@ module Combat
   end
 
   def attack(defender, fight)
+    if self.has_played?
+      return false
+    end
     hit = rand(self.attack_min..self.attack_max)
     defender.malus_life += (hit - defender.armor) < 0 ? 0 : (hit - defender.armor)
     fight.hit = hit
     fight.save
+    self.has_played = 1
+    self.save
   end
 
   def ripost(defender)

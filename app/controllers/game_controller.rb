@@ -8,15 +8,8 @@ class GameController < ApplicationController
       puts "game master"
     end
     if current_user.joined_world_id?(@world.id)
-      puts "world events:  #{@world.events}"
+      puts "world events: #{@world.current_event}"
       puts "has a character in world"
     end
-    # if current_user.joined_worlds.include?(@world)
-    #   puts "has a character in world"
-    # end
-    #
-    # else
-    #
-    # end
   end
 end
