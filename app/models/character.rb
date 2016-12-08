@@ -6,6 +6,9 @@ class Character < ApplicationRecord
   has_many :fights, as: :attacker
   has_many :fights, as: :defender
   has_many :messages
+  has_many :inventories, dependent: :destroy
+  has_many :stuffs, through: :inventories
+
 
   def malus_life=(malus_life)
     self[:malus_life] = malus_life
@@ -21,14 +24,14 @@ class Character < ApplicationRecord
   end
 
   def armor
-    self.classe.armor + self.bonus_armor
+    self.classe.armor + self.bonus_armor + self.stuffs.armor.first
   end
 
   def attack_min
-    self.classe.attack_min + self.bonus_attack_min
+    self.classe.attack_min + self.bonus_attack_min + self.stuffs.attack_min.first
   end
 
   def attack_max
-    self.classe.attack_max + self.bonus_attack_max
+    self.classe.attack_max + self.bonus_attack_max + self.stuffs.attack_max.first
   end
 end
