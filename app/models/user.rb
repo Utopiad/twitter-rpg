@@ -7,7 +7,11 @@ class User < ApplicationRecord
   has_many :worlds
   has_many :characters, dependent: :destroy
 
-  def joined_worlds
-    self.characters.map{ |character| character.world }
+  def joined_worlds_id
+    self.characters.map{ |character| character.world.id }
+  end
+
+  def joined_world_id?(world_id)
+    self.joined_worlds_id.include?(world_id)
   end
 end

@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20161208114642) do
 
   create_table "character_types", force: :cascade do |t|
     t.text     "name"
+    t.integer  "world_id"
     t.integer  "attack_min"
     t.integer  "attack_max"
     t.integer  "armor"

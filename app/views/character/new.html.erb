@@ -1,4 +1,4 @@
 <%= form_for @character, url: {action: "create"} do |f| -%>
-  <%= f.select :character_type_id, Classe.all.map{|c| [c.name, c.id]} %>
+  <%= f.select :character_type_id, CharacterType.all.map{|c| [c.name, c.id]} %>
   <p><%= f.submit "Create" -%></p>
 <% end %>
