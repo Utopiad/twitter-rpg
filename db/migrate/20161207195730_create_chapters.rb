@@ -4,7 +4,7 @@ class CreateChapters < ActiveRecord::Migration[5.0]
       t.string :title
       t.text :description
       t.string :image
-      t.references :world, foreign_key: true
+      t.integer :world_id
 
       t.timestamps
     end

@@ -1,7 +1,6 @@
 class Character < ApplicationRecord
   include Combat
   belongs_to :user
-  belongs_to :world
   belongs_to :character_type
   has_many :fights, as: :attacker
   has_many :fights, as: :defender
@@ -9,6 +8,7 @@ class Character < ApplicationRecord
   has_many :inventories, dependent: :destroy
   has_many :stuffs, through: :inventories
 
+  delegate :world, :to => :character_type
 
   def malus_life=(malus_life)
     self[:malus_life] = malus_life

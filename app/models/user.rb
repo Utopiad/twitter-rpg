@@ -6,5 +6,8 @@ class User < ApplicationRecord
 
   has_many :worlds
   has_many :characters, dependent: :destroy
-  has_many :joined_worlds, through: :characters, foreign_key: "world_id", source: :world
+
+  def joined_worlds
+    self.characters.map{ |character| character.world }
+  end
 end
