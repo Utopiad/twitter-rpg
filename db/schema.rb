@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
     t.integer  "attack_max"
     t.integer  "armor"
     t.integer  "life"
+    t.integer  "world_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
 
   create_table "event_monsters", force: :cascade do |t|
     t.integer  "monster_id"
+    t.integer  "event_id"
     t.integer  "bonus_attack_min", default: 0
     t.integer  "bonus_attack_max", default: 0
     t.integer  "bonus_life",       default: 0
