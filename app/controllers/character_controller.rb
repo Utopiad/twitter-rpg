@@ -6,7 +6,6 @@ class CharacterController < ApplicationController
     head 404 and return unless @world
 
     @world_characters_type = @world.character_types.map{|c| [c.name, c.id]}
-
   end
 
   def create
