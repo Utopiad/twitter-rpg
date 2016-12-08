@@ -10,10 +10,10 @@
 
   <body>
     <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
+      <p class="alert alert-success"><script>Materialize.toast("<%= notice %>", 4000, 'rounded')</script></p>
     <% end %>
     <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <p class="alert alert-danger"><script>Materialize.toast("<%= alert %>", 4000, 'rounded red')</script></p>
     <% end %>
 
     <p class="navbar-text pull-right">
@@ -27,6 +27,8 @@
     <% end %>
     </p>
 
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

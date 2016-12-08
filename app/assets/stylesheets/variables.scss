@@ -1,0 +1,62 @@
+// Reset
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+
+// Colors
+$primary: rgba(255, 138, 0, 1);
+$secondary: rgba(255, 202, 0, 1);
+$white: rgba(255, 255, 255, 1);
+
+// Title
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+.title__primary {
+  color: $primary;
+}
+
+p {
+  color: $white;
+}
+
+// Buttons
+.btn {
+
+  &__primary {
+    background-color: $primary;
+    color: $white;
+    &:hover {
+      background-color: $secondary;
+    }
+  }
+
+  &__white {
+    background-color: transparent;
+    color: $white;
+    border: 2px solid $white;
+    height: auto;
+    &:hover {
+
+    }
+    &:visited {
+      color: inherit !important;
+    }
+  }
+
+}
+
+a.btn:visited {
+  color: #ffffff !important;
+}

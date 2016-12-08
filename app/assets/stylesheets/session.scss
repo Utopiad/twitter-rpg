@@ -1,0 +1,74 @@
+.session {
+
+  position: relative;
+  top: 25vh;
+  height: 400px;
+  max-width: 800px;
+  margin: 0 auto !important;
+  padding: 50px;
+  background-color: rgba(0, 0, 0, 0.69);
+  border-radius: 15px;
+
+  &__right {
+    text-align: right;
+    a {
+      margin-top: 150px;
+    }
+  }
+
+  &__left {
+    text-align: left;
+    a {
+      margin-top: 150px;
+    }
+  }
+
+  &__active {
+    background-color: #fff;
+    box-shadow: 0px 5px 8px 5px rgba(0, 0, 0, 0.33);
+    border-radius: 15px;
+
+    &__action {
+      height: 38px;
+      line-height: 38px;
+      margin-top: 20px;
+    }
+
+    .section {
+      padding: 50px 55px 80px 55px;
+    }
+
+    a {
+      color: rgba(73, 73, 73, 1);
+
+      &:hover {
+        color: rgba(255, 138, 0, 1);
+      }
+    }
+  }
+
+  &__background {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-image: url("session_background.png");
+    background-size: cover;
+    z-index: -1;
+  }
+
+  form {
+    input {
+      border-bottom-color: rgba(188, 188, 188, 1);
+
+      &:-webkit-autofill {
+        background-color: #ffffff !important;
+      }
+    }
+
+    .error {
+      border-bottom-color: red;
+      color: red;
+    }
+
+  }
+
+}
