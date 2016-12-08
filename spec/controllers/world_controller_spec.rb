@@ -7,7 +7,7 @@ RSpec.describe WorldController, type: :controller do
 
   describe "HOME world" do
 
-    it "no world appears for new users" do
+    it "New users can't see any world" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -28,13 +28,13 @@ RSpec.describe WorldController, type: :controller do
       get :root
       expect(response).to have_http_status(:success)
 
-      expect(response.body).to include("Vous n'avez pas encore rejoint de mondes")
+      expect(response.body).to include("You have not join a world yet!")
       expect(response.body).to_not include(world.name)
       expect(response.body).to_not include("Player")
       expect(response.body).to_not include("Game Master")
     end
 
-    it "display world where being GM" do
+    it "User can see the world he just created (GM)" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -55,7 +55,7 @@ RSpec.describe WorldController, type: :controller do
       expect(response.body).to_not include("Player")
     end
 
-    it "display world where having character" do
+    it "User can see the world he just joined (character)" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -92,7 +92,7 @@ RSpec.describe WorldController, type: :controller do
 
   describe "LIST worlds" do
 
-    it "display sentance when no public world" do
+    it "Display a message when none public world exists" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -103,11 +103,11 @@ RSpec.describe WorldController, type: :controller do
       get :join
       expect(response).to have_http_status(:success)
 
-      expect(response.body).to include("Sorry no world need characters right now, come later.")
+      expect(response.body).to include("Sorry, no worlds available right now.")
       expect(response.body).to_not include(world.name)
     end
 
-    it "have worlds informations" do
+    it "Have worlds informations" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -127,7 +127,7 @@ RSpec.describe WorldController, type: :controller do
       expect(response.body).to include(bob.name)
     end
 
-    it "list just public worlds" do
+    it "Only list public worlds" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -166,9 +166,9 @@ RSpec.describe WorldController, type: :controller do
   end
 
 
-  describe "JOIN a world" do
+  describe "Joining world" do
 
-    it "can join public worlds" do
+    it "User can join public worlds" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -190,10 +190,10 @@ RSpec.describe WorldController, type: :controller do
       expect(response).to have_http_status(:success)
 
       expect(response.body).to include(world.name)
-      expect(response.body).to include("Specify your character")
+      expect(response.body).to include("Create your character")
     end
 
-    it "can't join private worlds" do
+    it "User can't join private worlds" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -217,7 +217,8 @@ RSpec.describe WorldController, type: :controller do
       expect(response.body).to include ("Sorry you don't have access to this world.")
     end
 
-    it "can join private worlds with url" do
+    # @need_review todo: recheck ce test après mise en place du système
+    it "User can join private worlds with a code" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -236,15 +237,13 @@ RSpec.describe WorldController, type: :controller do
       sign_in freddy
 
       post :join, params: {
-          world: { url: url }
+          world: { code: url }
       }
-      expect(response).to have_http_status(:success)
 
-      expect(response.body).to include(world.name)
-      expect(response.body).to include("Specify your character")
+      expect(response).to redirect_to(:world/new_character_path)
     end
 
-    it "can't join world where being GM" do
+    it "User can't join a world as a character if he is a GM" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -260,11 +259,11 @@ RSpec.describe WorldController, type: :controller do
       get :newcharacter, params: { id: world.id }
       expect(response).to have_http_status(403)
 
-      expect(response.body).to include ("You can't join a world where you already in.")
+      expect(response.body).to include ("You can't join a world where you are already god.")
     end
 
 
-    it "can't join two time a world" do
+    it "User can't create a second character in the same world" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -280,9 +279,12 @@ RSpec.describe WorldController, type: :controller do
           :email => 'freddy.mercury@gmail.com',
           :encrypted_password => 'password')
 
+      type = CharacterType.new
+
       charac = Character.new(
           :name => 'fred',
           :world_id => world.id,
+          :character_type_id => type.id,
           :user_id => freddy.id)
 
       sign_in freddy
@@ -290,7 +292,7 @@ RSpec.describe WorldController, type: :controller do
       get :newcharacter, params: { id: world.id }
       expect(response).to have_http_status(403)
 
-      expect(response.body).to include ("You can't join a world where you already in.")
+      expect(response.body).to include ("You can't join a world where you are already in.")
     end
 
     it "can't join a full world" do
@@ -309,9 +311,12 @@ RSpec.describe WorldController, type: :controller do
           :email => 'freddy.mercury@gmail.com',
           :encrypted_password => 'password')
 
+      type = CharacterType.new
+
       charac = Character.new(
           :name => 'fred',
           :world_id => world.id,
+          :character_type_id => type.id,
           :user_id => freddy.id)
 
       kurt = User.new(
@@ -331,12 +336,9 @@ RSpec.describe WorldController, type: :controller do
   end
 
 
-  ####################################################################################################
+  describe "Can play in the world" do
 
-
-  describe "participe on the world" do
-
-    it "Join world where he is GM" do
+    it "User can join a world as a GM" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -357,7 +359,7 @@ RSpec.describe WorldController, type: :controller do
 
     end
 
-    it "Join world where he is player" do
+    it "User can join a world as character" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -373,9 +375,12 @@ RSpec.describe WorldController, type: :controller do
           :password => 'password',
           :encrypted_password => 'password')
 
+      type = CharacterType.new
+
       charac = Character.new(
           :name => 'fred',
           :world_id => world.id,
+          :character_type_id => type.id,
           :user_id => freddy.id)
 
       sign_in freddy
@@ -389,7 +394,7 @@ RSpec.describe WorldController, type: :controller do
 
     end
 
-    it "can't join world where he is not" do
+    it "User can't join a world where he is not registered" do
       bob = User.new(
           :email => 'bob.marley@gmail.com',
           :password => 'password',
@@ -410,7 +415,7 @@ RSpec.describe WorldController, type: :controller do
       get :world, params: { id: world.id }
       expect(response).to have_http_status(403)
 
-      expect(response.body).to include("You not belong to this world")
+      expect(response.body).to include("You don't belong to this world.")
       expect(response.body).to_not include(world.name)
     end
 
