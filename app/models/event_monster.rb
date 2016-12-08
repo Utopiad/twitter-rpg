@@ -4,6 +4,7 @@ class EventMonster < ApplicationRecord
   has_many :fights, as: :defender
   belongs_to :monster
   belongs_to :world
+  belongs_to :event
 
   def malus_life=(malus_life)
     self[:malus_life] = malus_life
