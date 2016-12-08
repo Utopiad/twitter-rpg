@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20161208094726) do
     t.integer  "character_id"
     t.integer  "world_id"
     t.text     "message"
+    t.integer  "event_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
