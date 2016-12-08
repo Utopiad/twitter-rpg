@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get "world/new_character" => "world#new_character"
-
   resources :world do
     get "game" => "game#index"
     resources :character

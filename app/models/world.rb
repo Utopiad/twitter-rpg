@@ -6,9 +6,18 @@ class World < ApplicationRecord
   has_many :character_type, dependent: :destroy
   # has_many :characters, dependent: :destroy
   has_many :monsters, dependent: :destroy
-  # has_many :chapters, dependent: :destroy
+  has_many :chapters, dependent: :destroy
   # has_many :events, through: :chapters
   # has_many :messages
 
   validates :name, presence: true
+
+  delegate :events, :to => :chapters
+
+  def events
+    self.chapters.map{ |chapter| chapter.events.all}
+  end
+  # def current_event
+  #   self.events.where("active? = ?", true)
+  # end
 end
