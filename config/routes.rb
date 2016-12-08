@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   resources :world do
     resources :character
     resources :stuff
+    resources :character_type
     resources :monster do
       resources :event_monster
     end
-    resources :classe
   end
 
   devise_for :users

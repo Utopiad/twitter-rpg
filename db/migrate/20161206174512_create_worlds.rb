@@ -4,6 +4,7 @@ class CreateWorlds < ActiveRecord::Migration[5.0]
       t.integer :user_id
       t.text :name
       t.integer :public
+      t.integer :max_character_count
 
       t.timestamps
     end

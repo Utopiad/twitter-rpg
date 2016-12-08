@@ -1,4 +1,4 @@
-class Classe < ApplicationRecord
+class CharacterType < ApplicationRecord
   belongs_to :world
   has_many :characters, dependent: :destroy
   validates :name, presence: true
