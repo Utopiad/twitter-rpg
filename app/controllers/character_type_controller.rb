@@ -10,9 +10,6 @@ class CharacterTypeController < ApplicationController
 
     world_id = params[:world_id]
     @character_type.world = World.where(id: world_id).first
-    puts @character_type
-    puts @character_type.world
-    puts world_id
     if @character_type.save
       redirect_to action: "show", id: @character_type.id
     else
