@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :character
     resources :stuff
     resources :monster
-    resources :classe
+    resources :character_type
   end
 
   devise_for :users

@@ -1,8 +1,0 @@
-<%= form_for @classe, url: {action: "create"} do |f| %>
-  <p><%= f.text_field :name %> <%= f.label :name %></p>
-  <p><%= f.number_field :attack_min %> <%= f.label :attack_min %></p>
-  <p><%= f.number_field :attack_max %> <%= f.label :attack_max %></p>
-  <p><%= f.number_field :armor %> <%= f.label :armor %></p>
-  <p><%= f.number_field :life %> <%= f.label :life %></p>
-  <p><%= f.submit "Create" -%></p>
-<% end %>
