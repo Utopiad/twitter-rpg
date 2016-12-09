@@ -200,7 +200,6 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  coffee-rails (~> 4.2)
   devise
   forgery (= 0.6.0)
   jbuilder (~> 2.5)
