@@ -5,9 +5,9 @@ RSpec.describe CharacterController, type: :controller do
   render_views
 
 
-  describe "CONTROLLER : create works fine" do
+  describe "CONTROLLER : 'create' works fine" do
 
-    it "works when all arguments are corrects" do
+    it "Works when all arguments are correct" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -37,7 +37,7 @@ RSpec.describe CharacterController, type: :controller do
       expect(last_charac_created.id).to eq(charac.id)
     end
 
-    it "not works when there is a mistake" do
+    it "Don't work when there is a mistake" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -64,7 +64,7 @@ RSpec.describe CharacterController, type: :controller do
       expect(Character.count).to eq(0)
     end
 
-    it "don't work when there already a character" do
+    it "Don't work when there is already a character in the world for the same user" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -102,9 +102,9 @@ RSpec.describe CharacterController, type: :controller do
   end
 
 
-  describe "VIEW : creation form view works fine" do
+  describe "VIEW : 'creation form' view works fine" do
 
-    it "redirect to game when the form is correct" do
+    it "Redirect to game root when the form is correct" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -133,7 +133,7 @@ RSpec.describe CharacterController, type: :controller do
       expext(response).to redirect_to(game_path)
     end
 
-    it "display the error returned when a value is empty" do
+    it "Display the error returned when the name is empty" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -164,7 +164,7 @@ RSpec.describe CharacterController, type: :controller do
       except(response.body).to include("name can't be blank")
     end
 
-    it "display a specific error for empty tabel links" do
+    it "Display a specific error where there is a bad specified relationship" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -185,7 +185,7 @@ RSpec.describe CharacterController, type: :controller do
       post :newcharacter, params: {
           character: {
               :name => 'fredo',
-              :world_id => nil,
+              :world_id => 452,
               :character_type_id => type.id,
               :user_id => freddy.id
           }
@@ -198,9 +198,9 @@ RSpec.describe CharacterController, type: :controller do
   end
 
 
-  describe "VIEW : appears in GAME" do
+  describe "VIEW : all characters of the world appears in the GAME root" do
 
-    it "all valid characters appears in the game for players view" do
+    it "All valid characters appears in the players view" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -256,7 +256,7 @@ RSpec.describe CharacterController, type: :controller do
       except(response.body).to_not include(kurty.name)
     end
 
-    it "all valid characters appears in the game for game master view" do
+    it "All valid characters appears in the game master view" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
@@ -315,9 +315,9 @@ RSpec.describe CharacterController, type: :controller do
   end
 
 
-  describe "VIEW : appears in HOME" do
+  describe "VIEW : user's characters appears in HOME root" do
 
-    it "Can view all characters" do
+    it "All characters appears" do
       bob = User.new(
           :pseudo => 'bob',
           :email => 'bob.marley@gmail.com',
