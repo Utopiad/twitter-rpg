@@ -40,7 +40,6 @@ GEM
       tzinfo (~> 1.1)
     arel (7.1.4)
     bcrypt (3.1.11)
-    bcrypt (3.1.11-x64-mingw32)
     builder (3.2.2)
     byebug (9.0.6)
     choice (0.2.0)
@@ -87,8 +86,11 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+<<<<<<< HEAD
     nokogiri (1.6.8.1-x64-mingw32)
       mini_portile2 (~> 2.1.0)
+=======
+>>>>>>> 9edc1bfad5b42614b93760d8f88ebcb9cf77c882
     orm_adapter (0.5.0)
     pg (0.19.0)
     pg (0.19.0-x64-mingw32)
@@ -151,7 +153,10 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+<<<<<<< HEAD
     ruby-graphviz (1.2.2)
+=======
+>>>>>>> 9edc1bfad5b42614b93760d8f88ebcb9cf77c882
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -200,8 +205,13 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+<<<<<<< HEAD
   devise
   forgery (= 0.6.0)
+=======
+  coffee-rails (~> 4.2)
+  devise
+>>>>>>> 9edc1bfad5b42614b93760d8f88ebcb9cf77c882
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
@@ -209,7 +219,10 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
+<<<<<<< HEAD
   rails-erd
+=======
+>>>>>>> 9edc1bfad5b42614b93760d8f88ebcb9cf77c882
   rspec
   rspec-rails
   sass-rails (~> 5.0)
