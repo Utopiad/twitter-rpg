@@ -10,6 +10,14 @@ class Character < ApplicationRecord
 
   delegate :world, :to => :character_type
 
+  def has_played?
+    self.has_played == 1
+  end
+
+  def has_played!
+    self.has_played = 1
+  end
+
   def malus_life=(malus_life)
     self[:malus_life] = malus_life
     self.save
