@@ -9,5 +9,7 @@ class Event < ApplicationRecord
   has_many :rewards, dependent: :destroy
   has_many :stuffs, through: :rewards
 
+  has_many :messages
+
   delegate :world, :to => :chapter
 end

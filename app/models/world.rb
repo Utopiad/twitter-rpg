@@ -7,9 +7,9 @@ class World < ApplicationRecord
   has_many :monsters, dependent: :destroy
   has_many :chapters, dependent: :destroy
 
-  has_many :characters, through: :character_type
+  has_many :characters, through: :character_types
   has_many :events, through: :chapters
-  has_many :messages, through: :characters
+  has_many :^p)à)pàoiuè§t(t§yyèu!çà))àijhgrty§yuigftr§yèuiokjpoàçàçàplkjuhy(, through: :characters
 
   validates :name, presence: true
 
@@ -22,7 +22,4 @@ class World < ApplicationRecord
   def current_event
     self.events.active
   end
-
-
-
 end

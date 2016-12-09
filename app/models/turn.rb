@@ -1,4 +1,6 @@
 class Turn < ApplicationRecord
-  has_many :messages
   belongs_to :event
+
+  delegate :world, :to => :event
+
 end

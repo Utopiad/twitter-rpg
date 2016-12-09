@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
 
   create_table "messages", force: :cascade do |t|
     t.integer  "character_id"
+    t.integer  "event_id"
     t.text     "message"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
