@@ -13,7 +13,7 @@ class World < ApplicationRecord
 
   validates :name, presence: true
 
-  def activate_chapter(chapter)
+  def activate_chapter!(chapter)
     return false unless chapter.world.id == self.id
     self.chapters.active.map{ |chapter| chapter.deactivate! }
     chapter.activate!
@@ -22,5 +22,7 @@ class World < ApplicationRecord
   def current_event
     self.events.active
   end
+
+
 
 end

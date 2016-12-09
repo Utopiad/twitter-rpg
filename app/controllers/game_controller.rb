@@ -3,12 +3,11 @@ class GameController < ApplicationController
     @world = World.where(id: params[:world_id]).first
 
     puts "@world : #{@world.id}"
-    # puts "curr user world : #{current_user.joined_worlds_id}"
     if current_user == @world.game_master
       puts "game master"
     end
     if current_user.joined_world_id?(@world.id)
-
+      @character = current_user.character_for_world_id(@world.id).first
       # head 404 and return unless @world
       # @current_chapter = @world.chapters.active.first
       # head 404 and return unless @current_chapter
@@ -16,6 +15,7 @@ class GameController < ApplicationController
       # head 404 and return unless @current_event
       # puts "world events: #{@world.current_event}"
       puts "has a character in world"
+      puts "he is named #{@character.name}"
     end
   end
 end

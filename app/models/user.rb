@@ -14,4 +14,11 @@ class User < ApplicationRecord
   def joined_world_id?(world_id)
     self.joined_worlds_id.include?(world_id)
   end
+
+  def character_for_world_id(world_id)
+    CharacterType.joins(:characters).where( 'character_types.world_id' => world_id)
+      .where( 'characters.user_id' => self.id )
+
+    # world.character_types.characters.where(user: self).first
+  end
 end

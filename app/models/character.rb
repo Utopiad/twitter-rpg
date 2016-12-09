@@ -2,6 +2,7 @@ class Character < ApplicationRecord
   include Combat
   belongs_to :user
   belongs_to :character_type
+  has_one :world, through: :character_type
   has_many :fights, as: :attacker
   has_many :fights, as: :defender
   has_many :messages
@@ -14,13 +15,12 @@ class Character < ApplicationRecord
     self.has_played == 1
   end
 
-  def has_played!
-    self.has_played = 1
+  def world_id
+    self.world.id
   end
 
-  def malus_life=(malus_life)
-    self[:malus_life] = malus_life
-    self.save
+  def has_played!
+    self.has_played = 1
   end
 
   def current_life
