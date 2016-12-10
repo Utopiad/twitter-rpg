@@ -6,4 +6,6 @@ class Stuff < ApplicationRecord
 
   has_many :inventories, dependent: :destroy
   has_many :characters, through: :inventories
+
+  scope :attack_min, -> { where("bonus_attack_min > ?", 0) }
 end
