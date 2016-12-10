@@ -6,11 +6,8 @@ module Stuffable
       .find_all.map{ |i| i.stuff }
   end
 
-  def attack_min_stuffs_bonus
-    self.equiped_stuffs.map{ |s| s.bonus_attack_min }.sum
-  end
-  def attack_max_stuffs_bonus
-    self.equiped_stuffs.map{ |s| s.bonus_attack_max }.sum
+  def attack_stuffs_bonus
+    self.equiped_stuffs.map{ |s| s.bonus_attack }.sum
   end
   def armor_stuffs_bonus
     self.equiped_stuffs.map{ |s| s.bonus_armor }.sum

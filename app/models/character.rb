@@ -50,10 +50,10 @@ class Character < ApplicationRecord
   end
 
   def attack_min
-    self.character_type.attack_min + self.bonus_attack_min + self.attack_min_stuffs_bonus
+    self.character_type.attack_min + self.bonus_attack + self.attack_stuffs_bonus
   end
 
   def attack_max
-    self.character_type.attack_max + self.bonus_attack_max + self.attack_max_stuffs_bonus
+    self.character_type.attack_max + self.bonus_attack + self.attack_stuffs_bonus
   end
 end
