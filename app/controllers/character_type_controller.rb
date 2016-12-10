@@ -1,6 +1,5 @@
 class CharacterTypeController < ApplicationController
   def new
-    @errors = Array.new
     @character_type = CharacterType.new
   end
 
