@@ -14,13 +14,6 @@ Rails.application.routes.draw do
     resources :game
   end
 
-
-  get '/game/:world_id', to: 'game#index' do
-    resources :turn
-  end
-
-
-
   devise_for :users
 
   root 'yolo#index'
