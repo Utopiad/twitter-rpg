@@ -15,7 +15,7 @@ class Character < ApplicationRecord
   validate :user_not_world_game_master, on: :create
   validate :world_not_full, on: :create
 
-  def stuffs
+  def equiped_stuffs
     self.inventories.where("equiped = ?", 1)
       .map{ |i| i.stuff }
   end
