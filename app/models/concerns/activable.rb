@@ -9,6 +9,7 @@ module Activable
     self.active = 1
     self.save
   end
+
   def deactivate!
     self.active = 0
     self.save

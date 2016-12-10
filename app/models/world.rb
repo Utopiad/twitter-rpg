@@ -9,17 +9,21 @@ class World < ApplicationRecord
 
   has_many :characters, through: :character_types
   has_many :events, through: :chapters
-  has_many :^p)à)pàoiuè§t(t§yyèu!çà))àijhgrty§yuigftr§yèuiokjpoàçàçàplkjuhy(, through: :characters
+  has_many :messages, through: :characters
 
   validates :name, presence: true
 
   def activate_chapter!(chapter)
     return false unless chapter.world.id == self.id
-    self.chapters.active.map{ |chapter| chapter.deactivate! }
+    self.chapters.active.all.map{ |chapter| chapter.deactivate! }
     chapter.activate!
   end
 
   def current_event
     self.events.active
+  end
+
+  def messages
+    self.characters.map{ |c| c.messages }.flatten
   end
 end

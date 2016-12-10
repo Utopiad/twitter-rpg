@@ -15,24 +15,12 @@ class Character < ApplicationRecord
   validate :user_not_world_game_master, on: :create
 
   def user_not_in_world
-    puts self.world
-    puts "user"
-    puts self.world
-    puts "user"
-    puts self.world
-    puts "user"
-    puts self.world
-    puts "user"
-    puts "user"
-    puts "user"
-    puts "user"
-    puts "user"
-    puts user.joined_worlds.pluck(:id)
-    errors.add(:user_id, "is in world") if user.joined_worlds.pluck(:id).include?(self.world.id)
+    errors.add(:user_id, "is in world") if user.joined_worlds.pluck(:id)
+      .include?(self.world.id)
   end
 
   def user_not_world_game_master
-    errors.add(:user_id, "is not active") if user.worlds.include?(:world)
+    errors.add(:user_id, "is not active") if user.worlds.include?(self.world.id)
   end
 
   def has_played?

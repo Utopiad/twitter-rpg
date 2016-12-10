@@ -4,6 +4,5 @@ class Inventory < ApplicationRecord
 
   delegate :world, :to => :stuff
 
-
   scope :default, -> { where("equiped = ?", 1) }
 end
