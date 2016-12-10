@@ -1,5 +1,5 @@
 class EventMonster < ApplicationRecord
-  include Combat
+  include Fighter
   has_many :fights, as: :attacker
   has_many :fights, as: :defender
   belongs_to :monster

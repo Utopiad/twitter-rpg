@@ -1,5 +1,5 @@
 class Character < ApplicationRecord
-  include Combat
+  include Fighter
   include Stuffable
   belongs_to :user
   belongs_to :character_type
@@ -29,16 +29,8 @@ class Character < ApplicationRecord
     errors.add(:world, "is full") if world.max_character_count == world.characters.count
   end
 
-  def has_played?
-    self.has_played == 1
-  end
-
-  def has_played!
-    self.has_played = 1
-  end
-
   def current_life
-    self.character_type.life + self.bonus_life + self.malus_life
+    self.character_type.life + self.life - self.malus_life
   end
 
   def life
