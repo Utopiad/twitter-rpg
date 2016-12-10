@@ -14,4 +14,8 @@ module Activable
     self.active = 0
     self.save
   end
+
+  def active?
+    return self.active == 1
+  end
 end

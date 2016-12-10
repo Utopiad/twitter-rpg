@@ -12,4 +12,5 @@ class Event < ApplicationRecord
   has_many :messages
 
   delegate :world, :to => :chapter
+
 end
