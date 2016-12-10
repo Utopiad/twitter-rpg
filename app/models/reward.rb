@@ -1,10 +1,7 @@
 class Reward < ApplicationRecord
+  include Attributable
   belongs_to :stuff
   belongs_to :event
 
   delegate :world, :to => :stuff
-
-  def attribute_to(character)
-    character.inventories.create(stuff: self.stuff)
-  end
 end

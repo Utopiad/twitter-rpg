@@ -116,11 +116,11 @@ ActiveRecord::Schema.define(version: 20161208143326) do
   end
 
   create_table "rewards", force: :cascade do |t|
-    t.integer  "quantity"
+    t.integer  "quantity",   default: 0
     t.integer  "event_id"
     t.integer  "stuff_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "stuffs", force: :cascade do |t|
