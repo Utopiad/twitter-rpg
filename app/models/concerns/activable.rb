@@ -16,6 +16,6 @@ module Activable
   end
 
   def active?
-    return self.active == 1
+    self.active == 1
   end
 end

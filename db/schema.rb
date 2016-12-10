@@ -89,10 +89,10 @@ ActiveRecord::Schema.define(version: 20161208143326) do
   create_table "inventories", force: :cascade do |t|
     t.integer  "character_id"
     t.integer  "stuff_id"
-    t.integer  "used"
-    t.integer  "equiped"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "used",         default: 0
+    t.integer  "equiped",      default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "messages", force: :cascade do |t|

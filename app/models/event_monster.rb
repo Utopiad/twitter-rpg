@@ -7,11 +7,6 @@ class EventMonster < ApplicationRecord
 
   delegate :world, :to => :monster
 
-  def malus_life=(malus_life)
-    self[:malus_life] = malus_life
-    self.save
-  end
-
   def current_life
     self.monster.life + self.bonus_life - self.malus_life
   end

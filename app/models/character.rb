@@ -13,14 +13,19 @@ class Character < ApplicationRecord
 
   validate :user_not_in_world, on: :create
   validate :user_not_world_game_master, on: :create
+  validate :world_not_full, on: :create
 
   def user_not_in_world
-    errors.add(:user_id, "is in world") if user.joined_worlds.pluck(:id)
+    errors.add(:user, "is in world") if user.joined_worlds.pluck(:id)
       .include?(self.world.id)
   end
 
   def user_not_world_game_master
-    errors.add(:user_id, "is not active") if user.worlds.include?(self.world.id)
+    errors.add(:user, "is game master") if user.worlds.include?(self.world.id)
+  end
+
+  def world_not_full
+    errors.add(:world, "is full") if world.max_character_count == world.characters.count
   end
 
   def has_played?
