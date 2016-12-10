@@ -1,5 +1,9 @@
 class Inventory < ApplicationRecord
+  include Equipable
+  include Usable
+
   belongs_to :stuff
   belongs_to :character
-  scope :default, -> { where(:equiped == 1) }
+
+  delegate :world, :to => :stuff
 end

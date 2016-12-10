@@ -1,6 +1,11 @@
 module Combat
   extend ActiveSupport::Concern
 
+  def malus_life=(malus_life)
+    self[:malus_life] = malus_life
+    self.save
+  end
+
   def fight(defender:)
     fight = Fight.new(attacker: self, defender: defender)
     fight.save

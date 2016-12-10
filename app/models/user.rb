@@ -8,6 +8,6 @@ class User < ApplicationRecord
   has_many :characters, dependent: :destroy
 
   def joined_worlds
-    self.characters.map{ |character| character.world }
+    self.characters.map{ |c| c.world }
   end
 end
