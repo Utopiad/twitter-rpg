@@ -31,6 +31,6 @@ class GameController < ApplicationController
     world = World.where(id: params[:world_id]).first
     event = world.events.where(id: params[:event_id]).first
 
-    world.activate_event!(chapter)
+    world.activate_event!(event)
   end
 end
