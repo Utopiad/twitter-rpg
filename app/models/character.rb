@@ -15,6 +15,11 @@ class Character < ApplicationRecord
   validate :user_not_world_game_master, on: :create
   validate :world_not_full, on: :create
 
+  def stuffs
+    self.inventories.where("equiped = ?", 1)
+      .map{ |i| i.stuff }
+  end
+
   def user_not_in_world
     errors.add(:user, "is in world") if user.joined_worlds.pluck(:id)
       .include?(self.world.id)
