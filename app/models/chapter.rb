@@ -1,7 +1,11 @@
 class Chapter < ApplicationRecord
   include Activable
+  mount_uploader :picture, PictureUploader
+
   belongs_to :world
   has_many :events, dependent: :destroy
+
+
 
 
   def activate_event(event)

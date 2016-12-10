@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'chapter/new'
+
+  get 'chapter/view'
+
   resources :world do
     resources :character
     resources :stuff
