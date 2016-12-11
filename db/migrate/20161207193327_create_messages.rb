@@ -4,6 +4,7 @@ class CreateMessages < ActiveRecord::Migration[5.0]
       t.integer :character_id
       t.integer :event_id
       t.text :message
+      t.integer :event_id
 
       t.timestamps
     end
