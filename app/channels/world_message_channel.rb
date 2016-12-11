@@ -13,7 +13,8 @@ class WorldMessageChannel < ApplicationCable::Channel
     puts params[:world_id]
     ActionCable.server.broadcast('messages',
       message: render_message(data['message']))
-    message = Message.create(character_id: 1, event_id: 1, message: data['message'])
+    message = Message.create(character_id: data['character_id'],
+      event_id: data['event_id'], message: data['message'])
   end
 
   def render_message(message)
