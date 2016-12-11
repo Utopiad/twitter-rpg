@@ -1,3 +1,5 @@
+<div id="event_id"><%= @world.chapters.active.events.active.id %></div>
+<div id="character_id"><%= @world.characters.first.id %></div>
 <%= form_tag({controller: "game", action: "activate_chapter"}) do -%>
   <%= select_tag :chapter_id, options_from_collection_for_select(@world.chapters, "id", "title") %>
   <%= hidden_field_tag :world_id, @world.id %>
@@ -12,7 +14,6 @@
 
 <div id='messages'>
   <% @messages.each do |message| %>
-    aa
     <%= render partial: "message/message", locals: { message: message } %>
   <% end %>
 </div>
