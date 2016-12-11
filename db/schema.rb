@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
 
   create_table "worlds", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "character_id"
     t.text     "name"
     t.integer  "public"
     t.integer  "max_character_count"
