@@ -6,14 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 1.times do
-  u = User.create(email: Forgery(:internet).email_address,
-    password: Forgery(:basic).password)
+  u = User.create(email: "martinziserman@gmail.com",
+    password: "aaaaaa")
 
-  2.times do
+  1.times do
     w = World.create(user: u, name: Forgery(:internet).user_name,
       max_character_count: rand(2..10), public: 1)
 
-    2.times do
+    1.times do
       c = CharacterType.create(world: w, name: Forgery(:internet).user_name,
         attack_min: rand(1..3), attack_max: rand(3..10), armor: rand(1..3),
         life: rand(6..10))
@@ -24,23 +24,23 @@
         bonus_attack: rand(0..3), bonus_armor: rand(0..3),
         bonus_life: rand(0..3))
 
-      2.times do
+      1.times do
         ch = Character.create(character_type: c, user: u,
-          name: Forgery(:internet).user_name)
+          name: Forgery(:internet).user_name, world: w)
         i = Inventory.create(character: ch, stuff: s)
-        2.times do
+        1.times do
           chap = Chapter.create(description: Forgery('lorem_ipsum').paragraph,
             world: w, title: Forgery('lorem_ipsum').sentence)
 
-          2.times do
+          1.times do
             e = Event.create(chapter: chap, description: Forgery('lorem_ipsum').paragraph,
               title: Forgery('lorem_ipsum').sentence)
-            2.times do
+            1.times do
               em = EventMonster.create(monster: m, event: e,
                 name: Forgery(:internet).user_name)
               r = Reward.create(event: e, stuff: s)
               t = Turn.create(event: e, finished: 0)
-              2.times do
+              1.times do
                 # mes = Message.create(character: ch, message: Forgery('lorem_ipsum').paragraph)
               end
             end

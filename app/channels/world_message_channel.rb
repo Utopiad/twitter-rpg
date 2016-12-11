@@ -1,5 +1,4 @@
 # Be sure to restart your server when you modify this file. Action Cable runs in a loop that does not support auto reloading.
-import "pry"
 class WorldMessageChannel < ApplicationCable::Channel
   def subscribed
     template = 'messages_%s'
@@ -14,12 +13,41 @@ class WorldMessageChannel < ApplicationCable::Channel
   def speak(data)
     template = 'messages_%s'
     channel = template % [data['world_id']]
-    puts channel
-    message = Message.create(character_id: data['character_id'],
-      event_id: data['event_id'], message: data['message'])
-    ActionCable.server.broadcast(channel,
-      message: render_message(message))
 
+    message = Message.new(character_id: data['character_id'],
+      event_id: data['event_id'], message: data['message'])
+
+    fight = self.check_action(message)
+
+    if fight
+      fight_message = Message.new(character: message.character,
+        event_id: data['event_id'], message: fight.export(:txt))
+    end
+
+    if message.save
+      ActionCable.server.broadcast(channel, message: render_message(message))
+      if fight_message.save
+        ActionCable.server.broadcast(channel, message: render_message(fight_message))
+      end
+    end
+  end
+
+  def check_action(message)
+    reg = Regexp.new(/(\B#\w\w+)\s(\B@\w\w+)/)
+    actions = message.message.scan(reg)
+    actions.each do |action|
+      if action[0] == "#attack"
+        target = EventMonster.where(slug: action[1]).first
+        if target.blank?
+          target = message.character.world.characters.where(slug: action[1]).first
+          return false if target.blank?
+        else
+          return message.character.attack(target)
+        end
+      else
+        return false
+      end
+    end
   end
 
   def render_message(message)

@@ -1,28 +1,39 @@
 class Character < ApplicationRecord
   include Fighter
+  include Player
   include Stuffable
+  include Sluggable
+
   belongs_to :user
   belongs_to :character_type
+  belongs_to :world
 
   has_many :fights, as: :attacker
   has_many :fights, as: :defender
+
   has_many :messages
   has_many :inventories, dependent: :destroy
   has_many :stuffs, through: :inventories
 
-  delegate :world, :to => :character_type
-
   validate :user_not_in_world, on: :create
   validate :user_not_world_game_master, on: :create
   validate :world_not_full, on: :create
+  validates_uniqueness_of :name
 
   def user_not_in_world
-    errors.add(:user, "is in world") if user.joined_worlds.pluck(:id)
-      .include?(self.world.id)
+    if !user.joined_worlds.empty?
+      if user.joined_worlds.pluck(:id)
+        errors.add(:user, "is in world").include?(world.id)
+      end
+    end
   end
 
   def user_not_world_game_master
-    errors.add(:user, "is game master") if user.worlds.include?(self.world.id)
+    if !user.joined_worlds.empty?
+      if user.worlds.include?(world.id)
+        errors.add(:user, "is game master")
+      end
+    end
   end
 
   def world_not_full

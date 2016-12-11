@@ -8,6 +8,7 @@ class CreateEventMonsters < ActiveRecord::Migration[5.0]
       t.integer :bonus_armor, default: 0
       t.integer :malus_life, default: 0
       t.string :name
+      t.string :slug
 
       t.timestamps
     end

@@ -39,7 +39,9 @@ ActiveRecord::Schema.define(version: 20161208143326) do
   create_table "characters", force: :cascade do |t|
     t.integer  "character_type_id"
     t.integer  "user_id"
+    t.integer  "world_id"
     t.text     "name"
+    t.text     "slug"
     t.integer  "total_experience",  default: 0
     t.integer  "bonus_attack",      default: 0
     t.integer  "bonus_armor",       default: 0
@@ -58,6 +60,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
     t.integer  "bonus_armor",  default: 0
     t.integer  "malus_life",   default: 0
     t.string   "name"
+    t.string   "slug"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end

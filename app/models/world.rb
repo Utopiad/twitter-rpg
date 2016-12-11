@@ -24,8 +24,16 @@ class World < ApplicationRecord
     event.chapter.activate_event!(event)
   end
 
+  def current_chapter
+    self.chapters.find_all.each do |c|
+      return c if c.active?
+    end
+  end
   def current_event
-    self.events.active
+    return false if self.current_chapter.blank?
+    self.current_chapter.events.find_all do |e|
+      return e if e.active?
+    end
   end
 
   def messages

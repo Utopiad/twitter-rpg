@@ -3,7 +3,9 @@ class CreateCharacters < ActiveRecord::Migration[5.0]
     create_table :characters do |t|
       t.integer :character_type_id
       t.integer :user_id
+      t.integer :world_id
       t.text :name
+      t.text :slug
       t.integer :total_experience, default: 0
       t.integer :bonus_attack, default: 0
       t.integer :bonus_armor, default: 0

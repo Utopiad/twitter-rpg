@@ -1,6 +1,6 @@
 <div id="world_id"><%= @world.id %></div>
-<div id="event_id"><%= @world.chapters.first.events.first.id %></div>
-<div id="character_id"><%= @world.characters.first.id %></div>
+<div id="event_id"><%= @world.current_event.id %></div>
+<div id="character_id"><%= @character.id %></div>
 
 <%= form_tag({controller: "game", action: "activate_chapter"}) do %>
   <%= select_tag :chapter_id, options_from_collection_for_select(@world.chapters, "id", "title") %>

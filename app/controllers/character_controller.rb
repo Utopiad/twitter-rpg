@@ -9,13 +9,14 @@ class CharacterController < ApplicationController
   end
 
   def create
-    @world = World.where(id: params[:world_id])
+    @world = World.where(id: params[:world_id]).first
     head 404 and return unless @world
 
     @character = Character.new(params.require(:character).permit(:name,
       :character_type_id, :user_id))
 
     @character.user = current_user
+    @character.world = @world
 
     if @character.save
       redirect_to action: "show", id: @character.id
