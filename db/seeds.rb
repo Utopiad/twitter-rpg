@@ -9,7 +9,7 @@
   u = User.create(email: Forgery(:internet).email_address,
     password: Forgery(:basic).password)
 
-  1.times do
+  2.times do
     w = World.create(user: u, name: Forgery(:internet).user_name,
       max_character_count: rand(2..10), public: 1)
 
@@ -41,7 +41,7 @@
               r = Reward.create(event: e, stuff: s)
               t = Turn.create(event: e, finished: 0)
               2.times do
-                mes = Message.create(character: ch, message: Forgery('lorem_ipsum').paragraph)
+                # mes = Message.create(character: ch, message: Forgery('lorem_ipsum').paragraph)
               end
             end
           end
