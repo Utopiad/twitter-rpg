@@ -1,6 +1,5 @@
 $(document).ready(function() {
   var world_id = $('#world_id').html()
-  console.log(world_id)
 
   App.world_message = App.cable.subscriptions.create({channel: "WorldMessageChannel", world_id: world_id}, {
     connected: function() {
