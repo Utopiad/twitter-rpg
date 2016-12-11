@@ -1,0 +1,26 @@
+*:first-child {
+  margin-top: 0;
+}
+
+*:last-child {
+  margin-bottom: 0;
+}
+
+
+.container {
+  margin: 0 auto;
+  width: 95%;
+  max-width: 2000px;
+}
+
+.two-columns {
+
+  .columns-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}

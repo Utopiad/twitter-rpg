@@ -1,0 +1,21 @@
+<section class="home-view-container container two-column">
+  <div class="action-buttons">
+    <div class="btn__primary btn">
+      <%= link_to 'Créer un scénario', new_world_path%>
+    </div>
+    <div class="btn__primary btn">
+      <%= link_to 'Rejoindre un scénario', new_world_path %>
+    </div>
+  </div>
+  <div class="columns-wrapper">
+    <div class="left">
+      <% if current_user.joined_worlds.count > 0 %>
+        <div> la pépita </div>
+      <% else %>
+      <div class="no-world-joined">Vous n'avez rejoint aucun monde à ce jour.</div>
+      <% end %>
+    </div>
+
+    <div class="right"></div>
+  </div>
+</section>
