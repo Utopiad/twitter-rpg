@@ -30,11 +30,11 @@
         i = Inventory.create(character: ch, stuff: s)
         1.times do
           chap = Chapter.create(description: Forgery('lorem_ipsum').paragraph,
-            world: w, title: Forgery('lorem_ipsum').sentence)
+            world: w, title: Forgery('lorem_ipsum').sentence, active: 1)
 
           1.times do
             e = Event.create(chapter: chap, description: Forgery('lorem_ipsum').paragraph,
-              title: Forgery('lorem_ipsum').sentence)
+              title: Forgery('lorem_ipsum').sentence, active: 1)
             1.times do
               em = EventMonster.create(monster: m, event: e,
                 name: Forgery(:internet).user_name)
