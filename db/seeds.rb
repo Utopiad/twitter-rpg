@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-2.times do
+1.times do
   u = User.create(email: Forgery(:internet).email_address,
     password: Forgery(:basic).password)
 
@@ -41,7 +41,7 @@
               r = Reward.create(event: e, stuff: s)
               t = Turn.create(event: e, finished: 0)
               2.times do
-                mes = Message.create(character: ch, message: Forgery('lorem_ipsum').paragraph)
+                # mes = Message.create(character: ch, message: Forgery('lorem_ipsum').paragraph)
               end
             end
           end
