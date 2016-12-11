@@ -2,10 +2,6 @@ class GameController < ApplicationController
   def index
     @world = World.where(id: params[:world_id]).first
     cookies.signed[:current_user_id] = current_user.id
-    cookies.signed[:current_character_id] = current_user.id
-    cookies.signed[:current_event_id] = @world.chapters.active.events.active
-    # cookies.signed[:character_id] = current_user.character_for_world_id(@world.id).first.id
-    cookies.signed[:character_id] = @world.characters.first
     @messages = @world.messages
 
     if current_user == @world.game_master
