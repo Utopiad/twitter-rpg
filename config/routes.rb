@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :world do
+    post "/activate_chapter" => "game#activate_chapter"
+    post "/activate_event" => "game#activate_event"
     resources :character
     resources :stuff
     resources :character_type
@@ -15,8 +17,7 @@ Rails.application.routes.draw do
       # post "world#activate_chapter"
     end
   end
-  post "/activate_chapter" => "game#activate_chapter"
-  post "/activate_event" => "game#activate_event"
+
 
 
   devise_for :users
