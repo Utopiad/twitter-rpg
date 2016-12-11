@@ -11,8 +11,13 @@ Rails.application.routes.draw do
         resources :turn
       end
     end
-    resources :game
+    resources :game do
+      # post "world#activate_chapter"
+    end
   end
+  post "/activate_chapter" => "game#activate_chapter"
+  post "/activate_event" => "game#activate_event"
+
 
   devise_for :users
 

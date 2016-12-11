@@ -19,9 +19,9 @@ class World < ApplicationRecord
     chapter.activate!
   end
 
-  def activate_event(event)
+  def activate_event!(event)
     return false unless event.chapter.world.id == self.id
-    event.chapter.activate_event(event)
+    event.chapter.activate_event!(event)
   end
 
   def current_event

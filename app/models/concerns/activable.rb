@@ -2,7 +2,7 @@ module Activable
   extend ActiveSupport::Concern
 
   included do
-    scope :active, -> { where("active = ?", 1) }
+    scope :active, -> { where("active = ?", 1).first }
   end
 
   def activate!

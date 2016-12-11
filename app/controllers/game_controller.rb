@@ -19,4 +19,18 @@ class GameController < ApplicationController
       puts "he is named #{@character.name}"
     end
   end
+
+  def activate_chapter
+    world = World.where(id: params[:world_id]).first
+    chapter = world.chapters.where(id: params[:chapter_id]).first
+
+    world.activate_chapter!(chapter)
+  end
+
+  def activate_event
+    world = World.where(id: params[:world_id]).first
+    event = world.events.where(id: params[:event_id]).first
+
+    world.activate_event!(event)
+  end
 end

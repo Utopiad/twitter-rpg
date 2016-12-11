@@ -5,7 +5,7 @@ class Chapter < ApplicationRecord
   belongs_to :world
   has_many :events, dependent: :destroy
 
-  def activate_event(event)
+  def activate_event!(event)
     return false unless event.chapter.id == self.id && self.active?
     self.events.active.find_all.map{ |event| event.deactivate! }
     event.activate!
