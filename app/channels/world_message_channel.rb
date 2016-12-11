@@ -40,10 +40,10 @@ class WorldMessageChannel < ApplicationCable::Channel
     actions.each do |action|
       if action[0] == "#attack"
         target = EventMonster.where(slug: action[1]).first
-        puts target.blank?
-        if target.blank?
+        unless target.blank?
+          return message.character.attack(target)
+        else
           target = message.character.world.characters.where(slug: action[1]).first
-          puts target
           return false if target.blank?
           return message.character.attack(target)
         end
