@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
   create_table "chapters", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "image"
+    t.string   "picture"
     t.integer  "world_id"
     t.integer  "active",      default: 0
     t.datetime "created_at",              null: false
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "image"
+    t.string   "picture"
     t.integer  "chapter_id"
     t.integer  "active",      default: 0
     t.datetime "created_at",              null: false

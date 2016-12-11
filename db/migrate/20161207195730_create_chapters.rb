@@ -3,7 +3,7 @@ class CreateChapters < ActiveRecord::Migration[5.0]
     create_table :chapters do |t|
       t.string :title
       t.text :description
-      t.string :image
+      t.string :picture
       t.integer :world_id
       t.integer :active, default: 0
 

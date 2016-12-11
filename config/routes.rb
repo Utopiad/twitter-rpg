@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :world do
     resources :character
     resources :stuff
@@ -14,13 +13,6 @@ Rails.application.routes.draw do
     end
     resources :game
   end
-
-
-  get '/game/:world_id', to: 'game#index' do
-    resources :turn
-  end
-
-
 
   devise_for :users
 

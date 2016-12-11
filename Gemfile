@@ -55,6 +55,8 @@ gem 'rspec'
 gem 'rspec-rails'
 
 gem 'materialize-sass'
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+
 platforms :mswin do
   gem "wdm", :group => [:development, :test]
 end
