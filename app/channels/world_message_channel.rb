@@ -1,7 +1,10 @@
 # Be sure to restart your server when you modify this file. Action Cable runs in a loop that does not support auto reloading.
+import "pry"
 class WorldMessageChannel < ApplicationCable::Channel
   def subscribed
-    stream_from 'messages'
+    template = 'messages_%s'
+    channel = template % [params[:world_id]]
+    stream_from channel
   end
 
   def unsubscribed
@@ -9,9 +12,10 @@ class WorldMessageChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    puts params.inspect
-    puts params[:world_id]
-    ActionCable.server.broadcast('messages',
+    template = 'messages_%s'
+    channel = template % [data['world_id']]
+    puts channel
+    ActionCable.server.broadcast(channel,
       message: render_message(data['message']))
     message = Message.create(character_id: data['character_id'],
       event_id: data['event_id'], message: data['message'])
