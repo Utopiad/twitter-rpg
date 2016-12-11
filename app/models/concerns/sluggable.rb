@@ -1,15 +1,13 @@
 module Sluggable
   extend ActiveSupport::Concern
 
-  def slug
-    return self.slug unless self.slug.blank?
-    self.create_slug
-    return self.slug
+  included do
+    before_save :create_slug!
   end
 
-  def create_slug
+  def create_slug!
     template = "@%s"
     self.slug = template % [self.name]
-    self.save
   end
+
 end
