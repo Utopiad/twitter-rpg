@@ -2,7 +2,7 @@ class GameController < ApplicationController
   def index
     @world = World.where(id: params[:world_id]).first
     cookies.signed[:current_user_id] = current_user.id
-    @messages = @world.messages
+    @messages = @world.messages.order(created_at: :asc)
 
     if current_user == @world.game_master
       puts "game master"
