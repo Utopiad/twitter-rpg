@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var world_id = $('#world_id').html()
-
+  
   App.world_message = App.cable.subscriptions.create({channel: "WorldMessageChannel", world_id: world_id}, {
     connected: function() {
       // Called when the subscription is ready for use on the server
