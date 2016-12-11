@@ -17,6 +17,7 @@ class World < ApplicationRecord
   validates :name, presence: true
 
   def character
+    return nil if self.character_id.nil?
     Character.find(self.character_id)
   end
 
