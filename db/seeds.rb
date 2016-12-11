@@ -21,13 +21,13 @@
         attack_min: rand(1..3), attack_max: rand(3..10), armor: rand(1..3),
         life: rand(6..10))
       s = Stuff.create(world: w, name: Forgery(:internet).user_name,
-        bonus_attack_min: rand(0..3), bonus_attack_max: rand(0..3),
-        bonus_armor: rand(0..3), bonus_life: rand(0..3))
+        bonus_attack: rand(0..3), bonus_armor: rand(0..3),
+        bonus_life: rand(0..3))
 
       2.times do
         ch = Character.create(character_type: c, user: u,
           name: Forgery(:internet).user_name)
-        i = Inventory.create(character: ch, stuff: s, used: 0, equiped: 0)
+        i = Inventory.create(character: ch, stuff: s)
         2.times do
           chap = Chapter.create(description: Forgery('lorem_ipsum').paragraph,
             world: w, title: Forgery('lorem_ipsum').sentence)

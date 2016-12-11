@@ -1,5 +1,6 @@
 class Character < ApplicationRecord
   include Combat
+  include Stuffable
   belongs_to :user
   belongs_to :character_type
 
@@ -14,11 +15,6 @@ class Character < ApplicationRecord
   validate :user_not_in_world, on: :create
   validate :user_not_world_game_master, on: :create
   validate :world_not_full, on: :create
-
-  def equiped_stuffs
-    self.inventories.where("equiped = ?", 1)
-      .map{ |i| i.stuff }
-  end
 
   def user_not_in_world
     errors.add(:user, "is in world") if user.joined_worlds.pluck(:id)
@@ -42,22 +38,22 @@ class Character < ApplicationRecord
   end
 
   def current_life
-    self.character_type.life + self.bonus_life - self.malus_life
+    self.character_type.life + self.bonus_life + self.malus_life
   end
 
   def life
-    self.character_type.life + self.bonus_life
+    self.character_type.life + self.bonus_life + self.life_stuffs_bonus
   end
 
   def armor
-    self.character_type.armor + self.bonus_armor
+    self.character_type.armor + self.bonus_armor + self.armor_stuffs_bonus
   end
 
   def attack_min
-    self.character_type.attack_min + self.bonus_attack_min
+    self.character_type.attack_min + self.bonus_attack + self.attack_stuffs_bonus
   end
 
   def attack_max
-    self.character_type.attack_max + self.bonus_attack_max
+    self.character_type.attack_max + self.bonus_attack + self.attack_stuffs_bonus
   end
 end

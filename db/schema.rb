@@ -41,8 +41,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
     t.integer  "user_id"
     t.text     "name"
     t.integer  "total_experience",  default: 0
-    t.integer  "bonus_attack_min",  default: 0
-    t.integer  "bonus_attack_max",  default: 0
+    t.integer  "bonus_attack",      default: 0
     t.integer  "bonus_armor",       default: 0
     t.integer  "bonus_life",        default: 0
     t.integer  "malus_life",        default: 0
@@ -54,14 +53,13 @@ ActiveRecord::Schema.define(version: 20161208143326) do
   create_table "event_monsters", force: :cascade do |t|
     t.integer  "monster_id"
     t.integer  "event_id"
-    t.integer  "bonus_attack_min", default: 0
-    t.integer  "bonus_attack_max", default: 0
-    t.integer  "bonus_life",       default: 0
-    t.integer  "bonus_armor",      default: 0
-    t.integer  "malus_life",       default: 0
+    t.integer  "bonus_attack", default: 0
+    t.integer  "bonus_life",   default: 0
+    t.integer  "bonus_armor",  default: 0
+    t.integer  "malus_life",   default: 0
     t.string   "name"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -125,13 +123,12 @@ ActiveRecord::Schema.define(version: 20161208143326) do
 
   create_table "stuffs", force: :cascade do |t|
     t.integer  "world_id"
-    t.integer  "bonus_attack_min"
-    t.integer  "bonus_attack_max"
+    t.integer  "bonus_attack"
     t.integer  "bonus_armor"
     t.integer  "bonus_life"
     t.string   "name"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "turns", force: :cascade do |t|
