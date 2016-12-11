@@ -17,19 +17,21 @@ class WorldMessageChannel < ApplicationCable::Channel
     message = Message.new(character_id: data['character_id'],
       event_id: data['event_id'], message: data['message'])
 
+    if message.save
+      ActionCable.server.broadcast(channel, message: render_message(message))
+    end
+
     fight = self.check_action(message)
 
     if fight
       fight_message = Message.new(character: message.character,
         event_id: data['event_id'], message: fight.export(:txt))
-    end
-
-    if message.save
-      ActionCable.server.broadcast(channel, message: render_message(message))
       if fight_message.save
         ActionCable.server.broadcast(channel, message: render_message(fight_message))
       end
     end
+
+
   end
 
   def check_action(message)
@@ -38,16 +40,18 @@ class WorldMessageChannel < ApplicationCable::Channel
     actions.each do |action|
       if action[0] == "#attack"
         target = EventMonster.where(slug: action[1]).first
+        puts target.blank?
         if target.blank?
           target = message.character.world.characters.where(slug: action[1]).first
+          puts target
           return false if target.blank?
-        else
           return message.character.attack(target)
         end
       else
         return false
       end
     end
+    return false
   end
 
   def render_message(message)

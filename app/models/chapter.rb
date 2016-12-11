@@ -7,7 +7,7 @@ class Chapter < ApplicationRecord
 
   def activate_event!(event)
     return false unless event.chapter.id == self.id && self.active?
-    self.events.active.find_all.map{ |event| event.deactivate! }
+    self.events.where(active: 1).find_all.map{ |event| event.deactivate! }
     event.activate!
   end
 end
