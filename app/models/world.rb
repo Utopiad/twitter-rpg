@@ -48,8 +48,4 @@ class World < ApplicationRecord
       return e if e.active?
     end
   end
-
-  # def messages
-  #   self.characters.map{ |c| c.messages }.flatten
-  # end
 end
