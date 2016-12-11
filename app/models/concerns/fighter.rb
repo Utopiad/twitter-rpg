@@ -1,22 +1,26 @@
+# require 'pry'
+
 module Fighter
   extend ActiveSupport::Concern
 
-  def malus_life=(malus_life)
-    self[:malus_life] = malus_life
-    self.save
-  end
-
   def attack(target)
-    if self.has_played?
-      return false
-    end
+    # if self.has_played?
+    #   return false
+    # end
 
     hit = rand(self.attack_min..self.attack_max)
-    target.malus_life += (hit - target.armor) < 0 ? 0 : (hit - target.armor)
 
-    fight = Fight.create(attacker: self, target: target, hit: hit)
+    if hit >= target.armor
+      inc_malus_life = hit - target.armor
+
+      target.malus_life += inc_malus_life
+    end
+
+    fight = Fight.new(attacker: self, defender: target, hit: hit)
     fight.save
     self.has_played!
+
+    return fight
   end
 
   # def heal(target:, amount:)

@@ -9,7 +9,7 @@ class GameController < ApplicationController
     end
 
     if current_user.joined_worlds.pluck(:id).include?(@world.id)
-      @character = current_user.character_for_world_id(@world.id).first
+      @character = current_user.character_for_world_id(@world.id)
       # head 404 and return unless @world
       # @current_chapter = @world.chapters.active.first
       # head 404 and return unless @current_chapter

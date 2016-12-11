@@ -10,4 +10,8 @@ class User < ApplicationRecord
   def joined_worlds
     self.characters.map{ |c| c.world }
   end
+
+  def character_for_world_id(world_id)
+    self.characters.where(world_id: world_id).first
+  end
 end
