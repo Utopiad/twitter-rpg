@@ -9,3 +9,12 @@
   <%= hidden_field_tag :world_id, @world.id %>
   <p><%= submit_tag "Create" -%></p>
 <% end %>
+
+<div id='messages'>
+  <% @messages.each do |message| %>
+    aa
+    <%= render partial: "message/message", locals: { message: message } %>
+  <% end %>
+</div>
+<%= text_field_tag :body, '', id: 'chat-speak' %>
+

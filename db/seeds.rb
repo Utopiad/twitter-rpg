@@ -5,11 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-2.times do
+1.times do
   u = User.create(email: Forgery(:internet).email_address,
     password: Forgery(:basic).password)
 
-  2.times do
+  1.times do
     w = World.create(user: u, name: Forgery(:internet).user_name,
       max_character_count: rand(2..10), public: 1)
 
