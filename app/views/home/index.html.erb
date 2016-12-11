@@ -10,7 +10,28 @@
   <div class="columns-wrapper">
     <div class="left">
       <% if current_user.joined_worlds.count > 0 %>
-        <div> la pépita </div>
+        <h2> Vos parties </h2>
+        <%
+          joined_worlds = current_user.joined_worlds
+          joined_worlds.each do | scenar | %>
+            <div class="world-joined-card">
+              <div class="vignette-top">
+                <img src="" alt="">
+                <div class="world-joined-card-controls"></div>
+                <div class="word-title"><%= scenar.name %></div>
+                <div class="word-creator"> <%= User.where(id: scenar.user_id).name %></div>
+              </div>
+              <div class="world-description"><%= scenar.inspects %></div>
+              <span>Votre personnage</span>
+              <br>
+              <div class="world-character">
+                <img src="" alt="">
+                <div class="character-name">
+                  <%= current_user.character_for_world_id(scenar.id).name.to_s %>
+                </div>
+              </div>
+            </div>
+        <% end %>
       <% else %>
       <div class="no-world-joined">Vous n'avez rejoint aucun monde à ce jour.</div>
       <% end %>
