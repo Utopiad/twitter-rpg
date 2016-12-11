@@ -15,10 +15,11 @@ class WorldMessageChannel < ApplicationCable::Channel
     template = 'messages_%s'
     channel = template % [data['world_id']]
     puts channel
-    ActionCable.server.broadcast(channel,
-      message: render_message(data['message']))
     message = Message.create(character_id: data['character_id'],
       event_id: data['event_id'], message: data['message'])
+    ActionCable.server.broadcast(channel,
+      message: render_message(message))
+
   end
 
   def render_message(message)
@@ -26,7 +27,6 @@ class WorldMessageChannel < ApplicationCable::Channel
       partial: 'message/message',
       locals: {
         message: message,
-        username: current_user
       })
   end
 end
