@@ -1,4 +1,4 @@
-<section class="home-view-container container two-column">
+<section class="home-container two-columns">
   <div class="action-buttons">
     <div class="btn__primary btn">
       <%= link_to 'Créer un scénario', new_world_path%>
@@ -8,35 +8,84 @@
     </div>
   </div>
   <div class="columns-wrapper">
-    <div class="left">
+    <div class="layout-left">
       <% if current_user.joined_worlds.count > 0 %>
-        <h2> Vos parties </h2>
+        <h2> Vos scénarios </h2>
+        <div class="layout-left-container">
         <%
-          joined_worlds = current_user.joined_worlds
-          joined_worlds.each do | scenar | %>
-            <div class="world-joined-card">
+          current_user_worlds = current_user.worlds
+          current_user_worlds.each do | scenar | %>
+            <div class="user-world-card">
+              <img src="http://lorempixel.com/332/171" alt="">
+
               <div class="vignette-top">
-                <img src="" alt="">
-                <div class="world-joined-card-controls"></div>
-                <div class="word-title"><%= scenar.name %></div>
-                <div class="word-creator"> <%= User.where(id: scenar.user_id).name %></div>
+                <div class="world-card-controls">
+                  <div class="card-controls-left">
+                    <span class=" i i-game"></span>
+                  </div>
+                  <div class="card-controls-right">
+                    <span class="card-controls-right i i-play"></span>
+                    <span class="card-controls-right i i-edit"></span>
+                    <span class="card-controls-right i i-share"></span>
+                  </div>
+                </div>
+                <h4 class="world-card-title"><%= scenar.name  %></h4>
+                <div class="world-card-creator"> Créateur: <%= User.where(id: scenar.user_id).name %></div>
               </div>
-              <div class="world-description"><%= scenar.inspects %></div>
-              <span>Votre personnage</span>
-              <br>
+
+              <div class="world-card-description"><%= scenar.chapters.active.description %></div>
+              <span class="txt-personnage">Votre personnage</span>
               <div class="world-character">
-                <img src="" alt="">
-                <div class="character-name">
+                <% if scenar.user_id == current_user.id %>
+                  <span class="i i-mj"></span>
+                <% else %>
+                  <%= image_tag 'ncage.jpg' %>
+                <% end %>
+
+                <div class="world-character-name">
                   <%= current_user.character_for_world_id(scenar.id).name.to_s %>
                 </div>
               </div>
             </div>
         <% end %>
+      </div>
       <% else %>
-      <div class="no-world-joined">Vous n'avez rejoint aucun monde à ce jour.</div>
+      <div class="no-world-joined">Vous n'avez pas encore crée de monde.</div>
       <% end %>
     </div>
 
-    <div class="right"></div>
+    <div class="layout-right">
+      <% if current_user.joined_worlds.count > 0 %>
+        <h2> Actualités </h2>
+        <%
+          joined_worlds = current_user.joined_worlds
+          joined_worlds.each do | scenar | %>
+            <div class="world-joined-card">
+              <div class="info-left">
+                <h4 class="world-card-title"><%= scenar.name  %></h4>
+                <div class="world-card-creator"> Créateur: <%= User.where(id: scenar.user_id).name %></div>
+                <div class="world-card-description"><%= scenar.chapters.active.description %></div>
+              </div>
+              <img src="http://lorempixel.com/152/215" alt="">
+
+
+              <!-- <span class="txt-personnage">Votre personnage</span>
+              <div class="world-character">
+                <% if scenar.user_id == current_user.id %>
+                  <span class="i i-mj"></span>
+                <% else %>
+                  <%= image_tag 'ncage.jpg' %>
+                <% end %>
+
+                <div class="world-character-name">
+                  <%= current_user.character_for_world_id(scenar.id).name.to_s %>
+                </div>
+              </div> -->
+            </div>
+        <% end %>
+      <% else %>
+      <div class="no-world-joined">Vous n'avez pas encore rejoint de monde.</div>
+      <% end %>
+    </div>
   </div>
 </section>

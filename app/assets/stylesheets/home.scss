@@ -1,11 +1,13 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.home-view-container {
+.home-container {
+  z-index: 1;
+  position: relative;
+
   .action-buttons {
     position: relative;
     padding: 25px 0;
-
     display:flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -13,10 +15,220 @@
 
     .btn {
       border-radius: 6px;
-      // height: 60px;
+
       &:last-child {
         margin-left: 45px;
       }
     }
   }
+
+  h2 {
+    color: $primary;
+  }
+
+  .user-world-card {
+    width: 332px;
+    border-radius: 20px;
+    background-color: $white;
+    position: relative;
+    -webkit-box-shadow: 4px 2px 9px -3px rgba(125,125,125,1);
+    -moz-box-shadow: 4px 2px 9px -3px rgba(125,125,125,1);
+    box-shadow: 4px 2px 9px -3px rgba(125,125,125,1);
+
+    &:hover {
+      -webkit-box-shadow: 4px 2px 16px -3px rgba(125,125,125,1);
+      -moz-box-shadow: 4px 2px 16px -3px rgba(125,125,125,1);
+      box-shadow: 4px 2px 16px -3px rgba(125,125,125,1);
+    }
+    img {
+      z-index: 2;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+
+    }
+    .vignette-top {
+      position: absolute;
+      width: 100%;
+      z-index: 3;
+      top: 0px;
+      background-image: linear-gradient(rgba(234, 233, 233, 0) 0%, rgba(0, 0, 0, 1) 100%);
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      transition: all 2s ease-out 2s;
+
+      &:hover .world-card-controls {
+        opacity: 1;
+      }
+
+      .world-card-controls {
+        width:100%;
+        padding: 25px 15px 0px 15px;
+        opacity: 0;
+
+        .card-controls-left {
+          display: inline-block;
+          position: relative;
+          left: 0;
+          span {
+            display: inline-block;
+          }
+        }
+
+        .card-controls-right {
+          display: flex;
+          float: right;
+          span {
+            margin: 0 6px;
+
+          }
+          span:first-child {
+            margin-left: 0px;
+          }
+
+          span:last-child {
+            margin-right: 0px;
+          }
+
+          position:relative;
+          right: 0;
+        }
+      }
+      .world-card-title {
+        margin: 0;
+        padding: 35px 15px 5px;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+      .world-card-creator {
+        font-family: 'latolight';
+        font-size: 0.8em;
+        color: rgba(255, 255, 255, 1);
+        text-align: left;
+        padding: 5px 15px 30px;
+      }
+    }
+
+    .world-card-description {
+      font-family: 'latolight';
+      font-size: 1em;
+      padding: 15px 15px;
+    }
+    .txt-personnage {
+      font-family: 'latoregular';
+      font-size: 1em;
+      display: block;
+      padding-left: 15px;
+    }
+
+    .world-character {
+      display: flex;
+      padding: 25px 15px;
+      img {
+        width:50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      .world-character-name {
+        font-family: 'latolight';
+        font-size: 0.9em;
+        line-height: 45px;
+        max-width: 250px;
+        padding-left: 15px;
+      }
+    }
+    .world-card-bottom {
+
+    }
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.world-joined-card {
+  width: 450px;
+  border-radius: 20px;
+  background-color: $white;
+  position: relative;
+  display: flex;
+  -webkit-box-shadow: 4px 2px 9px -3px rgba(125,125,125,1);
+  -moz-box-shadow: 4px 2px 9px -3px rgba(125,125,125,1);
+  box-shadow: 4px 2px 9px -3px rgba(125,125,125,1);
+
+  &:hover {
+    -webkit-box-shadow: 4px 2px 16px -3px rgba(125,125,125,1);
+    -moz-box-shadow: 4px 2px 16px -3px rgba(125,125,125,1);
+    box-shadow: 4px 2px 16px -3px rgba(125,125,125,1);
+  }
+
+  .info-left {
+
+    .world-card-title {
+      margin: 0;
+      padding: 35px 15px 5px;
+      color: rgba(0, 0, 0, 1);
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    .world-card-creator {
+      font-family: 'latolight';
+      font-size: 0.8em;
+      color: rgba(26, 26, 26, 1);
+      text-align: left;
+      padding: 5px 15px 30px;
+    }
+
+    .world-card-description {
+      font-family: 'latolight';
+      font-size: 1em;
+      padding: 5px 15px;
+    }
+  }
+
+  img {
+    z-index: 2;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
+
+  .txt-personnage {
+    font-family: 'latoregular';
+    font-size: 1em;
+    display: block;
+    padding-left: 15px;
+  }
+
+  .world-character {
+    display: flex;
+    padding: 25px 15px;
+    img {
+      width:50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .world-character-name {
+      font-family: 'latolight';
+      font-size: 0.9em;
+      line-height: 45px;
+      max-width: 250px;
+      padding-left: 15px;
+    }
+  }
+  .world-card-bottom {
+
+  }
+
 }

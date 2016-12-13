@@ -12,9 +12,10 @@
  *
  *= require_self
  */
-
+// @import "reset";
 @import "materialize";
 @import "fonts";
+@import "icons";
 @import "variables";
 @import "session";
 @import "layouts";
