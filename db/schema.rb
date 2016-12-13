@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
     t.integer  "bonus_armor",       default: 0
     t.integer  "bonus_life",        default: 0
     t.integer  "malus_life",        default: 0
+    t.integer  "is_narrator",       default: 0
     t.integer  "has_played",        default: 0
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
@@ -160,6 +161,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
 
   create_table "worlds", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "character_id"
     t.text     "name"
     t.integer  "public"
     t.integer  "max_character_count"

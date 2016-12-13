@@ -1,6 +1,7 @@
 class Character < ApplicationRecord
   include Fighter
   include Player
+  include Narrator
   include Stuffable
   include Sluggable
 

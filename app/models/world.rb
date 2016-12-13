@@ -1,7 +1,10 @@
 class World < ApplicationRecord
   alias_attribute :game_master, :user
+  alias_attribute :narrator, :character
+
 
   belongs_to :user
+  has_one :narrator, class_name: :Character, foreign_key: :character_id
 
   has_many :character_types, dependent: :destroy
   has_many :monsters, dependent: :destroy
@@ -12,6 +15,16 @@ class World < ApplicationRecord
   has_many :messages, through: :characters
 
   validates :name, presence: true
+
+  def character
+    return nil if self.character_id.nil?
+    Character.find(self.character_id)
+  end
+
+  def character=(character)
+    self.character_id = character.id
+    self.save
+  end
 
   def activate_chapter!(chapter)
     return false unless chapter.world.id == self.id
@@ -35,8 +48,4 @@ class World < ApplicationRecord
       return e if e.active?
     end
   end
-
-  # def messages
-  #   self.characters.map{ |c| c.messages }.flatten
-  # end
 end
