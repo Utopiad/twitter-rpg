@@ -2,9 +2,13 @@
 
 <p>user : <%= @world.user.email %></p>
 
+<% if @world.image && @world.image.url(:web, :thumb) %>
+    <p><%= image_tag @world.image.url(:web, :thumb) %></p>
+<% end %>
 
 <p><%= @world.public == 1 ? "public" : "privé" %></p>
 <% if @world.public == 1 %>
   <%= link_to "Create character", :controller => :character, :action => :new, world_id: @world.id %>
+
 
 <% end %>

@@ -1,0 +1,21 @@
+<h1>List des worlds public :</h1>
+
+<h2>Search form :</h2>
+
+
+<%= form_tag(world_index_path, :method => "get", id: "world-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "World name" %>
+    <%= submit_tag "Search" %>
+<% end %>
+
+<h2>Search result :</h2>
+
+<% if @worlds.present? %>
+    <% @worlds.each do | world | %>
+
+        <div><%= world.name  %></div>
+
+    <% end %>
+<% else %>
+    <p>There are no world containing the term(s) <%= params[:search] %>.</p>
+<% end %>
