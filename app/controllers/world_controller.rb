@@ -24,9 +24,9 @@ class WorldController < ApplicationController
 
   def edit
     world = World.where(id: params[:id]).first
-    #unless user_signed_in? && current_user.id == world.user.id
-    #  redirect_to action: "show", id: world.id
-    #end
+    unless user_signed_in? && current_user.id == world.user.id
+      redirect_to action: "show", id: world.id
+    end
     @world = world
   end
 
@@ -48,12 +48,4 @@ class WorldController < ApplicationController
     end
   end
 
-  def home
-    @worlds = World.public_worlds
-    if params[:search]
-      @worlds = World.search(params[:search])
-    else
-      @worlds = World.public_worlds
-    end
-  end
 end

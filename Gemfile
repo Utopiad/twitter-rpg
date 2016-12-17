@@ -62,9 +62,7 @@ gem 'materialize-sass'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 gem 'fog', '>= 1.0.0'
 gem 'mini_magick'
-gem 'faye-websocket', '0.10.0'
-gem 'websocket-rails', github: 'moaa/websocket-rails', branch: 'threadsocket-rails'
-gem 'websocket-rails-js'
+gem 'faye-websocket'
 
 platforms :mswin do
   gem "wdm", :group => [:development, :test]

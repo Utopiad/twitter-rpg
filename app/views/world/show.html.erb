@@ -3,7 +3,7 @@
 <p>user : <%= @world.user.email %></p>
 
 <% if @world.image && @world.image.url(:web, :thumb) %>
-    <p><%= image_tag @world.image.url(:web, :thumb) %></p>
+    <p><%= image_tag @world.image.url(:web, :preview) %></p>
 <% end %>
 
 <p><%= @world.public == 1 ? "public" : "privé" %></p>
