@@ -1,8 +1,8 @@
-<p>world_id : <%= @character.world_id %></p>
+<p>world_id : <%= @character.world.id %></p>
 <p>character_type_id : <%= @character.character_type_id %></p>
 <p>user_id : <%= @character.user_id %></p>
 <p>total_experience : <%= @character.total_experience %></p>
-<p>attack_min : <%= @character.character_type.attack_min %> + <%= @character.bonus_attack_min %></p>
-<p>attack_max : <%= @character.character_type.attack_max %> + <%= @character.bonus_attack_max %></p>
+<p>attack_min : <%= @character.character_type.attack_min %> + <%= @character.bonus_attack %></p>
+<p>attack_max : <%= @character.character_type.attack_max %> + <%= @character.bonus_attack %></p>
 <p>armor : <%= @character.character_type.armor %> + <%= @character.bonus_armor %></p>
 <p>life : <%= @character.character_type.life %> + <%= @character.bonus_life %></p>

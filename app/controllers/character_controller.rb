@@ -1,22 +1,27 @@
 class CharacterController < ApplicationController
   def new
     @character = Character.new
+
+    @world = World.where(id: params[:world_id]).first
+    head 404 and return unless @world
+
+    @world_characters_type = @world.character_types.map{|c| [c.name, c.id]}
   end
 
   def create
-    @character = Character.new(params.require(:character).permit(:name, :world_id,
-      :character_type_id, :user_id, :total_experience, :bonus_attack_min,
-      :bonus_attack_max, :bonus_armor, :bonus_life))
+    @world = World.where(id: params[:world_id]).first
+    head 404 and return unless @world
 
-    world_id = params[:world_id]
-    current_user_id = current_user.id
+    @character = Character.new(params.require(:character).permit(:name,
+      :character_type_id, :user_id))
 
-    @character.world = World.where(id: world_id).first
-    @character.user = User.where(id: current_user_id).first
+    @character.user = current_user
+    @character.world = @world
 
     if @character.save
       redirect_to action: "show", id: @character.id
     else
+      @world_characters_type = @world.character_types.map{|c| [c.name, c.id]}
       render :new
     end
   end

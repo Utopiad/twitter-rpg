@@ -2,26 +2,33 @@ class Fight < ApplicationRecord
   belongs_to :attacker, polymorphic: true
   belongs_to :defender, polymorphic: true
 
-  after_create :save_attacker
-  after_create :save_defender
 
-  def save_attacker
-    self[:attacker_attack_min] = self.attacker.attack_min
-    self[:attacker_attack_max] = self.attacker.attack_max
-    self[:attacker_armor] = self.attacker.armor
-    self[:attacker_life] = self.attacker.life
-    self[:attacker_malus_life] = self.attacker.malus_life
-
-    self.save
+  def export(format)
+    defender = self.fetch_fighter(:defender)
+    attacker = self.fetch_fighter(:attacker)
+    if format == :txt
+      template = "%s à attaqué %s lui portant un coup à %i de degats qui ont
+      étés reduits par son armure de %i. Il reste %i pv à %s et %i pv à
+      %s"
+      return template % [self.attacker.name, defender.name, hit,
+        defender.armor, attacker.current_life, self.attacker.name,
+        defender.current_life, self.defender.name]
+    end
   end
 
-  def save_defender
-    self[:defender_attack_min] = self.defender.attack_min
-    self[:defender_attack_max] = self.defender.attack_max
-    self[:defender_armor] = self.defender.armor
-    self[:defender_life] = self.defender.life
-    self[:defender_malus_life] = self.defender.malus_life
-
-    self.save
+  def fetch_fighter(role)
+    if role == :defender
+      if self.defender_type == "Character"
+        Character.find(defender_id)
+      elsif fighter.defender_type == "EventMonster"
+        EventMonster.find(defender_id)
+      end
+    elsif role == :attacker
+      if self.attacker_type == "Character"
+        Character.find(attacker_id)
+      elsif fighter.attacker_type == "EventMonster"
+        EventMonster.find(attacker_id)
+      end
+    end
   end
 end

@@ -1,7 +1,6 @@
 # Routine
-Un p'tit coup de  ``bundle install` quand on met son code à jour.
-// TO DO
-// Alias pour git rebase origin/develop && bundle install
+Pour populer la base de donnée : ``` rake db:seed ```
+Pour mettre la bdd a jour : ``` rake db:drop rake db:create rake db:migrate ```
 
 # Workflow
 
@@ -9,6 +8,7 @@ Pour ce projet où nous serons nombreux à développer, je propose qu'on mette e
   - branche feature héritée de develop, ex: front/Adds-users-authentication-view
   - branche develop rassemblant toutes les features développées valides et mergées
   - branche master dans laquelle develop est mergée lorsque notre code est valide
+
 
 Ainsi, on évitera les commits foireux qui compromettent la prod. Pas la peine d'essayer de push sur le master, je l'ai bloqué, il n'y a que moi (Jérémy) qui puisse y accéder.
 
