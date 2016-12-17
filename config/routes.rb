@@ -24,5 +24,5 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
-  root 'yolo#index'
+  root 'home#index'
 end
