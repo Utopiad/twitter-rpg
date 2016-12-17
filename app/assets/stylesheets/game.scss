@@ -1,3 +1,320 @@
 // Place all the styles related to the game controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.game {
+  .world-image {
+    width: 100%;
+    height: 120px;
+    img {
+      height: 100%;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    .image-cover {
+      position: absolute;
+      top: 65px;
+      display: flex;
+      padding: 45px 10px 45px 80px;
+      align-items: baseline;
+      .return {
+        display: flex;
+        line-height: 1.2em;
+        padding-right: 15px;
+        span {
+          padding-left: 15px;
+          font-family: 'latolight';
+          color: white;
+          font-size: 1.2em;
+          &:hover {
+            color: $primary;
+          }
+        }
+      }
+
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: "latoregular";
+        color: $white;
+        font-size: 1.2em;
+        line-height: 1.4em;
+        .world-name {
+          font-family: 'latolight';
+          a {
+            text-decoration: none;
+            color: $white;
+          }
+          padding: 0px 10px 0px;
+        }
+        span {
+          font-family: 'latobold';
+          font-size: 1.5em;
+          padding: 0 5px;
+        }
+        .active_chapter {
+          font-family: 'latobold';
+        }
+      }
+    }
+  }
+
+  .content-wrapper {
+    position: relative;
+    min-height: calc(100vh - 64px);
+    width: 100%;
+    background-color: $white;
+
+    .content {
+      margin: 0 80px;
+
+      &.two-columns {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .layout-left {
+        width: 55%;
+        padding: 50px 25px 50px 0px;
+        .event {
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: row;
+          min-height: 175px;
+          .left {
+            h2 {
+              color: $primary;
+              font-size: 1.2em;
+            }
+
+            .event-desc {
+              font-family: 'latoregular';
+              font-size: 1em;
+              max-width: 300px;
+              padding: 0 10px 0 0px;
+            }
+
+            .monsters-list {
+              display: flex;
+              justify-content: space-between;
+              .monster {
+                display: flex;
+                .monster-thumbnail {
+                  padding: 0 10px;
+                  border-radius: 50%;
+                  img {
+                    width: 36px;
+                    height: 36px;
+                  }
+                }
+                .monster-name-count {
+                  font-family: 'latolight';
+                  font-size: 1em;
+                  color: $black;
+
+                  span {
+                    color: $primary;
+                  }
+                }
+              }
+
+            }
+          }
+
+          .right {
+            img {
+              width: 235px;
+              height: 175px;
+            }
+          }
+        }
+
+        .message-box {
+          background-color:  rgba(251, 250, 248, 1);
+          box-shadow: 5px 8px 12px 0px rgba(0, 0, 0, 0.03);
+          min-height: 490px;
+          padding: 25px 30px;
+          h2 {
+            color: $primary;
+            font-family: 'latoregular';
+            font-size: 1.2em;
+          }
+          form {
+            border-radius: 5px;
+            box-shadow: 4px 5px 16px 0px rgba(0, 0, 0, 0.12);
+            input[type="text"] {
+              background-color: $white;
+              border-bottom: 1px solid rgba(255, 138, 0, 0.5);
+              min-height: 90px;
+              margin: 0;
+              border-top-left-radius: 5px;
+              border-top-right-radius: 5px;
+            }
+            .bottom {
+              color: $primary;
+              font-family: 'latobold';
+              font-size: 0.9em;
+              background-color: $white;
+              height: 28px;
+              border-top: 1px solid rgba(255, 138, 0, 0.5);
+              .arobase, .hashtag {
+                width: 20px;
+                height: 15px;
+                line-height: 2em;
+                padding: 0 5px;
+                display: inline-block;
+              }
+              input[type="submit"] {
+                display: inline-block;
+                border: none;
+                padding: 7px 20px 8px;
+                background-color: $white;
+                color: $primary;
+                font-family: 'latobold';
+                font-size: 0.9em;
+                float: right;
+              }
+            }
+          }
+        }
+      }
+
+      .layout-right {
+        width: 45%;
+        padding: 50px 0 50px 25px;;
+        .inventory-stuff {
+          background-color: rgba(251, 250, 248, 1);
+          box-shadow: 5px 8px 12px 0px rgba(0, 0, 0, 0.03);
+          padding: 25px 45px;
+
+          h2 {
+            color: $primary;
+            font-size: 1.2em;
+            font-family: 'latoregular';
+            margin: 0;
+          }
+
+          .action-zone {
+            padding: 25px 0px;
+            width: 360px;
+            margin: 0 auto;
+
+            .inline {
+              display: flex;
+              .two-first-items {
+                padding-right:25px;
+              }
+
+              .two-last-items {
+                padding-left: 25px;
+              }
+
+              .two-first-items, .two-last-items {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                .stuff-card {
+                  position: relative;
+                  width: 55px ;
+                  height: 55px;
+                  background-color: $white;
+                  border-radius: 5px;
+                  margin: 0;
+                  cursor: pointer;
+                  box-shadow: 4px 5px 16px 0px rgba(0, 0, 0, 0.12);
+                  img {
+                    width: 55px;
+                    height: 55px;
+                  }
+
+                  &:first-child, :nth-child(2) {
+                    float:left;
+                  }
+
+                  &:nth-child(3), :last-child {
+                    float: right;
+                  }
+                }
+              }
+
+              .drop-zone {
+                width: 200px;
+                height: 200px;
+                background-color: $white;
+                flex: 1 1 auto;
+                border-radius: 6px;
+                box-shadow: 4px 5px 16px 0px rgba(0, 0, 0, 0.12);
+                img {
+                  width: 200px;
+                  height: 200px;
+                }
+              }
+            }
+
+            .bottom-stuff {
+              flex: 1 1 auto;
+              display: flex;
+              flex-flow: row nowrap;
+              justify-content: space-between;
+              padding: 15px 80px;
+
+              .stuff-little-card {
+                position: relative;
+                width: 36px ;
+                height: 36px;
+                background-color: $white;
+                border-radius: 6px;
+                margin: 0;
+                cursor: pointer;
+                box-shadow: 4px 5px 16px 0px rgba(0, 0, 0, 0.12);
+                img {
+                  width: 55px;
+                  height: 55px;
+                }
+              }
+            }
+          }
+
+          .character-state-info {
+            width: 360px;
+            margin: 0 auto;
+
+            .top-section {
+              display: flex;
+              justify-content: space-between;
+              span {
+                width: 15px;
+                font-family: 'latolight';
+                font-size: 0.9em;
+                color: $primary;
+              }
+
+              .life-bar {
+                background-color: rgba(255, 202, 0, 0.45);
+                border-radius: 4px;
+                width: 270px;
+                height: 7px;
+              }
+            }
+
+            .bottom-section {
+              font-family: 'latolight';
+              font-size: 0.9em;
+              color: $primary;
+              display: flex;
+              flex-direction: space-between;
+              .attaque-info {
+
+              }
+
+              .armure-info {
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
