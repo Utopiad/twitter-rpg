@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 20161208143326) do
   create_table "chapters", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "picture"
+    t.string   "image"
     t.integer  "world_id"
-    t.integer  "active",      default: 0
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["world_id"], name: "index_chapters_on_world_id", using: :btree
   end
 
   create_table "character_types", force: :cascade do |t|
@@ -37,43 +37,52 @@ ActiveRecord::Schema.define(version: 20161208143326) do
   end
 
   create_table "characters", force: :cascade do |t|
-    t.integer  "character_type_id"
+    t.integer  "world_id"
+    t.integer  "classe_id"
     t.integer  "user_id"
+    t.text     "name"
+    t.integer  "total_experience", default: 0
+    t.integer  "bonus_attack_min", default: 0
+    t.integer  "bonus_attack_max", default: 0
+    t.integer  "bonus_armor",      default: 0
+    t.integer  "bonus_life",       default: 0
+    t.integer  "malus_life",       default: 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "classes", force: :cascade do |t|
     t.integer  "world_id"
     t.text     "name"
-    t.text     "slug"
-    t.integer  "total_experience",  default: 0
-    t.integer  "bonus_attack",      default: 0
-    t.integer  "bonus_armor",       default: 0
-    t.integer  "bonus_life",        default: 0
-    t.integer  "malus_life",        default: 0
-    t.integer  "is_narrator",       default: 0
-    t.integer  "has_played",        default: 0
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "attack_min"
+    t.integer  "attack_max"
+    t.integer  "armor"
+    t.integer  "life"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "event_monsters", force: :cascade do |t|
+    t.integer  "world_id"
     t.integer  "monster_id"
-    t.integer  "event_id"
-    t.integer  "bonus_attack", default: 0
-    t.integer  "bonus_life",   default: 0
-    t.integer  "bonus_armor",  default: 0
-    t.integer  "malus_life",   default: 0
+    t.integer  "bonus_attack_min", default: 0
+    t.integer  "bonus_attack_max", default: 0
+    t.integer  "bonus_life",       default: 0
+    t.integer  "bonus_armor",      default: 0
+    t.integer  "malus_life",       default: 0
     t.string   "name"
-    t.string   "slug"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "picture"
+    t.string   "image"
     t.integer  "chapter_id"
-    t.integer  "active",      default: 0
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["chapter_id"], name: "index_events_on_chapter_id", using: :btree
   end
 
   create_table "fights", force: :cascade do |t|
@@ -81,9 +90,19 @@ ActiveRecord::Schema.define(version: 20161208143326) do
     t.integer  "attacker_id"
     t.string   "defender_type"
     t.integer  "defender_id"
+    t.integer  "attacker_attack_min"
+    t.integer  "attacker_attack_max"
+    t.integer  "attacker_armor"
+    t.integer  "attacker_life"
+    t.integer  "attacker_malus_life"
+    t.integer  "defender_attack_min"
+    t.integer  "defender_attack_max"
+    t.integer  "defender_armor"
+    t.integer  "defender_life"
+    t.integer  "defender_malus_life"
     t.integer  "hit"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.index ["attacker_type", "attacker_id"], name: "index_fights_on_attacker_type_and_attacker_id", using: :btree
     t.index ["defender_type", "defender_id"], name: "index_fights_on_defender_type_and_defender_id", using: :btree
   end
@@ -99,7 +118,7 @@ ActiveRecord::Schema.define(version: 20161208143326) do
 
   create_table "messages", force: :cascade do |t|
     t.integer  "character_id"
-    t.integer  "event_id"
+    t.integer  "world_id"
     t.text     "message"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -108,10 +127,10 @@ ActiveRecord::Schema.define(version: 20161208143326) do
   create_table "monsters", force: :cascade do |t|
     t.integer  "world_id"
     t.text     "name"
-    t.integer  "attack_min", default: 0
-    t.integer  "attack_max", default: 0
-    t.integer  "armor",      default: 0
-    t.integer  "life",       default: 0
+    t.integer  "attack_min"
+    t.integer  "attack_max"
+    t.integer  "armor"
+    t.integer  "life"
     t.integer  "malus_life", default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -161,12 +180,12 @@ ActiveRecord::Schema.define(version: 20161208143326) do
 
   create_table "worlds", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "character_id"
     t.text     "name"
     t.integer  "public"
-    t.integer  "max_character_count"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "chapters", "worlds"
+  add_foreign_key "events", "chapters"
 end
