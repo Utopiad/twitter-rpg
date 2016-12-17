@@ -18,4 +18,10 @@
 .idea/*
 erd.pdf
 
+# Gemfile lock
+Gemfile.lock
+
+# Uploads
+public/uploads/*
+
 .DS_Store
