@@ -16,8 +16,6 @@
       <p class="alert alert-danger"><script>Materialize.toast("<%= alert %>", 4000, 'rounded red')</script></p>
     <% end %>
 
-    <div class="background"></div>
-
     <% if user_signed_in? %>
       <ul id="dropdown1" class="dropdown-content">
         <li><%= link_to 'Edit Profile', edit_user_registration_path, :class => 'navbar-link' %></li>
@@ -33,10 +31,8 @@
         </div>
       </nav>
     <% end %>
-    <div class="content-wrapper">
-      <div class="content">
-        <%= yield %>
-      </div>
-    </div>
+
+    <%= yield %>
+
   </body>
 </html>
