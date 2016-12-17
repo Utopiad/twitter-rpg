@@ -1,5 +1,19 @@
-<%= form_for @world, url: {action: "create"} do |f| -%>
-  <p><%= f.text_field :name -%></p>
-  <p><%= f.check_box(:public) %><%= f.label(:public, "Rendre le serveur public (tout le monde peut rejoindre)") %></p>
-  <p><%= f.submit "Create" -%></p>
-<% end %>
+<div class="content-wrapper">
+  <div class="content">
+    <div class="scenario">
+
+      <h2>First step</h2>
+
+      <div class="scenario_content">
+
+        <h3>Build your scenario</h3>
+
+        <%= form_for @world, url: {action: "create"} do |f| -%>
+            <p><%= f.text_field :name -%></p>
+            <p><%= f.check_box(:public) %><%= f.label(:public, "Rendre le serveur public (tout le monde peut rejoindre)") %></p>
+            <p><%= f.submit "Create" -%></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
