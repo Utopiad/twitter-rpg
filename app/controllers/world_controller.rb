@@ -2,6 +2,8 @@ class WorldController < ApplicationController
   def show
     @world = World.where(id: params[:id]).first
     head 404 and return unless @world
+    @user_owner = User.where(id: @world.user_id).first
+    @event = @world.current_event
   end
 
   def new
