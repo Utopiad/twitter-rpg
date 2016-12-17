@@ -15,3 +15,13 @@
 //= require turbolinks
 //= require materialize-sprockets
 //= require_tree .
+
+
+$('.dropdown-button').on('click', function() {
+  console.log('bite');
+  $('.dropdown-content').css({
+    'top': '90px'
+  });
+
+
+});

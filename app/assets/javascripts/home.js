@@ -4,7 +4,6 @@ $(document).ready(function(){
   if ( home ) {
     $('.content-wrapper').addClass('carded');
 
-    $("dropdown-button").dropdown();
   } else  {
     return;
   }
