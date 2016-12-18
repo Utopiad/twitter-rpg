@@ -302,14 +302,15 @@
               font-family: 'latolight';
               font-size: 0.9em;
               color: $primary;
-              display: flex;
-              flex-direction: space-between;
+              overflow: auto;
+              width: 100%;
+              padding: 15px 0px;
               .attaque-info {
-
+                float: left;
               }
 
               .armure-info {
-
+                float: right;
               }
             }
           }

@@ -43,8 +43,8 @@
           <div class="world-event-monster-container">
             <div class="event">
               <h5>Évènement actif</h5>
-              <% if @event.picture %>
-                <%= image_tag @event.picture %>
+              <% if @event.image %>
+                <%= image_tag @event.title %>
               <% end %>
               <div class="event-name"><%= @event.title %></div>
             </div>

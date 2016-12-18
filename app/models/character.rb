@@ -46,7 +46,7 @@ class Character < ApplicationRecord
   end
 
   def current_life
-    self.character_type.life + self.life - self.malus_life
+    self.life - self.malus_life
   end
 
   def life

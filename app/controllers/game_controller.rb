@@ -20,6 +20,7 @@ class GameController < ApplicationController
         id: @character.character_type_id,
         world_id: @world.id
         ).first
+      @full_life = @character.life + @character.bonus_life
 
     end
   end

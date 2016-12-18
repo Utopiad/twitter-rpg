@@ -102,7 +102,9 @@
             <div class="top-section">
               <span>PV</span>
               <div class="life-bar"></div>
-              <span class="life-indicator"></span>
+              <span class="life-indicator">
+                <%= @character.current_life %>/<%= @full_life %>
+              </span>
             </div>
             <div class="bottom-section">
               <div class="attaque-info">
@@ -114,7 +116,13 @@
                 <%= @character_type.armor %>
               </div>
             </div>
+          </div>
 
+          <h2>Sac</h2>
+          <div class="inventory">
+            <% @character.inventories.each do | s | %>
+              <div><%= s.inspect %></div>
+            <% end %>
           </div>
         </div>
       </div>
