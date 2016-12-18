@@ -25,9 +25,10 @@ class Event < ApplicationRecord
     self.turns.where(finished: 0).first
   end
 
-  def pass_turn(turn)
-    turn.finish!
+  def pass_turn
+    self.current_turn.finish!
     self.world.characters.find_all.map{ |c| c.has_not_played! }
     self.world.current_event.event_monsters.find_all.map{ |em| em.has_not_played! }
+    self.turns.new.save
   end
 end

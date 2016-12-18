@@ -141,9 +141,9 @@ ActiveRecord::Schema.define(version: 20161218030427) do
 
   create_table "turns", force: :cascade do |t|
     t.integer  "event_id"
-    t.integer  "finished"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "finished",   default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|
