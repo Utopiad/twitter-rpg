@@ -24,6 +24,7 @@ class WorldMessageChannel < ApplicationCable::Channel
     if character.is_narrator?
       self.monster_attack(message, character, event_id, channel)
       self.attribute(message, character, event_id, channel)
+      self.pass_turn(message, character, event_id, channel)
     else
       self.attack(message, character, event_id, channel)
     end
@@ -45,6 +46,30 @@ class WorldMessageChannel < ApplicationCable::Channel
     if fight_message.save
       ActionCable.server.broadcast(channel, message: render_message(fight_message))
     end
+  end
+
+  def pass_turn_message(character, event_id, channel)
+    template = "%s a mis fin au tour. Vous pouvez maintenant tous jouer."
+    message = template % [character.name]
+    pass_turn_message = Message.new(character: character,
+      event_id: event_id, message: message)
+    if pass_turn_message.save
+      ActionCable.server.broadcast(channel, message: render_message(pass_turn_message))
+    end
+  end
+
+  def pass_turn(message, character, event_id, channel)
+    reg = Regexp.new(/(\B#\w\w+)/)
+    actions = message.message.scan(reg)
+
+    actions.each do |action|
+      if action[0] == "#pass_turn"
+        event = Event.find(event_id)
+        event.pass_turn
+        self.pass_turn_message(character, event_id, channel)
+      end
+    end
+
   end
 
   def attack(message, character, event_id, channel)
