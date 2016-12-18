@@ -13,16 +13,17 @@ class WorldMessageChannel < ApplicationCable::Channel
   def speak(data)
     template = 'messages_%s'
     channel = template % [data['world_id']]
-
     message = Message.new(character_id: data['character_id'],
       event_id: data['event_id'], message: data['message'])
 
     if message.save
       ActionCable.server.broadcast(channel, message: render_message(message))
     end
-
-    fight = self.check_action(message)
-
+    if message.character.is_narrator?
+      fight = self.check_action_narrator(message)
+    else
+      fight = self.check_action(message)
+    end
     if fight
       fight_message = Message.new(character: message.character,
         event_id: data['event_id'], message: fight.export(:txt))
@@ -34,9 +35,18 @@ class WorldMessageChannel < ApplicationCable::Channel
 
   end
 
-  def check_action(message)
+  def check_action_user(message)
+    self.attack(message)
+  end
+  def check_action_narrator(message)
+    self.monster_attack(message)
+  end
+
+
+  def attack(message)
     reg = Regexp.new(/(\B#\w\w+)\s(\B@\w\w+)/)
     actions = message.message.scan(reg)
+
     actions.each do |action|
       if action[0] == "#attack"
         target = EventMonster.where(slug: action[1]).first
@@ -51,7 +61,26 @@ class WorldMessageChannel < ApplicationCable::Channel
         return false
       end
     end
-    return false
+  end
+
+  def monster_attack(message)
+    reg = Regexp.new(/(\B@\w\w+)\s(\B#\w\w+)\s(\B@\w\w+)/)
+    action = message.message.scan(reg)
+    actions.each do |action|
+      if action[1] == "#attack"
+        attacker = EventMonster.where(slug: action[0]).first
+        target = EventMonster.where(slug: action[2]).first
+        unless target.blank?
+          return attacker.attack(target)
+        else
+          target = message.character.world.characters.where(slug: action[2]).first
+          return false if target.blank?
+          return attacker.attack(target)
+        end
+      else
+        return false
+      end
+    end
   end
 
   def render_message(message)
