@@ -19,7 +19,7 @@ module Fighter
 
     fight = Fight.new(attacker: self, defender: target, hit: hit)
     fight.save
-    self.has_played!
+    #self.has_played!
 
     return fight
   end
