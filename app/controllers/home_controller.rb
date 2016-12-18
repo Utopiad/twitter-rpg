@@ -1,7 +1,13 @@
 class HomeController < ApplicationController
 
   def index
-    # @current_user = User.where(id: cookies.signed[:current_user_id])
-    # puts current_user.inspect
+    if current_user.worlds.count > 0
+      @user_worlds = current_user.worlds
+    end
+
+    if current_user.joined_worlds.count > 0
+      @joined_worlds = current_user.joined_worlds
+
+    end
   end
 end

@@ -38,7 +38,7 @@
           chap = Chapter.create(description: Forgery('lorem_ipsum').paragraph,
             world: w, title: Forgery('lorem_ipsum').sentence, active: 1)
 
-          1.times do
+          3.times do
             e = Event.create(chapter: chap, description: Forgery('lorem_ipsum').paragraph,
               title: Forgery('lorem_ipsum').sentence, active: 1)
             1.times do
