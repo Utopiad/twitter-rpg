@@ -16,4 +16,8 @@ class Event < ApplicationRecord
   delegate :world, :to => :chapter
 
   mount_uploader :image, EventImageUploader
+
+  def grouped_monsters
+    self.event_monsters.group_by{|m| m.monster_id}
+  end
 end
