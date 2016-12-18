@@ -16,13 +16,15 @@
           <div class="world-creator"><%= @user_owner.name %></div>
         </div>
         <div class="controls">
-          <span class="world-controls-right i i-play"></span>
+          <%= link_to(:controller=>'game', :action=>'index', :world_id=>@world.id) do %>
+            <div class="world-controls-right i i-play-big"></div>
+          <% end %>
           <% if current_user.id == @world.user_id %>
             <%= link_to(:controller=>'world', :action=>'edit') do %>
-              <span class="world-controls-right i i-edit"></span>
+              <div class="world-controls-right i i-edit-big"></div>
             <% end %>
           <% end %>
-          <span class="world-controls-right i i-share"></span>
+          <div class="world-controls-right i i-share-big"></div>
         </div>
       </div>
     </div>
@@ -41,14 +43,14 @@
           </div>
           <div class="world-event-monster-container">
             <div class="event">
-              <h5>Évènement actif</h5>
+              <h4>Évènement actif</h4>
               <% if @event.image %>
                 <%= image_tag @event.image %>
               <% end %>
               <div class="event-name"><%= @event.title %></div>
             </div>
             <div class="monsters">
-              <h5>Les monstres</h5>
+              <h4>Les monstres</h4>
             </div>
           </div>
 
