@@ -27,6 +27,7 @@ class WorldMessageChannel < ApplicationCable::Channel
       self.pass_turn(message, character, event_id, channel)
     else
       self.attack(message, character, event_id, channel)
+      self.equip(message, character, event_id, channel)
     end
   end
 
@@ -51,6 +52,16 @@ class WorldMessageChannel < ApplicationCable::Channel
   def pass_turn_message(character, event_id, channel)
     template = "%s a mis fin au tour. Vous pouvez maintenant tous jouer."
     message = template % [character.name]
+    pass_turn_message = Message.new(character: character,
+      event_id: event_id, message: message)
+    if pass_turn_message.save
+      ActionCable.server.broadcast(channel, message: render_message(pass_turn_message))
+    end
+  end
+
+  def equip_message(character, stuff, event_id, channel)
+    template = "%s a équipé %s"
+    message = template % [character.name, stuff.name]
     pass_turn_message = Message.new(character: character,
       event_id: event_id, message: message)
     if pass_turn_message.save
@@ -105,8 +116,29 @@ class WorldMessageChannel < ApplicationCable::Channel
 
         target = message.character.world.characters.where(slug: action[2]).first
         unless target.blank?
-          attribution = reward.attribute_to(target)
+          reward.attribute_to(target)
           self.attribution_message(character, reward.stuff, target, event_id, channel)
+        end
+      else
+        return false
+      end
+    end
+  end
+
+  def equip(message, character, event_id, channel)
+    reg = Regexp.new(/(\B#\w\w+)\s(\B@\w\w+)/)
+    actions = message.message.scan(reg)
+
+    actions.each do |action|
+      if action[0] == "#equip"
+        inventory = Inventory.where(slug: action[1]).first
+        puts inventory
+        return false if inventory.blank?
+
+        target = character
+        unless target.blank?
+          inventory.equip!
+          self.equip_message(character, inventory.stuff, event_id, channel)
         end
       else
         return false
