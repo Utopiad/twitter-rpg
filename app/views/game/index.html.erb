@@ -65,7 +65,8 @@
 
             <% end %>
           </div>
-          <div class="messages-conv">
+
+          <div class="messages-conv" id="messages">
             <% @messages.each do |message| %>
               <%= render partial: "message/message", locals: { message: message } %>
             <% end %>
