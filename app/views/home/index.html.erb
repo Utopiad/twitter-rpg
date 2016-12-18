@@ -1,5 +1,5 @@
 <div class="home">
-  <div class="content-wrapper">
+  <div class="content-wrapper carded">
     <div class="content">
       <section class="home-container two-columns">
         <div class="action-buttons">
@@ -51,9 +51,6 @@
 
                           <div class="world-character-name">
                             <%= current_user.character_for_world_id(scenar.id).name.to_s %>
-                          </div>
-                          <div>
-                            <%= scenar.inspect %>
                           </div>
                         </div>
                       </div>

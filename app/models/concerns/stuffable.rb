@@ -13,6 +13,6 @@ module Stuffable
     self.equiped_stuffs.map{ |s| s.bonus_armor }.sum
   end
   def life_stuffs_bonus
-    self.equiped_stuffs.map{ |s| s.life }.sum
+    self.equiped_stuffs.map{ |s| s.bonus_life }.sum
   end
 end
