@@ -10,10 +10,12 @@ class EventController < ApplicationController
     if @event.save
       if request.xhr?
         render :json => {
-          :world_id => params[:world_id]
+          :world_id => params[:world_id],
+          :chapter_id => params[:chapter_id],
+          :event_id => @event.id
         }
       else
-        redirect_to controller: "character_type", action: "new", :world_id => params[:world_id]
+        redirect_to controller: "reward", action: "new", :world_id => params[:world_id], :chapter_id => params[:chapter_id], :event_id => @event.id
       end
     else
       render :new

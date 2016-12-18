@@ -184,6 +184,54 @@ scenario.newEvent = function () {
             self.post(URL, DATA)
                 .done(function (e) {
 
+                    var url = '/world/' + world_id + '/chapter/' + chapter_id + "/event/" + e.event_id + "/reward/new"
+
+                    self.redirect(url)
+                })
+        } else {
+            Materialize.toast("Please complete all fields", 4000, 'rounded')
+        }
+    })
+
+}
+
+scenario.newReward = function () {
+
+    var self = this
+
+    $("body").on("click", "#newReward", function (e) {
+        e.preventDefault()
+
+        var name = self.getData("stuff[name]", true)
+        var bonus_attack = self.getData("stuff[bonus_attack]", true)
+        var bonus_armor = self.getData("stuff[bonus_armor]", true)
+        var bonus_life = self.getData("stuff[bonus_life]", true)
+        var quantity = self.getData("quantity", true)
+
+        var world_id = self.getData("world_id")
+        var chapter_id = self.getData("chapter_id")
+        var event_id = self.getData("event_id")
+
+        if (name.length != 0 && bonus_attack.length != 0 &&
+            bonus_armor.length != 0 && bonus_life.length != 0 && quantity.length != 0) {
+
+            console.log("in reward")
+
+            var DATA = {
+                stuff: {
+                    name: name,
+                    bonus_attack: bonus_attack,
+                    bonus_armor: bonus_armor,
+                    bonus_life: bonus_life
+                },
+                quantity: quantity
+            }
+
+            var URL = "/world/" + world_id + "/chapter/" + chapter_id + "/event/" + event_id + "/reward"
+
+            self.post(URL, DATA)
+                .done(function (e) {
+
                     var url = '/world/' + world_id + '/character_type/new'
 
                     self.redirect(url)
