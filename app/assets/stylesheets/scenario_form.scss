@@ -1,10 +1,70 @@
 .scenario {
 
   width: 50%;
-  max-width: 500px;
+  max-width: 600px;
+  padding-top: 10vh;
+  margin: auto;
+
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(245, 166, 35, 1);
+    text-align: left;
+    padding-left: 50px;
+  }
+
+  p {
+    font-size: 16px;
+    color: rgba(111, 111, 111, 1);
+  }
+
+  textarea {
+    border: none;
+    min-height: 180px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    box-shadow: 4px 5px 16px 0px rgba(0, 0, 0, 0.16);
+  }
 
   &_content {
+    padding: 30px 0;
+    background-color: rgba(252, 250, 248, 1);
+    border-radius: 15px;
+    box-shadow: 5px 8px 16px 5px rgba(0, 0, 0, 0.16);
+
+    &_form {
+
+      padding: 0 60px;
+
+      &__active {
+        background-color: rgba(255, 235, 201, 1);
+        padding: 10px 60px 30px 60px;
+      }
+
+      &__submit {
+        background: none;
+        border: none;
+        float: right;
+        font-size: 18px;
+        color: rgba(245, 166, 35, 1);
+        margin: 10px 60px 0 0;
+      }
+
+    }
 
   }
 
+}
+
+.chapter {
+  textarea {
+    min-height: 80px !important;
+  }
 }

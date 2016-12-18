@@ -36,17 +36,17 @@
                           <div class="world-card-creator"> Créateur: <%= User.where(id: scenar.user_id).name %></div>
                         </div>
 
-                        <div class="world-card-description"><%= scenar.chapters.active.description %></div>
+                        <div class="world-card-description"><%# scenar.chapters.active.description %></div>
                         <span class="txt-personnage">Votre personnage</span>
                         <div class="world-character">
                           <% if scenar.user_id == current_user.id %>
                               <span class="i i-mj"></span>
                           <% else %>
-                              <%= image_tag 'ncage.jpg' %>
+                              <%# image_tag 'ncage.jpg' %>
                           <% end %>
 
                           <div class="world-character-name">
-                            <%= current_user.character_for_world_id(scenar.id).name.to_s %>
+                            <%# current_user.character_for_world_id(scenar.id).name.to_s %>
                           </div>
                         </div>
                       </div>
@@ -67,7 +67,7 @@
                       <div class="info-left">
                         <h4 class="world-card-title"><%= scenar.name  %></h4>
                         <div class="world-card-creator"> Créateur: <%= User.where(id: scenar.user_id).name %></div>
-                        <div class="world-card-description"><%= scenar.chapters.active.description %></div>
+                        <div class="world-card-description"><%# scenar.chapters.active.description %></div>
                       </div>
                       <img src="http://lorempixel.com/152/215" alt="">
 
@@ -77,11 +77,11 @@
                 <% if scenar.user_id == current_user.id %>
                   <span class="i i-mj"></span>
                 <% else %>
-                  <%= image_tag 'ncage.jpg' %>
+                  <%# image_tag 'ncage.jpg' %>
                 <% end %>
 
                 <div class="world-character-name">
-                  <%= current_user.character_for_world_id(scenar.id).name.to_s %>
+                  <%# current_user.character_for_world_id(scenar.id).name.to_s %>
                 </div>
               </div> -->
                     </div>

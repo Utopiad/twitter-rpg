@@ -1,6 +1,7 @@
 class MonsterController < ApplicationController
   def new
     @monster = Monster.new
+    @world_id = params[:world_id]
   end
 
   def create
@@ -12,7 +13,7 @@ class MonsterController < ApplicationController
     @monster.world = World.where(id: world_id).first
 
     if @monster.save
-      redirect_to action: "show", id: @monster.id
+      redirect_to root_path
     else
       render :new
     end

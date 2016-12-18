@@ -16,7 +16,7 @@ class WorldController < ApplicationController
     @world.user = current_user
     if @world.save
       cookies[:current_world_id] = @world.id
-      redirect_to action: "show", id: @world.id
+      redirect_to controller: "chapter", action: "new", :world_id => @world.id
     else
       render :new
     end

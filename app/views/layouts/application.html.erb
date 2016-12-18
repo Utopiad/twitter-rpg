@@ -23,7 +23,7 @@
       </ul>
       <nav>
         <div class="nav-wrapper">
-          <a href="#!" class="left brand-logo">RPG</a>
+          <%= link_to 'RPG', root_path, :class => "left brand-logo" %>
           <ul class="right hide-on-med-and-down">
             <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
               <li><a class="dropdown-button " href="#!" data-activates="dropdown1"><%= current_user.name %> <i class="material-icons right "></i></a></li>
