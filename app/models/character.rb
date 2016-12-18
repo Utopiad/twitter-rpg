@@ -27,15 +27,15 @@ class Character < ApplicationRecord
 
   def user_not_in_world
     if !user.joined_worlds.empty?
-      if user.joined_worlds.pluck(:id)
-        errors.add(:user, "is in world").include?(world.id)
+      if user.joined_worlds.pluck(:id).include?(world.id)
+        errors.add(:user, "is in world")
       end
     end
   end
 
   def user_not_world_game_master
     if !user.joined_worlds.empty?
-      if user.worlds.include?(world.id)
+      if user.worlds.pluck(:id).include?(world.id)
         errors.add(:user, "is game master")
       end
     end
