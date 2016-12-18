@@ -39,7 +39,7 @@ class WorldMessageChannel < ApplicationCable::Channel
   def attack(message, character, event_id, channel)
     reg = Regexp.new(/(\B#\w\w+)\s(\B@\w\w+)/)
     actions = message.message.scan(reg)
-
+    return false if character.has_played?
     actions.each do |action|
       if action[0] == "#attack"
         target = EventMonster.where(slug: action[1]).first
@@ -65,6 +65,8 @@ class WorldMessageChannel < ApplicationCable::Channel
     actions.each do |action|
       if action[1] == "#attack"
         attacker = EventMonster.where(slug: action[0]).first
+        return false if attacker.has_played?
+
         target = EventMonster.where(slug: action[2]).first
         unless target.blank?
           fight = attacker.attack(target)
