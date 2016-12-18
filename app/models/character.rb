@@ -1,3 +1,5 @@
+load 'image_uploader.rb'
+
 class Character < ApplicationRecord
   include Fighter
   include Player
@@ -15,6 +17,8 @@ class Character < ApplicationRecord
   has_many :messages
   has_many :inventories, dependent: :destroy
   has_many :stuffs, through: :inventories
+
+  mount_uploader :image, ChapterImageUploader
 
   validate :user_not_in_world, on: :create
   validate :user_not_world_game_master, on: :create

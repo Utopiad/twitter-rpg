@@ -1,3 +1,5 @@
+load 'image_uploader.rb'
+
 class Stuff < ApplicationRecord
   belongs_to :world
 
@@ -6,4 +8,6 @@ class Stuff < ApplicationRecord
 
   has_many :inventories, dependent: :destroy
   has_many :characters, through: :inventories
+
+  mount_uploader :image, StuffImageUploader
 end

@@ -1,6 +1,5 @@
 <%= form_for @world, url: {action: "update"} do |f| %>
   <p><%= f.text_field :name %></p>
-  <p><%= f.file_field :image %></p>
   <p><%= f.check_box(:public) %><%= f.label(:public, "Rendre le serveur public (tout le monde peut rejoindre)") %></p>
   <p><%= f.submit "Create" %></p>
 <% end %>
