@@ -3,6 +3,7 @@ class CreateEventMonsters < ActiveRecord::Migration[5.0]
     create_table :event_monsters do |t|
       t.integer :monster_id
       t.integer :event_id
+      t.integer :has_played, default: 0
       t.integer :bonus_attack, default: 0
       t.integer :bonus_life, default: 0
       t.integer :bonus_armor, default: 0
