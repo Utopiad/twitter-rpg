@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(version: 20161218030427) do
     t.integer  "quantity",   default: 0
     t.integer  "event_id"
     t.integer  "stuff_id"
+    t.string   "name"
+    t.string   "slug"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end

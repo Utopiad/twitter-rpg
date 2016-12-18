@@ -23,8 +23,19 @@ class WorldMessageChannel < ApplicationCable::Channel
     end
     if character.is_narrator?
       self.monster_attack(message, character, event_id, channel)
+      self.attribute(message, character, event_id, channel)
     else
       self.attack(message, character, event_id, channel)
+    end
+  end
+
+  def attribution_message(character, stuff, target, event_id, channel)
+    template = "%s a récompensé %s d'un %s"
+    message = template % [character.name, target.name, stuff.name]
+    attribution_message = Message.new(character: character,
+      event_id: event_id, message: message)
+    if attribution_message.save
+      ActionCable.server.broadcast(channel, message: render_message(attribution_message))
     end
   end
 
@@ -51,6 +62,26 @@ class WorldMessageChannel < ApplicationCable::Channel
           return false if target.blank?
           fight = character.attack(target)
           self.fight_message(fight, character, event_id, channel)
+        end
+      else
+        return false
+      end
+    end
+  end
+
+  def attribute(message, character, event_id, channel)
+    reg = Regexp.new(/(\B#\w\w+)\s(\B@\w\w+)\s(\B@\w\w+)/)
+    actions = message.message.scan(reg)
+
+    actions.each do |action|
+      if action[0] == "#attribute"
+        reward = Reward.where(slug: action[1]).first
+        return false if reward.blank?
+
+        target = message.character.world.characters.where(slug: action[2]).first
+        unless target.blank?
+          attribution = reward.attribute_to(target)
+          self.attribution_message(character, reward.stuff, target, event_id, channel)
         end
       else
         return false
