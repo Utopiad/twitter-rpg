@@ -8,7 +8,14 @@ class ChapterController < ApplicationController
     @chapter = Chapter.new(params.require(:chapter).permit(:picture,
       :description, :world_id, :title))
     if @chapter.save
-      redirect_to controller: "event", action: "new", :world_id => params[:world_id], :chapter_id => @chapter.id
+      if request.xhr?
+        render :json => {
+          :world_id => params[:world_id],
+          :chapter_id => @chapter.id
+        }
+      else
+        redirect_to controller: "event", action: "new", :world_id => params[:world_id], :chapter_id => @chapter.id
+      end
     else
       render :new
     end

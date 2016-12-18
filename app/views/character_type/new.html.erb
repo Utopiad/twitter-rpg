@@ -1,6 +1,6 @@
 <div class="content-wrapper">
-  <div class="content">
-    <div class="scenario chapter">
+  <div class="content content__overflow">
+    <div class="scenario chapter anim__in">
 
       <h2>Fourth step</h2>
 
@@ -8,7 +8,7 @@
 
         <h3>Create your characters</h3>
 
-        <%= form_for @character_type, url: {action: "create"} do |f| %>
+        <%= form_for @character_type, remote: true, url: {action: "create"} do |f| %>
             <div class="scenario_content_form__active row">
               <div class="col m4">
                 <div class="input-field">
@@ -39,13 +39,23 @@
               </div>
             </div>
 
-            <%= hidden_field_tag :world_id, :value => @world_id %>
+            <%= hidden_field_tag :world_id, @world_id %>
 
             <div class="row">
-              <%= f.submit "Next step", :class => "scenario_content_form__submit" -%>
+              <%= f.button "Next step", :id => "newCharacter", :class => "scenario_content_form__submit" -%>
             </div>
         <% end %>
       </div>
     </div>
+
+    <ul class="progress">
+      <li class="active"></li>
+      <li class="active"></li>
+      <li class="active"></li>
+      <li class="active"></li>
+      <li></li>
+      <li></li>
+    </ul>
+
   </div>
 </div>

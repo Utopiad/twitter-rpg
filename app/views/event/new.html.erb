@@ -1,6 +1,6 @@
 <div class="content-wrapper">
-  <div class="content">
-    <div class="scenario chapter">
+  <div class="content content__overflow">
+    <div class="scenario chapter anim__in">
 
       <h2>Third step</h2>
 
@@ -8,12 +8,11 @@
 
         <h3>Create your events</h3>
 
-        <%= form_for @event, url: {action: "create"} do |f| %>
+        <%= form_for @event, remote: true, url: {action: "create"} do |f| %>
             <div class="scenario_content_form__active row">
               <div class="col m4">
-                <div class="input-field">
-                  <%= f.label :picture %>
-                  <%= f.text_field :picture %>
+                <div class="input-field file-field scenario_content_form__img">
+                  <%= f.file_field :picture %>
                 </div>
               </div>
               <div class="col m8">
@@ -22,19 +21,30 @@
                   <%= f.text_field :title %>
                 </div>
                 <div class="input-field">
-                  <%= f.label :description %>
-                  <%= f.text_field :description %>
+                  <p>Description :</p>
+                  <%= f.text_area :description %>
                 </div>
               </div>
             </div>
 
-            <%= hidden_field_tag :world_id, :value => @world_id %>
+            <%= hidden_field_tag :world_id, @world_id %>
+            <%= hidden_field_tag :chapter_id, @chapter_id %>
 
             <div class="row">
-              <%= f.submit "Next step", :class => "scenario_content_form__submit" -%>
+              <%= f.button "Next step", :id => "newEvent", :class => "scenario_content_form__submit" -%>
             </div>
         <% end %>
       </div>
     </div>
+
+    <ul class="progress">
+      <li class="active"></li>
+      <li class="active"></li>
+      <li class="active"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
   </div>
 </div>

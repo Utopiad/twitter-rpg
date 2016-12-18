@@ -1,18 +1,18 @@
 <div class="content-wrapper">
-  <div class="content">
-    <div class="scenario">
+  <div class="content content__overflow">
+    <div class="scenario anim__in">
 
       <h2>First step</h2>
 
       <div class="scenario_content">
 
-        <h3>Build your scenario</h3>
+        <h3>Create your scenario</h3>
 
-        <%= form_for @world, url: {action: "create"} do |f| -%>
+        <%= form_for @world, remote: true, url: {action: "create"} do |f| -%>
             <div class="scenario_content_form__active row">
               <div class="col m4">
-                <div class="input-field">
-                  IMAGE
+                <div class="input-field file-field scenario_content_form__img">
+                  <%= f.file_field :picture %>
                 </div>
               </div>
               <div class="col m8">
@@ -28,17 +28,27 @@
             </div>
 
             <div class="scenario_content_form row">
-              <p>Description :</p>
               <div class="col m12">
+                <p>Description :</p>
                 <textarea></textarea>
               </div>
             </div>
 
             <div class="row">
-              <%= f.submit "Next step", :class => "scenario_content_form__submit" -%>
+              <%= f.button "Next step", :id => "newWorld", :class => "js-submit scenario_content_form__submit" -%>
             </div>
         <% end %>
       </div>
     </div>
+
+    <ul class="progress">
+      <li class="active"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
   </div>
 </div>

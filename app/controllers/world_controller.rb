@@ -12,11 +12,18 @@ class WorldController < ApplicationController
   end
 
   def create
+    puts params.inspect
     @world = World.new(params.require(:world).permit(:name, :public))
     @world.user = current_user
     if @world.save
-      cookies[:current_world_id] = @world.id
-      redirect_to controller: "chapter", action: "new", :world_id => @world.id
+      if request.xhr?
+        render :json => {
+          :world => @world
+        }
+      else
+        cookies[:current_world_id] = @world.id
+        redirect_to controller: "chapter", action: "new", :world_id => @world.id
+      end
     else
       render :new
     end

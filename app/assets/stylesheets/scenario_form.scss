@@ -1,9 +1,29 @@
+.content__overflow {
+  overflow: hidden;
+}
+
 .scenario {
 
   width: 50%;
   max-width: 600px;
-  padding-top: 10vh;
+  padding-top: 5vh;
+  height: calc(95vh - 104px); // 100vh - 5vh from padding 104px = 64px nav + 40px progress
   margin: auto;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+
+
+  &.anim__in {
+    transform: translateX(100vw);
+    transition: all 0.5s ease-in-out;
+    opacity: 0.5;
+  }
+
+  &.anim__out {
+    transform: translateX(-100vw);
+    transition: all 0.5s ease-in-out;
+    opacity: 0.5;
+  }
 
   h2 {
     font-size: 28px;
@@ -27,25 +47,40 @@
 
   textarea {
     border: none;
-    min-height: 180px;
+    min-height: 160px;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 5px;
     box-shadow: 4px 5px 16px 0px rgba(0, 0, 0, 0.16);
   }
 
   &_content {
-    padding: 30px 0;
+    padding: 5px 0;
     background-color: rgba(252, 250, 248, 1);
     border-radius: 15px;
     box-shadow: 5px 8px 16px 5px rgba(0, 0, 0, 0.16);
 
+    h2 {
+      font-size: 30px;
+      font-weight: bold;
+      color: rgba(245, 166, 35, 1);
+      text-align: center;
+    }
+
     &_form {
 
-      padding: 0 60px;
+      padding: 0 40px;
 
       &__active {
         background-color: rgba(255, 235, 201, 1);
-        padding: 10px 60px 30px 60px;
+        padding: 10px 40px 30px 40px;
+      }
+
+      &__img {
+        height: 165px;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 1);
+        border-radius: 6px;
+        box-shadow: 4px 5px 16px 0px rgba(0, 0, 0, 0.12);
       }
 
       &__submit {
@@ -55,16 +90,100 @@
         font-size: 18px;
         color: rgba(245, 166, 35, 1);
         margin: 10px 60px 0 0;
+        transition: all 0.2s;
+
+        &:after {
+          content: '\2192';
+          position: relative;
+          display: inline-block;
+          padding-left: 5px;
+          vertical-align: top;
+          transition: all 0.2s;
+        }
+
+        &:hover {
+          transition: all 0.2s;
+          color: rgba(111, 111, 111, 1);
+
+          &:after {
+            transform: translateX(5px);
+            transition: all 0.2s;
+          }
+        }
+      }
+
+      &__more {
+        img {
+          margin: auto;
+          display: block;
+          padding: 40px 0;
+        }
       }
 
     }
 
   }
-
 }
 
 .chapter {
   textarea {
     min-height: 80px !important;
+  }
+}
+
+.progress {
+  width: 60%;
+  max-width: 800px;
+  margin: 20px auto;
+  height: 40px;
+  counter-reset: step;
+  background-color: transparent;
+
+  li {
+    list-style-type: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 9px;
+    width: calc(100% / 6);
+    float: left;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+
+    &:before {
+      content: counter(step);
+      counter-increment: step;
+      width: 40px;
+      line-height: 40px;
+      text-align: center;
+      display: block;
+      font-size: 16px;
+      color: #333;
+      border-radius: 50%;
+      margin: 0 auto 5px auto;
+      background: #ffffff;
+      transition: all 0.5s ease-in-out;
+    }
+
+    &:after {
+      content: '';
+      width: 100%;
+      height: 2px;
+      background: white;
+      position: absolute;
+      left: -50%;
+      top: 19px;
+      z-index: -1;
+      transition: all 0.5s ease-in-out;
+    }
+    &:first-child:after {
+      content: none;
+      transition: all 0.5s ease-in-out;
+    }
+
+    &.active:before,  &.active:after{
+      background: rgba(245, 166, 35, 1);
+      color: #ffffff;
+      transition: all 0.5s ease-in-out;
+    }
   }
 }
