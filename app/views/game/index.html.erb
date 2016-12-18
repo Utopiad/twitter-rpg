@@ -1,3 +1,21 @@
+<div class="hidden">
+  <div id="world_id"><%= @world.id %></div>
+  <% unless @current_event.blank? %><div id="event_id"><%= @current_event.id %></div><% end %>
+  <% unless @character.blank? %><div id="character_id"><%= @character.id %></div><% end %>
+
+  <%= form_tag({controller: "game", action: "activate_chapter", world_id: @world.id}) do %>
+    <%= select_tag :chapter_id, options_from_collection_for_select(@world.chapters, "id", "title") %>
+    <%= hidden_field_tag :world_id, @world.id %>
+    <p><%= submit_tag "Create" %></p>
+  <% end %>
+
+  <%= form_tag({controller: "game", action: "activate_event", world_id: @world.id}) do %>
+    <%= select_tag :event_id, options_from_collection_for_select(@world.chapters.first.events, "id", "title") %>
+    <%= hidden_field_tag :world_id, @world.id %>
+    <p><%= submit_tag "Create" %></p>
+  <% end %>
+</div>
+
 <div class="game">
   <div class="world-image">
 
@@ -131,25 +149,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-<!-- <div id="world_id"><%= @world.id %></div>
-<% unless @current_event.blank? %><div id="event_id"><%= @current_event.id %></div><% end %>
-<% unless @character.blank? %><div id="character_id"><%= @character.id %></div><% end %>
-
-<%= form_tag({controller: "game", action: "activate_chapter", world_id: @world.id}) do %>
-  <%= select_tag :chapter_id, options_from_collection_for_select(@world.chapters, "id", "title") %>
-  <%= hidden_field_tag :world_id, @world.id %>
-  <p><%= submit_tag "Create" %></p>
-<% end %>
-
-<%= form_tag({controller: "game", action: "activate_event", world_id: @world.id}) do %>
-  <%= select_tag :event_id, options_from_collection_for_select(@world.chapters.first.events, "id", "title") %>
-  <%= hidden_field_tag :world_id, @world.id %>
-  <p><%= submit_tag "Create" %></p>
-<% end %> -->
