@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test, :docker do
+group :development, :test, :docker, :windows do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'forgery', '0.6.0'
@@ -57,8 +57,7 @@ gem 'rspec-rails'
 gem 'materialize-sass'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 
-platforms :mswin do
-  gem "wdm", :group => [:development, :test]
-end
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'bcrypt', '3.1.11', :require => 'bcrypt' if Gem.win_platform?
 
 ruby "2.3.1"
