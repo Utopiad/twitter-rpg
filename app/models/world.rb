@@ -1,7 +1,7 @@
 class World < ApplicationRecord
+
   alias_attribute :game_master, :user
   alias_attribute :narrator, :character
-
 
   belongs_to :user
   has_one :narrator, class_name: :Character, foreign_key: :character_id
@@ -13,6 +13,10 @@ class World < ApplicationRecord
   has_many :characters, through: :character_types
   has_many :events, through: :chapters
   has_many :messages, through: :characters
+
+  mount_uploader :image, WorldImageUploader
+
+  scope :public_worlds, -> { where(public: 1) }
 
   validates :name, presence: true
 
@@ -42,10 +46,15 @@ class World < ApplicationRecord
       return c if c.active?
     end
   end
+
   def current_event
     return false if self.current_chapter.blank?
     self.current_chapter.events.find_all do |e|
       return e if e.active?
     end
+  end
+
+  def self.search(search)
+    where("name LIKE ?", "%#{search}%")
   end
 end

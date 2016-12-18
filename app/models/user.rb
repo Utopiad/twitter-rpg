@@ -1,3 +1,5 @@
+load 'image_uploader.rb'
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -6,6 +8,8 @@ class User < ApplicationRecord
 
   has_many :worlds
   has_many :characters, dependent: :destroy
+
+  mount_uploader :image, UserImageUploader
 
   def joined_worlds
     self.characters.map{ |c| c.world }

@@ -47,6 +47,10 @@ group :development do
   # gem 'pry-rails', :group => :development
 end
 
+group :docker do
+  gem 'forgery', '0.6.0'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
@@ -56,6 +60,9 @@ gem 'rspec-rails'
 
 gem 'materialize-sass'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+gem 'fog', '>= 1.0.0'
+gem 'mini_magick'
+gem 'faye-websocket'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'bcrypt', '3.1.11', :require => 'bcrypt' if Gem.win_platform?

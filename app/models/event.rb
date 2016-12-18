@@ -1,3 +1,5 @@
+load 'image_uploader.rb'
+
 class Event < ApplicationRecord
   include Activable
   belongs_to :chapter
@@ -12,4 +14,6 @@ class Event < ApplicationRecord
   has_many :messages
 
   delegate :world, :to => :chapter
+
+  mount_uploader :image, EventImageUploader
 end

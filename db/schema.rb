@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161211152939) do
+ActiveRecord::Schema.define(version: 20161218030427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20161211152939) do
   create_table "chapters", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "picture"
+    t.string   "image"
     t.integer  "world_id"
     t.integer  "active",      default: 0
     t.datetime "created_at",              null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20161211152939) do
     t.integer  "world_id"
     t.text     "name"
     t.text     "slug"
+    t.string   "image"
     t.integer  "total_experience",  default: 0
     t.integer  "bonus_attack",      default: 0
     t.integer  "bonus_armor",       default: 0
@@ -69,7 +70,7 @@ ActiveRecord::Schema.define(version: 20161211152939) do
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "picture"
+    t.string   "image"
     t.integer  "chapter_id"
     t.integer  "active",      default: 0
     t.datetime "created_at",              null: false
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(version: 20161211152939) do
   create_table "monsters", force: :cascade do |t|
     t.integer  "world_id"
     t.text     "name"
+    t.string   "image"
     t.integer  "attack_min", default: 0
     t.integer  "attack_max", default: 0
     t.integer  "armor",      default: 0
@@ -131,6 +133,7 @@ ActiveRecord::Schema.define(version: 20161211152939) do
     t.integer  "bonus_armor"
     t.integer  "bonus_life"
     t.string   "name"
+    t.string   "image"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
@@ -156,6 +159,7 @@ ActiveRecord::Schema.define(version: 20161211152939) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "name"
+    t.string   "image"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -164,6 +168,7 @@ ActiveRecord::Schema.define(version: 20161211152939) do
     t.integer  "user_id"
     t.integer  "character_id"
     t.text     "name"
+    t.string   "image"
     t.integer  "public"
     t.integer  "max_character_count"
     t.datetime "created_at",          null: false
