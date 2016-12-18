@@ -6,5 +6,5 @@
 <p><%= @world.public == 1 ? "public" : "privé" %></p>
 <% if @world.public == 1 %>
   <%= link_to "Create character", :controller => :character, :action => :new, world_id: @world.id %>
-    
+
 <% end %>
