@@ -27,7 +27,7 @@ class World < ApplicationRecord
 
   def character=(character)
     self.character_id = character.id
-    self.save
+    if self.save then character.is_narrator! end
   end
 
   def activate_chapter!(chapter)
