@@ -4,7 +4,7 @@ class GameController < ApplicationController
     head 404 and return unless @world
     @current_chapter = @world.current_chapter
     @current_event = @world.current_event
-    @messages = @world.messages.order(created_at: :asc)
+    @messages = @world.messages.order(created_at: :desc)
 
     if current_user == @world.game_master
       cookies.signed[:current_user_id] = current_user.id
@@ -16,6 +16,10 @@ class GameController < ApplicationController
 
       @character = current_user.character_for_world_id(@world.id)
       @character_stuffs = @character.stuffs
+      @character_type = CharacterType.where(
+        id: @character.character_type_id,
+        world_id: @world.id
+        ).first
 
     end
   end

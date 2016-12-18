@@ -1,10 +1,109 @@
-<h1><%= @world.name %></h1>
+<div class="world-detail">
+  <!--  image du world -->
+  <div class="world-image">
 
-<p>user : <%= @world.user.email %></p>
+  </div>
+
+  <div class="content-wrapper carded">
+    <div class="content">
+
+      <div class="image-cover">
+        <div class="return">
+          <%= link_to(:controller=>'home', :action=>'index') do %>
+            <%= image_tag 'white-return.png' %>
+            <span>Retour à l'accueil</span>
+          <% end %>
+        </div>
+        <div class="bottom-cover">
+          <div class="world-base-info">
+            <h1 class="world-name"><%= @world.name %></h1>
+            <div class="world-creator"><%= @user_owner.name %></div>
+          </div>
+          <div class="controls">
+            <span class="world-controls-right i i-play"></span>
+            <% if current_user.id == @world.user_id %>
+              <%= link_to(:controller=>'world', :action=>'edit') do %>
+                <span class="world-controls-right i i-edit"></span>
+              <% end %>
+            <% end %>
+            <span class="world-controls-right i i-share"></span>
+          </div>
+        </div>
+      </div>
 
 
-<p><%= @world.public == 1 ? "public" : "privé" %></p>
-<% if @world.public == 1 %>
-  <%= link_to "Create character", :controller => :character, :action => :new, world_id: @world.id %>
+      <div class="two-columns">
+        <div class="layout-left">
+          <div class="world-description-container">
+            <h3>Description</h3>
+            <div class="world-description">
+              <%= @world.chapters.active.description %>
+            </div>
+          </div>
+          <div class="world-event-monster-container">
+            <div class="event">
+              <h5>Évènement actif</h5>
+              <% if @event.picture %>
+                <%= image_tag @event.picture %>
+              <% end %>
+              <div class="event-name"><%= @event.title %></div>
+            </div>
+            <div class="monsters">
+              <h5>Les monstres</h5>
+            </div>
+          </div>
 
-<% end %>
+          <div class="game-history">Historique du jeu</div>
+        </div>
+
+
+        <div class="layout-right">
+          <h4>Maître du jeu</h4>
+          <div class="world-mj">
+            <span class="i i-mj"></span>
+            <div class="world-mj-name">
+              <%= @user_owner.name %>
+            </div>
+          </div>
+          <div class="world-gamers">
+            <div class="txt">
+              <div>Joueurs</div>
+              <div class="game-limit-number">
+                <span>Limite: </span>
+                <%= @world.max_character_count %>
+              </div>
+            </div>
+            <div class="characters-list">
+              <% @world.characters.each do |character| %>
+                <div class="character-thumbnail">
+                  <%= image_tag 'http://lorempixel.com/65/65' %>
+                  <!-- <%= character.name %> -->
+                </div>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div><%= @world.inspect %></div>
+      <!-- <h1><%= @world.name %></h1> -->
+
+      <p><%= @world.public == 1 ? "Public" : "Privé" %></p>
+      <% if @world.public == 1 %>
+        <%= link_to "Create character", :controller => :character, :action => :new, world_id: @world.id %>
+
+      <% end %>
+    </div>
+    <h1><%= @world.name %></h1>
+
+    <p>user : <%= @world.user.email %></p>
+
+
+    <p><%= @world.public == 1 ? "public" : "privé" %></p>
+    <% if @world.public == 1 %>
+      <%= link_to "Create character", :controller => :character, :action => :new, world_id: @world.id %>
+
+    <% end %>
+  </div>
+</div>

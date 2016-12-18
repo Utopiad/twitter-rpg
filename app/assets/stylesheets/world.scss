@@ -1,3 +1,202 @@
 // Place all the styles related to the world controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.world-detail {
+  min-height: calc(100vh - 64px);
+  width: 100%;
+  overflow: hidden;
+
+  *:first-child {
+    margin-top: 0;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+
+  .world-image {
+    width: 100%;
+    height: 390px;
+    background-color:blue;
+    img {
+      height: 100%;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+  }
+
+  .content-wrapper {
+    position: relative;
+    min-height: calc(100vh - 64px);
+    width: 100%;
+
+    &.carded {
+      background-color: rgba(252, 250, 248, 1);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      overflow: hidden;
+    }
+
+    .content {
+      margin: 0 80px;
+
+      .image-cover {
+        // position: absolute;
+        // width: 100%;
+        // z-index: 3;
+        // top: 0px;
+        .return {
+          padding: 30px 10px 0px;
+          display: flex;
+          font-size: 1.2em;
+          line-height: 1.2em;
+          span {
+            padding-left: 15px;
+            font-family: 'latolight';
+
+            color: white;
+
+            &:hover {
+              color: $primary;
+            }
+          }
+        }
+
+        .bottom-cover {
+          padding: 200px 0px 40px;
+          display: flex;
+          .world-base-info {
+            h1.world-name {
+              font-family: 'latobold';
+              font-size: 2.5em;
+            }
+
+            .world-creator {
+              font-family: 'latolight';
+              font-size: 0.8em;
+              color: rgba(255, 255, 255, 1);
+              text-align: left;
+              padding: 5px 15px 0px;
+            }
+          }
+
+          .controls {
+
+          }
+        }
+      }
+
+      .two-columns {
+        display: flex;
+        flex-direction: row;
+        .layout-left {
+          display: flex;
+          padding-top: 30px;
+          width: 73%;
+          .world-description-container {
+            h3 {
+              color: $black;
+            }
+            .world-description {
+              font-family: 'latoregular';
+              font-size: 1em;
+              line-height: 1.5em;
+              color: rgba(26, 26, 26, 1);
+              max-width: 300px;
+              margin-right: 25px;
+            }
+          }
+
+          .world-event-monster-container {
+            display: flex;
+            flex-direction: column;
+            min-width: 540px;
+            h5 {
+              color: $black;
+            }
+
+            .events {
+
+            }
+
+            .monster {
+
+            }
+          }
+
+
+          .game-history {
+            display: none;
+          }
+        }
+
+        .layout-right {
+          display: flex;
+          flex-direction: column;
+          padding-top: 30px;
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          width: 28%;
+          h4 {
+            color: $black;
+          }
+          .world-mj {
+            display: flex;
+            padding: 15px 15px;
+            span, img {
+              width:65px;
+              height: 65px;
+              border-radius: 50%;
+            }
+            .world-mj-name {
+              font-family: 'latoregular';
+              font-size: 1.2em;
+              line-height: 65px;
+              max-width: 250px;
+              padding-left: 15px;
+            }
+          }
+          .world-creator-name {
+            color: $black;
+          }
+          .world-gamers {
+            .txt {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              padding-bottom: 10px;
+              line-height: 1.75em;
+              div:first-child {
+                color: $black;
+                font-family: "latoregular";
+                font-size: 1.25em;
+              }
+              .game-limit-number {
+                font-family: 'latolight';
+                color: $black;
+                span {
+                  font-size: 1.1em;
+                }
+              }
+            }
+
+            .characters-list {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              .character-thumbnail {
+                width: 65px;
+                height: 65px;
+                img {
+                  border-radius: 50%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+}

@@ -1,3 +1,134 @@
+<div class="game">
+  <div class="world-image">
+
+    <div class="image-cover">
+      <div class="return">
+        <%= link_to(:controller=>'home', :action=>'index') do %>
+          <%= image_tag 'white-return.png' %>
+          <span>Retour à l'accueil</span>
+        <% end %>
+      </div>
+      <div class="navigation">
+        <div class="world-name">
+          <%= link_to(:controller =>'world', :action=>'show', :id=> @world.id) do %>
+            <%= @world.name %>
+          <% end %>
+        </div>
+        <span> > </span>
+        <div class="active-chapter"><%= @current_chapter.title %></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="content two-columns">
+
+      <div class="layout-left">
+        <div class="event">
+
+          <div class="left">
+            <h2>Les évènements</h2>
+            <div class="event-desc"><%= @current_event.description %></div>
+            <h2>Les monstres</h2>
+            <div class="monsters-list">
+              <% @current_event.monsters.each do |m| %>
+                <div class="monster">
+                  <div class="monster-thumbnail">
+                    <%= m %>
+                  </div>
+                  <div class="monster-name-count"><%= m.name %><span> x<%= @current_event.event_monsters.where(monster_id: m.id).count %> </span></%></div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="right">
+            <% if @current_event.image != nil %>
+              <%=  image_tag @current_event.image %>
+            <% else %>
+              <span>There is no thumbnail for this image</span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="message-box">
+          <h2>Jeu</h2>
+
+          <div class="message-input">
+            <%= form_tag("") do %>
+              <%= text_field_tag(:body, '', id: 'chat-speak', size: 100, maxlength: 160) %>
+              <div class="bottom">
+                <div class="arobase">@</div>
+                <div class="hashtag">#</div>
+                <%= submit_tag("Envoyer") %>
+              </div>
+
+            <% end %>
+          </div>
+
+          <div class="messages-conv" id="messages">
+            <% @messages.each do |message| %>
+              <%= render partial: "message/message", locals: { message: message } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="layout-right">
+        <div class="inventory-stuff">
+          <h2 class="character-name"><%= @character.name %></h2>
+          <!-- <%= @character_stuff.inspect %> -->
+          <div class="action-zone">
+            <div class="inline">
+              <div class="two-first-items">
+                <div class="stuff-card drag-eligible"></div>
+                <div class="stuff-card drag-eligible"></div>
+              </div>
+              <div class="drop-zone"></div>
+              <div class="two-last-items">
+                <div class="stuff-card drag-eligible"></div>
+                <div class="stuff-card drag-eligible"></div>
+              </div>
+            </div>
+            <div class="bottom-stuff">
+              <div class="stuff-little-card drag-eligible"></div>
+              <div class="stuff-little-card drag-eligible"></div>
+              <div class="stuff-little-card drag-eligible"></div>
+              <div class="stuff-little-card drag-eligible"></div>
+            </div>
+          </div>
+
+          <div class="character-state-info">
+            <div class="top-section">
+              <span>PV</span>
+              <div class="life-bar"></div>
+              <span class="life-indicator"></span>
+            </div>
+            <div class="bottom-section">
+              <div class="attaque-info">
+                Attaque :
+                <%= @character_type.attack_min %> - <%= @character_type.attack_max %>
+              </div>
+              <div class="armure-info">
+                Armure :
+                <%= @character_type.armor %>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 <div id="world_id"><%= @world.id %></div>
 <% unless @current_event.blank? %><div id="event_id"><%= @current_event.id %></div><% end %>
 <% unless @character.blank? %><div id="character_id"><%= @character.id %></div><% end %>
@@ -13,11 +144,3 @@
   <%= hidden_field_tag :world_id, @world.id %>
   <p><%= submit_tag "Create" -%></p>
 <% end %>
-
-<div id='messages'>
-  <% @messages.each do |message| %>
-    <%= render partial: "message/message", locals: { message: message } %>
-  <% end %>
-</div>
-<%= text_field_tag :body, '', id: 'chat-speak' %>
-

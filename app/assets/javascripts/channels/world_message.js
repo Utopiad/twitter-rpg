@@ -11,7 +11,7 @@ $(document).ready(function() {
     },
 
     received: function(data) {
-      $('#messages').append(data.message)
+      $('#messages').prepend(data.message)
     },
 
     speak: function(message, event_id, character_id, world_id) {
@@ -29,5 +29,14 @@ $(document).ready(function() {
       e.target.value = ""
       e.preventDefault()
     } 
+  })
+  $("#chat-speak").parents('form').find('.bottom input').click(function(e) {
+    var event_id = $('#event_id').html()
+    var character_id = $('#character_id').html()
+    var world_id = $('#world_id').html()
+    var message = $('#chat-speak').val()
+    $('#chat-speak')[0].value = "";
+    App.world_message.speak(message, event_id, character_id, world_id)
+    e.preventDefault()
   })
 })
