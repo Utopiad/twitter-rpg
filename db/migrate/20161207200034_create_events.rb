@@ -5,7 +5,7 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.text :description
       t.string :image
       t.integer :chapter_id
-      t.integer :active, default: 0
+      t.integer :active, default: 1
 
       t.timestamps
     end
