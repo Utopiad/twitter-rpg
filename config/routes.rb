@@ -6,12 +6,13 @@ Rails.application.routes.draw do
     resources :stuff
     resources :character_type
     resources :monster
-    resources :reward
-
-    resources :chapter
-    resources :event
-    resources :event_monster
-    resources :turn
+    resources :chapter do
+      resources :event do
+        resources :reward
+        resources :event_monster
+        resources :turn
+      end
+    end
     resources :game do
       # post "world#activate_chapter"
     end
