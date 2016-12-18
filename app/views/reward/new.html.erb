@@ -2,13 +2,13 @@
   <div class="content content__overflow">
     <div class="scenario chapter anim__in">
 
-      <h2>Sixth step</h2>
+      <h2>Fourth step</h2>
 
       <div class="scenario_content">
 
-        <h3>Create your monster</h3>
+        <h3>Create your reward</h3>
 
-        <%= form_for @monster, remote: true, url: {action: "create"} do |f| %>
+        <%= form_for @stuff, remote: true, url: {action: "create"} do |f| %>
             <div class="scenario_content_form__active row">
               <div class="col m4">
                 <div class="input-field">
@@ -19,29 +19,32 @@
               <div class="col m8">
                 <div class="row">
                   <div class="input-field col m6">
-                    <%= f.label :attack_min %>
-                    <%= f.number_field :attack_min %>
+                    <%= f.label :bonus_attack %>
+                    <%= f.number_field :bonus_attack %>
                   </div>
                   <div class="input-field col m6">
-                    <%= f.label :attack_max %>
-                    <%= f.number_field :attack_max %>
+                    <%= f.label :bonus_armor %>
+                    <%= f.number_field :bonus_armor %>
+                  </div>
+
+                  <div class="input-field col m6">
+                    <%= f.label :bonus_life %>
+                    <%= f.number_field :bonus_life %>
                   </div>
                   <div class="input-field col m6">
-                    <%= f.label :armor %>
-                    <%= f.number_field :armor %>
-                  </div>
-                  <div class="input-field col m6">
-                    <%= f.label :life %>
-                    <%= f.number_field :life %>
+                    <%= label_tag :quantity %>
+                    <%= number_field_tag :quantity %>
                   </div>
                 </div>
               </div>
             </div>
 
             <%= hidden_field_tag :world_id, @world_id %>
+            <%= hidden_field_tag :chapter_id, @chapter_id %>
+            <%= hidden_field_tag :event_id, @event_id %>
 
             <div class="row">
-              <%= f.button "Next step", :id => "newMonster", :class => "scenario_content_form__submit" -%>
+              <%= f.button "Next step", :id => "newReward", :class => "scenario_content_form__submit" -%>
             </div>
         <% end %>
       </div>
@@ -52,8 +55,8 @@
       <li class="active"></li>
       <li class="active"></li>
       <li class="active"></li>
-      <li class="active"></li>
-      <li class="active"></li>
+      <li></li>
+      <li></li>
       <li></li>
     </ul>
 

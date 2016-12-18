@@ -87,3 +87,15 @@ p {
 a.btn:visited {
   color: #ffffff !important;
 }
+
+button:visited {
+  background: inherit !important;
+}
+
+button:active {
+  background: transparent !important;
+}
+
+button:focus {
+  background: transparent !important;
+}

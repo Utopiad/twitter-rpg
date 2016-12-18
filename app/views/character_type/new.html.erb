@@ -1,8 +1,62 @@
-<%= form_for @character_type, url: {action: "create"} do |f| %>
-  <p><%= f.text_field :name %> <%= f.label :name %></p>
-  <p><%= f.number_field :attack_min %> <%= f.label :attack_min %></p>
-  <p><%= f.number_field :attack_max %> <%= f.label :attack_max %></p>
-  <p><%= f.number_field :armor %> <%= f.label :armor %></p>
-  <p><%= f.number_field :life %> <%= f.label :life %></p>
-  <p><%= f.submit "Create" -%></p>
-<% end %>
+<div class="content-wrapper">
+  <div class="content content__overflow">
+    <div class="scenario chapter anim__in">
+
+      <h2>Fifth step</h2>
+
+      <div class="scenario_content">
+
+        <h3>Create your character</h3>
+
+        <%= form_for @character_type, remote: true, url: {action: "create"} do |f| %>
+            <div class="scenario_content_form__active row">
+              <div class="col m4">
+                <div class="input-field">
+                  <%= f.label :name %>
+                  <%= f.text_field :name %>
+                </div>
+              </div>
+              <div class="col m8">
+                <div class="row">
+                  <div class="input-field col m6">
+                    <%= f.label :attack_min %>
+                    <%= f.number_field :attack_min %>
+                  </div>
+                  <div class="input-field col m6">
+                    <%= f.label :attack_max %>
+                    <%= f.number_field :attack_max %>
+                  </div>
+
+                  <div class="input-field col m6">
+                    <%= f.label :armor %>
+                    <%= f.number_field :armor %>
+                  </div>
+                  <div class="input-field col m6">
+                    <%= f.label :life %>
+                    <%= f.number_field :life %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <%= hidden_field_tag :world_id, @world_id %>
+
+            <div class="row">
+              <%= f.button "Next step", :id => "newCharacter", :class => "scenario_content_form__submit" -%>
+            </div>
+        <% end %>
+      </div>
+    </div>
+
+    <ul class="progress">
+      <li class="active"></li>
+      <li class="active"></li>
+      <li class="active"></li>
+      <li class="active"></li>
+      <li class="active"></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+  </div>
+</div>
