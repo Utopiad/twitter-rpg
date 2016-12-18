@@ -1,37 +1,36 @@
 <div class="world-detail">
   <!--  image du world -->
   <div class="world-image">
+    <%= image_tag 'http://lorempixel.com/1440/390'%>
+
+    <div class="image-cover">
+      <div class="return">
+        <%= link_to(:controller=>'home', :action=>'index') do %>
+          <%= image_tag 'white-return.png' %>
+          <span>Retour à l'accueil</span>
+        <% end %>
+      </div>
+      <div class="bottom-cover">
+        <div class="world-base-info">
+          <h1 class="world-name"><%= @world.name %></h1>
+          <div class="world-creator"><%= @user_owner.name %></div>
+        </div>
+        <div class="controls">
+          <span class="world-controls-right i i-play"></span>
+          <% if current_user.id == @world.user_id %>
+            <%= link_to(:controller=>'world', :action=>'edit') do %>
+              <span class="world-controls-right i i-edit"></span>
+            <% end %>
+          <% end %>
+          <span class="world-controls-right i i-share"></span>
+        </div>
+      </div>
+    </div>
 
   </div>
 
-  <div class="content-wrapper carded">
+  <div class="content-wrapper">
     <div class="content">
-
-      <div class="image-cover">
-        <div class="return">
-          <%= link_to(:controller=>'home', :action=>'index') do %>
-            <%= image_tag 'white-return.png' %>
-            <span>Retour à l'accueil</span>
-          <% end %>
-        </div>
-        <div class="bottom-cover">
-          <div class="world-base-info">
-            <h1 class="world-name"><%= @world.name %></h1>
-            <div class="world-creator"><%= @user_owner.name %></div>
-          </div>
-          <div class="controls">
-            <span class="world-controls-right i i-play"></span>
-            <% if current_user.id == @world.user_id %>
-              <%= link_to(:controller=>'world', :action=>'edit') do %>
-                <span class="world-controls-right i i-edit"></span>
-              <% end %>
-            <% end %>
-            <span class="world-controls-right i i-share"></span>
-          </div>
-        </div>
-      </div>
-
-
       <div class="two-columns">
         <div class="layout-left">
           <div class="world-description-container">
@@ -44,7 +43,7 @@
             <div class="event">
               <h5>Évènement actif</h5>
               <% if @event.image %>
-                <%= image_tag @event.title %>
+                <%= image_tag @event.image %>
               <% end %>
               <div class="event-name"><%= @event.title %></div>
             </div>
@@ -85,25 +84,23 @@
           </div>
         </div>
       </div>
-
-      <div><%= @world.inspect %></div>
-      <!-- <h1><%= @world.name %></h1> -->
-
-      <p><%= @world.public == 1 ? "Public" : "Privé" %></p>
-      <% if @world.public == 1 %>
-        <%= link_to "Create character", :controller => :character, :action => :new, world_id: @world.id %>
-
-      <% end %>
     </div>
-    <h1><%= @world.name %></h1>
 
-    <p>user : <%= @world.user.email %></p>
+    <!-- <h1><%= @world.name %></h1> -->
 
-
-    <p><%= @world.public == 1 ? "public" : "privé" %></p>
-    <% if @world.public == 1 %>
+    <!-- <p><%= @world.public == 1 ? "Public" : "Privé" %></p> -->
+    <!-- <% if @world.public == 1 %>
       <%= link_to "Create character", :controller => :character, :action => :new, world_id: @world.id %>
 
-    <% end %>
+    <% end %> -->
+    <!-- <h1><%= @world.name %></h1> -->
+
+    <!-- <p>user : <%= @world.user.email %></p> -->
+
+
+    <!-- <p><%= @world.public == 1 ? "public" : "privé" %></p> -->
+    <!-- <% if @world.public == 1 %>
+      <%= link_to "Create character", :controller => :character, :action => :new, world_id: @world.id %>
+    <% end %> -->
   </div>
 </div>
