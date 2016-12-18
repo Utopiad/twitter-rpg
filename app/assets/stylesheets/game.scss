@@ -86,13 +86,14 @@
             h2 {
               color: $primary;
               font-size: 1.2em;
+              margin: 0;
             }
 
             .event-desc {
               font-family: 'latoregular';
               font-size: 1em;
-              max-width: 300px;
-              padding: 0 10px 0 0px;
+              max-width: 450px;
+              padding: 15px 0px 10px;
             }
 
             .monsters-list {
@@ -123,6 +124,7 @@
           }
 
           .right {
+
             img {
               width: 235px;
               height: 175px;
@@ -311,6 +313,33 @@
 
               .armure-info {
                 float: right;
+              }
+            }
+          }
+          .sac {
+            font-family: 'latoregular';
+            font-size: 1.2em;
+            color: $primary;
+            margin: 15px 5px;
+          }
+          .inventory {
+            padding: 10px;
+            width: 360px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            .stuff-card {
+              // position: relative;
+              width: 55px ;
+              height: 55px;
+              background-color: $white;
+              border-radius: 6px;
+              margin: 0;
+              cursor: pointer;
+              box-shadow: 4px 5px 16px 0px rgba(0, 0, 0, 0.12);
+              img {
+                width: 55px;
+                height: 55px;
               }
             }
           }
