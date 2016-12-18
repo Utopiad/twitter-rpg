@@ -15,6 +15,7 @@ class GameController < ApplicationController
       cookies.signed[:current_user_id] = current_user.id
 
       @character = current_user.character_for_world_id(@world.id)
+      @character_stuffs = @character.stuffs
 
     end
   end
