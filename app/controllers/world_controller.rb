@@ -2,6 +2,8 @@ class WorldController < ApplicationController
   def show
     @world = World.where(id: params[:id]).first
     head 404 and return unless @world
+    @user_owner = User.where(id: @world.user_id).first
+    @event = @world.current_event
   end
 
   def new
@@ -39,10 +41,20 @@ class WorldController < ApplicationController
 
   def update
     world = World.where(id: params[:id]).first
-    if world.update(params.require(:world).permit(:name, :public))
+    if world.update(params.require(:world).permit(:name, :image, :public))
       redirect_to action: "show", id: world.id
     else
       render :edit
     end
   end
+
+  def index
+    @worlds = World.public_worlds
+    if params[:search]
+      @worlds = World.search(params[:search])
+    else
+      @worlds = World.public_worlds
+    end
+  end
+
 end

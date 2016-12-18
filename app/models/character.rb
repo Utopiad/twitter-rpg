@@ -1,3 +1,5 @@
+load 'image_uploader.rb'
+
 class Character < ApplicationRecord
   include Fighter
   include Player
@@ -16,6 +18,8 @@ class Character < ApplicationRecord
   has_many :inventories, dependent: :destroy
   has_many :stuffs, through: :inventories
 
+  mount_uploader :image, ChapterImageUploader
+
   validate :user_not_in_world, on: :create
   validate :user_not_world_game_master, on: :create
   validate :world_not_full, on: :create
@@ -23,15 +27,15 @@ class Character < ApplicationRecord
 
   def user_not_in_world
     if !user.joined_worlds.empty?
-      if user.joined_worlds.pluck(:id)
-        errors.add(:user, "is in world").include?(world.id)
+      if user.joined_worlds.pluck(:id).include?(world.id)
+        errors.add(:user, "is in world")
       end
     end
   end
 
   def user_not_world_game_master
     if !user.joined_worlds.empty?
-      if user.worlds.include?(world.id)
+      if user.worlds.pluck(:id).include?(world.id)
         errors.add(:user, "is game master")
       end
     end
@@ -42,7 +46,7 @@ class Character < ApplicationRecord
   end
 
   def current_life
-    self.character_type.life + self.life - self.malus_life
+    self.life - self.malus_life
   end
 
   def life

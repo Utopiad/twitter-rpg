@@ -17,19 +17,21 @@
     <% end %>
 
     <% if user_signed_in? %>
-      <ul id="dropdown1" class="dropdown-content">
-        <li><%= link_to 'Edit Profile', edit_user_registration_path, :class => 'navbar-link' %></li>
-        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
-      </ul>
-      <nav>
-        <div class="nav-wrapper">
-          <%= link_to 'RPG', root_path, :class => "left brand-logo" %>
-          <ul class="right hide-on-med-and-down">
+
+    <nav>
+      <div class="menu-wrapper">
+        <a href="#!" class="brand-logo"></a>
+        <ul class="right">
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><%= current_user.name%><i class="i i-menu"></i></a></li>
+          <ul id="dropdown1" class="dropdown-content">
+            <li><%= link_to 'Edit Profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+            <li class="divider"></li>
+
             <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
-              <li><a class="dropdown-button " href="#!" data-activates="dropdown1"><%= current_user.name %> <i class="material-icons right "></i></a></li>
-          </ul>
-        </div>
-      </nav>
+        </ul>
+        </ul>
+      </div>
+    </nav>
     <% end %>
 
     <%= yield %>

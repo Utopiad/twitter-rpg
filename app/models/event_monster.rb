@@ -1,5 +1,6 @@
 class EventMonster < ApplicationRecord
   include Fighter
+  include Player
   include Sluggable
   has_many :fights, as: :attacker
   has_many :fights, as: :defender

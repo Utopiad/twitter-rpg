@@ -4,9 +4,9 @@ module Fighter
   extend ActiveSupport::Concern
 
   def attack(target)
-    # if self.has_played?
-    #   return false
-    # end
+    if self.has_played?
+      return false
+    end
 
     hit = rand(self.attack_min..self.attack_max)
 
@@ -19,6 +19,7 @@ module Fighter
 
     fight = Fight.new(attacker: self, defender: target, hit: hit)
     fight.save
+
     self.has_played!
 
     return fight

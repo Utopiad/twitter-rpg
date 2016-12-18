@@ -15,6 +15,12 @@ class GameController < ApplicationController
       cookies.signed[:current_user_id] = current_user.id
 
       @character = current_user.character_for_world_id(@world.id)
+      @character_stuffs = @character.stuffs
+      @character_type = CharacterType.where(
+        id: @character.character_type_id,
+        world_id: @world.id
+        ).first
+      @full_life = @character.life + @character.bonus_life
 
     end
   end

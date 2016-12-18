@@ -1,5 +1,5 @@
 <div class="home">
-  <div class="content-wrapper">
+  <div class="content-wrapper carded">
     <div class="content">
       <section class="home-container two-columns">
         <div class="action-buttons">
@@ -12,12 +12,11 @@
         </div>
         <div class="columns-wrapper">
           <div class="layout-left">
-            <% if current_user.joined_worlds.count > 0 %>
+            <% if @user_worlds %>
                 <h2> Vos scénarios </h2>
                 <div class="layout-left-container">
-                  <%
-                    current_user_worlds = current_user.worlds
-                    current_user_worlds.each do | scenar | %>
+                  <!--  USER WORLDS CARDS-->
+                  <% @user_worlds.each do | scenar | %>
                       <div class="user-world-card">
                         <img src="http://lorempixel.com/332/171" alt="">
 
@@ -28,11 +27,16 @@
                             </div>
                             <div class="card-controls-right">
                               <span class="card-controls-right i i-play"></span>
-                              <span class="card-controls-right i i-edit"></span>
+                              <%= link_to(:controller=>'world', :action=>'edit', :id=>scenar.id) do %>
+                                <span class="card-controls-right i i-edit"></span>
+                              <% end %>
                               <span class="card-controls-right i i-share"></span>
                             </div>
                           </div>
-                          <h4 class="world-card-title"><%= scenar.name  %></h4>
+                          <%= link_to(:controller=>'world', :action=>'show', :id => scenar.id)  do %>
+                            <h4 class="world-card-title"><%= scenar.name  %></h4>
+                          <% end %>
+
                           <div class="world-card-creator"> Créateur: <%= User.where(id: scenar.user_id).name %></div>
                         </div>
 
@@ -51,6 +55,7 @@
                         </div>
                       </div>
                   <% end %>
+                  <!--  END USER WORLDS CARDS-->
                 </div>
             <% else %>
                 <div class="no-world-joined">Vous n'avez pas encore crée de monde.</div>
@@ -58,11 +63,9 @@
           </div>
 
           <div class="layout-right">
-            <% if current_user.joined_worlds.count > 0 %>
-                <h2> Actualités </h2>
-                <%
-                  joined_worlds = current_user.joined_worlds
-                  joined_worlds.each do | scenar | %>
+            <% if @joined_worlds %>
+                <h2> Parties en cours </h2>
+                <% @joined_worlds.each do | scenar | %>
                     <div class="world-joined-card">
                       <div class="info-left">
                         <h4 class="world-card-title"><%= scenar.name  %></h4>

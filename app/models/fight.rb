@@ -20,13 +20,13 @@ class Fight < ApplicationRecord
     if role == :defender
       if self.defender_type == "Character"
         Character.find(defender_id)
-      elsif fighter.defender_type == "EventMonster"
+      elsif self.defender_type == "EventMonster"
         EventMonster.find(defender_id)
       end
     elsif role == :attacker
       if self.attacker_type == "Character"
         Character.find(attacker_id)
-      elsif fighter.attacker_type == "EventMonster"
+      elsif self.attacker_type == "EventMonster"
         EventMonster.find(attacker_id)
       end
     end

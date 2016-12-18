@@ -24,7 +24,7 @@ default: &default
 development:
   <<: *default
   database: twitter-rpg_development
-henry:
+windows:
   <<: *default
   database: twitter-rpg
   encoding: utf8
