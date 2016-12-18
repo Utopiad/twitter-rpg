@@ -11,12 +11,10 @@ $(document).ready(function() {
     },
 
     received: function(data) {
-      $('#messages').append(data.message)
+      $('#messages').prepend(data.message)
     },
 
     speak: function(message, event_id, character_id, world_id) {
-      console.log({message: message, event_id: event_id, 
-        character_id: character_id, world_id: world_id})
       return this.perform('speak', {message: message, event_id: event_id, 
         character_id: character_id, world_id: world_id});
     }
