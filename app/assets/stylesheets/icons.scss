@@ -4,7 +4,7 @@
 }
 
 .i-play {
-  background-image:url('play.png');
+  background-image:url('icons/play.svg');
   width:16px;
   height: 18px;
 }
@@ -18,7 +18,7 @@
 }
 
 .i-edit {
-  background-image:url('edit.png');
+  background-image:url('icons/edit.svg');
   width: 17px;
   height:16px;
 }
@@ -34,17 +34,17 @@
 }
 
 .i-mj {
-  background-image:url('mj.png');
+  background-image:url('icons/mj-avatar.svg');
   width: 50px;
   height: 50px;
 }
 
 .i-potion {
-  background-image:url('potion.png');
+  background-image:url('icons/potion.png');
 }
 
 .i-share {
-  background-image:url('share.png');
+  background-image:url('icons/share.svg');
   width: 18px;
   height: 18px;
 }
@@ -55,4 +55,18 @@
 
 .i-triangle {
   background-image:url('triangle.png');
+}
+
+.i-return {
+  background-image: url('icons/white-return.svg');
+  width: 32px;
+  height: 32px;
+}
+
+.i-menu {
+  background-image: url('icons/triangle-menu.svg');
+  width: 10px;
+  height: 6px;
+  display: inline-block;
+  margin: 0 5px;
 }
