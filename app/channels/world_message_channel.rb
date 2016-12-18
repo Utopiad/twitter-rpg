@@ -26,6 +26,7 @@ class WorldMessageChannel < ApplicationCable::Channel
       self.attribute(message, character, event_id, channel)
       self.pass_turn(message, character, event_id, channel)
     else
+      puts 'oui'
       self.attack(message, character, event_id, channel)
       self.equip(message, character, event_id, channel)
     end
@@ -86,6 +87,7 @@ class WorldMessageChannel < ApplicationCable::Channel
   def attack(message, character, event_id, channel)
     reg = Regexp.new(/(\B#\w\w+)\s(\B@\w\w+)/)
     actions = message.message.scan(reg)
+    puts actions
     return false if character.has_played?
     actions.each do |action|
       if action[0] == "#attack"
@@ -96,6 +98,8 @@ class WorldMessageChannel < ApplicationCable::Channel
         else
           target = message.character.world.characters.where(slug: action[1]).first
           return false if target.blank?
+                  puts 'ouuuuuui'
+
           fight = character.attack(target)
           self.fight_message(fight, character, event_id, channel)
         end
