@@ -4,11 +4,11 @@
 
 .scenario {
 
-  width: 50%;
+  // width: 50%;
   max-width: 600px;
-  padding-top: 5vh;
-  height: calc(95vh - 104px); // 100vh - 5vh from padding 104px = 64px nav + 40px progress
-  margin: auto;
+  // padding-top: 5vh;
+  // height: calc(95vh - 104px); // 100vh - 5vh from padding 104px = 64px nav + 40px progress
+  margin: 0 auto;
   opacity: 1;
   transition: all 0.5s ease-in-out;
 
