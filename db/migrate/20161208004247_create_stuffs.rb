@@ -6,6 +6,7 @@ class CreateStuffs < ActiveRecord::Migration[5.0]
       t.integer :bonus_armor
       t.integer :bonus_life
       t.string :name
+      t.string :slug
       t.string :image
 
       t.timestamps

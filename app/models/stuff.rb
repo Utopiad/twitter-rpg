@@ -1,6 +1,7 @@
 load 'image_uploader.rb'
 
 class Stuff < ApplicationRecord
+  include Sluggable
   belongs_to :world
 
   has_many :rewards, dependent: :destroy
