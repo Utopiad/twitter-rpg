@@ -11,12 +11,16 @@ $(document).ready(function() {
     },
 
     received: function(data) {
-      $('#messages').append(data.message)
+      var character_id = $('#character_id').html() * 1;
+      $('#messages').prepend(data.message);
+      if (data.characters != undefined) {
+        if (data.characters.indexOf(character_id) != -1) {
+          $('#current_life').replaceWith('<span id="current_life">' + data.updated_life[character_id] + '</span>')
+        }
+      }
     },
 
     speak: function(message, event_id, character_id, world_id) {
-      console.log({message: message, event_id: event_id, 
-        character_id: character_id, world_id: world_id})
       return this.perform('speak', {message: message, event_id: event_id, 
         character_id: character_id, world_id: world_id});
     }

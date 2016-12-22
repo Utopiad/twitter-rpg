@@ -52,6 +52,8 @@
                           <div class="world-character-name">
                             <%# current_user.character_for_world_id(world.id).name.to_s %>
                           </div>
+                          <div>
+                          </div>
                         </div>
                       </div>
                   <% end %>
@@ -65,7 +67,7 @@
           <div class="layout-right">
             <% if @joined_worlds %>
                 <h2> Parties en cours </h2>
-                <% @joined_worlds.each do | world | %>
+                <% @joined_worlds.each do |world| %>
                     <div class="world-joined-card">
                       <div class="info-left">
                         <h4 class="world-card-title"><%= world.name  %></h4>
