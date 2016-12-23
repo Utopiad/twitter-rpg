@@ -13,9 +13,29 @@ $(document).ready(function() {
     received: function(data) {
       var character_id = $('#character_id').html() * 1;
       $('#messages').prepend(data.message);
-      if (data.characters != undefined) {
+      if (data.updated_current_life != undefined) {
         if (data.characters.indexOf(character_id) != -1) {
-          $('#current_life').replaceWith('<span id="current_life">' + data.updated_life[character_id] + '</span>')
+          $('#current_life').replaceWith('<span id="current_life">' + data.updated_current_life[character_id] + '</span>')
+        }
+      }
+      if (data.updated_armor != undefined) {
+        if (data.characters.indexOf(character_id) != -1) {
+          $('#armor').replaceWith('<span id="armor">' + data.updated_armor[character_id] + '</span>')
+        }
+      }
+      if (data.updated_life != undefined) {
+        if (data.characters.indexOf(character_id) != -1) {
+          $('#life').replaceWith('<span id="life">' + data.updated_life[character_id] + '</span>')
+        }
+      }
+      if (data.updated_attack_min != undefined) {
+        if (data.characters.indexOf(character_id) != -1) {
+          $('#attack_min').replaceWith('<span id="attack_min">' + data.updated_attack_min[character_id] + '</span>')
+        }
+      }
+      if (data.updated_attack_max != undefined) {
+        if (data.characters.indexOf(character_id) != -1) {
+          $('#attack_max').replaceWith('<span id="attack_max">' + data.updated_attack_max[character_id] + '</span>')
         }
       }
     },

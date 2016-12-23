@@ -93,13 +93,13 @@ scenario.newWorld = function () {
             var URL = "/world"
 
             self.post(URL, DATA)
-                .done(function (e) {
-                    console.log('done', e)
+                // .done(function (e) {
+                //     console.log('done', e)
 
-                    var url = '/world/' + e.world.id + '/chapter/new'
+                //     var url = '/world/' + e.world.id + '/chapter/new'
 
-                    self.redirect(url)
-                })
+                //     self.redirect(url)
+                // })
 
         } else {
             Materialize.toast("Please complete all fields", 4000, 'rounded')
@@ -212,12 +212,12 @@ scenario.newReward = function () {
             var URL = "/world/" + world_id + "/chapter/" + chapter_id + "/event/" + event_id + "/reward"
 
             self.post(URL, DATA)
-                .done(function (e) {
+                // .done(function (e) {
 
-                    var url = '/world/' + world_id + '/character_type/new'
+                //     var url = '/world/' + world_id + '/character_type/new'
 
-                    self.redirect(url)
-                })
+                //     self.redirect(url)
+                // })
         } else {
             Materialize.toast("Please complete all fields", 4000, 'rounded')
         }
@@ -256,12 +256,12 @@ scenario.newCharacter = function () {
             var URL = "/world/" + world_id + "/character_type/"
 
             self.post(URL, DATA)
-                .done(function (e) {
+                // .done(function (e) {
 
-                    var url = '/world/' + world_id + '/monster/new'
+                //     var url = '/world/' + world_id + '/monster/new'
 
-                    self.redirect(url)
-                })
+                //     self.redirect(url)
+                // })
         } else {
             Materialize.toast("Please complete all fields", 4000, 'rounded')
         }
@@ -300,16 +300,16 @@ scenario.newMonster = function () {
             var URL = "/world/" + world_id + "/monster/"
 
             self.post(URL, DATA)
-                .done(function (e) {
+                // .done(function (e) {
 
-                    var url = '/world/' + world_id + '/monster/new'
+                //     var url = '/world/' + world_id + '/monster/new'
 
-                $(".scenario_content").html("<h2>Your scenario has been created</h2>")
+                //     $(".scenario_content").html("<h2>Your scenario has been created</h2>")
 
-                    setTimeout(function () {
-                        self.redirect("/")
-                    }, 2000)
-                })
+                //     setTimeout(function () {
+                //         self.redirect("/")
+                //     }, 2000)
+                // })
         } else {
             Materialize.toast("Please complete all fields", 4000, 'rounded')
         }

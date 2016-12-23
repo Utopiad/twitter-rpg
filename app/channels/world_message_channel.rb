@@ -47,7 +47,7 @@ class WorldMessageChannel < ApplicationCable::Channel
     if fight_message.save
       ActionCable.server.broadcast(channel, message: render_message(fight_message),
         characters: [fight.attacker.id, fight.defender.id],
-        updated_life: {
+        updated_current_life: {
           fight.attacker.id => fight.attacker.current_life,
           fight.defender.id => fight.defender.current_life
         })
@@ -70,7 +70,12 @@ class WorldMessageChannel < ApplicationCable::Channel
     pass_turn_message = Message.new(character: character,
       event_id: event_id, message: message)
     if pass_turn_message.save
-      ActionCable.server.broadcast(channel, message: render_message(pass_turn_message))
+      ActionCable.server.broadcast(channel, message: render_message(pass_turn_message),
+        characters: [character.id],
+        updated_armor: {character.id => character.armor},
+        updated_life: {character.id => character.life},
+        updated_attack_min: {character.id => character.attack_min},
+        updated_attack_max: {character.id => character.attack_max})
     end
   end
 

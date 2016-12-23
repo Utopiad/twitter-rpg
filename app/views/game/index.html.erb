@@ -127,11 +127,17 @@
             <div class="bottom-section">
               <div class="attaque-info">
                 Attaque :
-                <%= @character.attack_min %> - <%= @character.attack_max %>
+                <span id="attack_min">
+                  <%= @character.attack_min %>
+                </span>  - 
+                <span id="attack_max">
+                  <%= @character.attack_max %>
+                </span>
               </div>
               <div class="armure-info">
-                Armure :
-                <%= @character.armor %>
+                Armure : <span id="armor">
+                  <%= @character.armor %>
+                </span>
               </div>
             </div>
           </div>
