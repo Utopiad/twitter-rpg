@@ -15,8 +15,8 @@ CarrierWave.configure do |config|
       #:aws_access_key_id     => ENV['S3_KEY'],
       #:aws_secret_access_key => ENV['S3_SECRET'],
       #:region                => ENV['S3_REGION']
-      :aws_access_key_id     => 'AKIAI5Y6QW7Q34GZUDTA',
-      :aws_secret_access_key => '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',
+      :aws_access_key_id     => 'AKIAJM3VBN2ZDJQAAJ4A',
+      :aws_secret_access_key => '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',
       :region                => 'eu-west-2'
   }
 
