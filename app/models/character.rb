@@ -22,7 +22,7 @@ class Character < ApplicationRecord
 
   validate :user_not_in_world, on: :create
   # validate :user_not_world_game_master, on: :create
-  validate :world_not_full, on: :create
+  # validate :world_not_full, on: :create
   validates_uniqueness_of :name
 
   def user_not_in_world

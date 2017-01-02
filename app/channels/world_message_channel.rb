@@ -129,6 +129,7 @@ class WorldMessageChannel < ApplicationCable::Channel
 
         target = message.character.world.characters.where(slug: action[2]).first
         unless target.blank?
+          # puts "oui"
           reward.attribute_to(target)
           self.attribution_message(character, reward.stuff, target, event_id, channel)
         end
@@ -166,7 +167,11 @@ class WorldMessageChannel < ApplicationCable::Channel
     actions.each do |action|
       if action[1] == "#attack"
         attacker = EventMonster.where(slug: action[0]).first
-        return false if attacker.has_played?
+        puts action[0]
+        puts attacker
+        if attacker.blank? || attacker.has_played?
+          return false
+        end
 
         target = EventMonster.where(slug: action[2]).first
         unless target.blank?
@@ -174,6 +179,7 @@ class WorldMessageChannel < ApplicationCable::Channel
           self.fight_message(fight, character, event_id, channel)
         else
           target = message.character.world.characters.where(slug: action[2]).first
+          puts target
           return false if target.blank?
           fight = attacker.attack(target)
           self.fight_message(fight, character, event_id, channel)

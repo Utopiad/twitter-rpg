@@ -8,6 +8,8 @@ class EventMonster < ApplicationRecord
   belongs_to :event
 
   delegate :world, :to => :monster
+  delegate :name, :to => :monster
+  delegate :slug, :to => :monster
 
   validates_uniqueness_of :name
 
