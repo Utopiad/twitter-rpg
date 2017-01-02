@@ -17,6 +17,12 @@ class Event < ApplicationRecord
 
   mount_uploader :image, EventImageUploader
 
+  before_create :start_turn
+
+  def start_turn
+    self.turns.new
+  end
+
   def grouped_monsters
     self.event_monsters.group_by{|m| m.monster_id}
   end

@@ -14,10 +14,13 @@ class WorldController < ApplicationController
   end
 
   def create
-    @world = World.new(params.require(:world).permit(:name, :public))
+    # @world = World.new(params.require(:world).permit(:name, :public))
+    name = params[:world][:name]
+    public = params[:world][:public]
+    @world = World.new(name: name, public: public)
     @world.user = current_user
     if @world.save
-      narrator = CharacterType.find(3).characters.create(name: params[:world][:narrator_name],
+      narrator = CharacterType.find(1).characters.create(name: params[:world][:narrator_name],
         user: current_user, world: @world)
       puts narrator.errors.inspect
       @world.narrator = narrator

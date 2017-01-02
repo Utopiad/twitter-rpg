@@ -8,10 +8,14 @@ class EventController < ApplicationController
   def create
     @event = Event.new(params.require(:event).permit(:title, :description,
       :picture, :chapter_id))
+
+    world_id = params[:world_id]
+
     if @event.save
-      redirect_to controller: :reward, action: :new, world_id: params[:world_id],
+      redirect_to controller: :reward, action: :new, world_id: world_id,
         chapter_id: params[:chapter_id], event_id: @event.id
     else
+      puts @events.error.inspect
       render :new
     end
   end
