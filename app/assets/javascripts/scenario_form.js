@@ -13,13 +13,9 @@ $(function () {
 var scenario =  {}
 
 scenario.init = function () {
-
     this.bind()
-
     this.fadeIn()
-
     this[this.action]()
-
 }
 
 scenario.bind = function () {
@@ -38,18 +34,18 @@ scenario.fadeOut = function () {
 }
 
 scenario.post = function (url, data) {
-
-        return $.post(url, data, function (e) {
-            console.log('ok', e)
-        })
-        .fail(function (e) {
-            console.log('fail', e)
-            Materialize.toast("Something wrong happen, are you sure all field are set ?", 4000, 'rounded')
-        })
-        .always(function (e) {
-            console.log('finish', e)
-        });
-    }
+    return $.post(url, data, function (e) {
+        console.log('ok', e)
+    })
+    .fail(function (e) {
+        debugger
+        console.log('fail', e)
+        Materialize.toast("Something wrong happen, are you sure all field are set ?", 4000, 'rounded')
+    })
+    .always(function (e) {
+        console.log('finish', e)
+    });
+}
 
 scenario.redirect = function (url, delay) {
     delay == undefined ? delay = 500 : delay
@@ -62,7 +58,6 @@ scenario.redirect = function (url, delay) {
 }
 
 scenario.getData = function (key, required, checkbox) {
-
     checkbox === undefined ? checkbox = false : checkbox
     var value
     $("body").find("[name='" + key + "']").each(function() {
@@ -76,43 +71,41 @@ scenario.getData = function (key, required, checkbox) {
     });
 
     return value
-
 }
 
 scenario.newWorld = function () {
-
     var self = this
-
     $("body").on("click", "#newWorld", function (e) {
         e.preventDefault()
 
         var name = self.getData("world[name]", true)
+        var narrator_name = self.getData("narrator_name", true)
         var public = self.getData("world[public]", true, true)
 
-        if (name.length != 0 && public.length != 0) {
+        if (name.length != 0 && public.length != 0 && narrator_name.length != 0) {
 
             var DATA = {world: {
                 name: name,
+                narrator_name: narrator_name,
                 public: public
             }}
 
             var URL = "/world"
 
             self.post(URL, DATA)
-                .done(function (e) {
-                    console.log('done', e)
+                // .done(function (e) {
+                //     console.log('done', e)
 
-                    var url = '/world/' + e.world.id + '/chapter/new'
+                //     var url = '/world/' + e.world.id + '/chapter/new'
 
-                    self.redirect(url)
-                })
+                //     self.redirect(url)
+                // })
 
         } else {
             Materialize.toast("Please complete all fields", 4000, 'rounded')
         }
 
     })
-
 }
 
 scenario.newChapter = function () {
@@ -124,31 +117,27 @@ scenario.newChapter = function () {
 
         var title = self.getData("chapter[title]", true)
         var description = self.getData("chapter[description]", true)
-
-        var world_id = self.getData("world_id")
-
-        console.log("world_id", world_id)
-
+        var world_id = self.getData("chapter[world_id]", true)
         if (title.length != 0 && description.length != 0) {
 
             var DATA = {
                 chapter: {
+                    world_id: world_id,
                     title: title,
-                    desciption: description
+                    description: description
                 }
             }
 
             var URL = "/world/" + world_id + "/chapter/"
 
             self.post(URL, DATA)
-                .done(function (e) {
 
-                    var url = '/world/' + world_id + '/chapter/' + e.chapter_id + '/event/new'
-
-                    console.log(url)
-
-                    self.redirect(url)
-                })
+                // .done(function (e) {
+                //     console.log(e)
+                //     debugger
+                //     var url = '/world/' + world_id + '/chapter/' + e.chapter_id + '/event/new'
+                //     self.redirect(url)
+                // })
         } else {
             Materialize.toast("Please complete all fields", 4000, 'rounded')
         }
@@ -166,28 +155,23 @@ scenario.newEvent = function () {
         var title = self.getData("event[title]", true)
         var description = self.getData("event[description]", true)
 
-        var world_id = self.getData("world_id")
-        var chapter_id = self.getData("chapter_id")
+        var world_id = self.getData("event[world_id]")
+        var chapter_id = self.getData("event[chapter_id]")
 
         if (title.length != 0 && description.length != 0) {
 
             var DATA = {
                 event: {
+                    world_id: world_id,
+                    chapter_id: chapter_id,
                     title: title,
-                    desciption: description
+                    description: description
                 }
             }
 
             var URL = "/world/" + world_id + "/chapter/" + chapter_id + "/event/"
-            console.log(URL)
 
             self.post(URL, DATA)
-                .done(function (e) {
-
-                    var url = '/world/' + world_id + '/chapter/' + chapter_id + "/event/" + e.event_id + "/reward/new"
-
-                    self.redirect(url)
-                })
         } else {
             Materialize.toast("Please complete all fields", 4000, 'rounded')
         }
@@ -208,21 +192,19 @@ scenario.newReward = function () {
         var bonus_life = self.getData("stuff[bonus_life]", true)
         var quantity = self.getData("quantity", true)
 
-        var world_id = self.getData("world_id")
-        var chapter_id = self.getData("chapter_id")
-        var event_id = self.getData("event_id")
+        var world_id = self.getData("stuff[world_id]")
+        var chapter_id = self.getData("stuff[chapter_id]")
+        var event_id = self.getData("stuff[event_id]")
 
         if (name.length != 0 && bonus_attack.length != 0 &&
             bonus_armor.length != 0 && bonus_life.length != 0 && quantity.length != 0) {
-
-            console.log("in reward")
-
             var DATA = {
                 stuff: {
                     name: name,
                     bonus_attack: bonus_attack,
                     bonus_armor: bonus_armor,
-                    bonus_life: bonus_life
+                    bonus_life: bonus_life,
+                    world_id: world_id
                 },
                 quantity: quantity
             }
@@ -230,12 +212,12 @@ scenario.newReward = function () {
             var URL = "/world/" + world_id + "/chapter/" + chapter_id + "/event/" + event_id + "/reward"
 
             self.post(URL, DATA)
-                .done(function (e) {
+                // .done(function (e) {
 
-                    var url = '/world/' + world_id + '/character_type/new'
+                //     var url = '/world/' + world_id + '/character_type/new'
 
-                    self.redirect(url)
-                })
+                //     self.redirect(url)
+                // })
         } else {
             Materialize.toast("Please complete all fields", 4000, 'rounded')
         }
@@ -274,12 +256,12 @@ scenario.newCharacter = function () {
             var URL = "/world/" + world_id + "/character_type/"
 
             self.post(URL, DATA)
-                .done(function (e) {
+                // .done(function (e) {
 
-                    var url = '/world/' + world_id + '/monster/new'
+                //     var url = '/world/' + world_id + '/monster/new'
 
-                    self.redirect(url)
-                })
+                //     self.redirect(url)
+                // })
         } else {
             Materialize.toast("Please complete all fields", 4000, 'rounded')
         }
@@ -318,16 +300,16 @@ scenario.newMonster = function () {
             var URL = "/world/" + world_id + "/monster/"
 
             self.post(URL, DATA)
-                .done(function (e) {
+                // .done(function (e) {
 
-                    var url = '/world/' + world_id + '/monster/new'
+                //     var url = '/world/' + world_id + '/monster/new'
 
-                $(".scenario_content").html("<h2>Your scenario has been created</h2>")
+                //     $(".scenario_content").html("<h2>Your scenario has been created</h2>")
 
-                    setTimeout(function () {
-                        self.redirect("/")
-                    }, 2000)
-                })
+                //     setTimeout(function () {
+                //         self.redirect("/")
+                //     }, 2000)
+                // })
         } else {
             Materialize.toast("Please complete all fields", 4000, 'rounded')
         }

@@ -5,4 +5,6 @@ class Reward < ApplicationRecord
   belongs_to :event
 
   delegate :world, :to => :stuff
+  delegate :name, :to => :stuff
+  delegate :slug, :to => :stuff
 end

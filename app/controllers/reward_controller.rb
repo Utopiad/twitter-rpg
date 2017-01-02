@@ -8,26 +8,18 @@ class RewardController < ApplicationController
   end
 
   def create
-    @stuff = Stuff.new(params.require(:stuff).permit(:name, :world_id, :bonus_attack, :bonus_armor, :bonus_life))
+    @stuff = Stuff.new(params.require(:stuff).permit(:name, :world_id,
+      :bonus_attack, :bonus_armor, :bonus_life))
 
     if @stuff.save
-
-      @reward = Reward.new(quantity: params[:quantity], event_id: params[:event_id], stuff_id: @stuff.id)
-
+      @reward = Reward.new(quantity: params[:quantity],
+        event_id: params[:event_id], stuff_id: @stuff.id)
       if @reward.save
-        if request.xhr?
-          render :json => {
-            :world_id => params[:world_id]
-          }
-        else
-          redirect_to controller: "character_type", action: "new", :world_id => params[:world_id]
-        end
+        redirect_to controller: :character_type, action: :new,
+          world_id: params[:world_id]
       else
-        @errors = @character_type.errors
         render :new
       end
-
     end
-
   end
 end

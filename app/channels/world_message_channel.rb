@@ -26,7 +26,6 @@ class WorldMessageChannel < ApplicationCable::Channel
       self.attribute(message, character, event_id, channel)
       self.pass_turn(message, character, event_id, channel)
     else
-      puts 'oui'
       self.attack(message, character, event_id, channel)
       self.equip(message, character, event_id, channel)
     end
@@ -46,7 +45,12 @@ class WorldMessageChannel < ApplicationCable::Channel
     fight_message = Message.new(character: character,
       event_id: event_id, message: fight.export(:txt))
     if fight_message.save
-      ActionCable.server.broadcast(channel, message: render_message(fight_message))
+      ActionCable.server.broadcast(channel, message: render_message(fight_message),
+        characters: [fight.attacker.id, fight.defender.id],
+        updated_current_life: {
+          fight.attacker.id => fight.attacker.current_life,
+          fight.defender.id => fight.defender.current_life
+        })
     end
   end
 
@@ -66,7 +70,12 @@ class WorldMessageChannel < ApplicationCable::Channel
     pass_turn_message = Message.new(character: character,
       event_id: event_id, message: message)
     if pass_turn_message.save
-      ActionCable.server.broadcast(channel, message: render_message(pass_turn_message))
+      ActionCable.server.broadcast(channel, message: render_message(pass_turn_message),
+        characters: [character.id],
+        updated_armor: {character.id => character.armor},
+        updated_life: {character.id => character.life},
+        updated_attack_min: {character.id => character.attack_min},
+        updated_attack_max: {character.id => character.attack_max})
     end
   end
 
@@ -87,20 +96,20 @@ class WorldMessageChannel < ApplicationCable::Channel
   def attack(message, character, event_id, channel)
     reg = Regexp.new(/(\B#\w\w+)\s(\B@\w\w+)/)
     actions = message.message.scan(reg)
-    puts actions
-    return false if character.has_played?
+    # return false if character.has_played?
     actions.each do |action|
       if action[0] == "#attack"
+        puts "oui"
         target = EventMonster.where(slug: action[1]).first
         unless target.blank?
           fight = character.attack(target)
           self.fight_message(fight, character, event_id, channel)
         else
           target = message.character.world.characters.where(slug: action[1]).first
+          puts target
           return false if target.blank?
-                  puts 'ouuuuuui'
-
           fight = character.attack(target)
+          puts fight
           self.fight_message(fight, character, event_id, channel)
         end
       else
@@ -120,6 +129,7 @@ class WorldMessageChannel < ApplicationCable::Channel
 
         target = message.character.world.characters.where(slug: action[2]).first
         unless target.blank?
+          # puts "oui"
           reward.attribute_to(target)
           self.attribution_message(character, reward.stuff, target, event_id, channel)
         end
@@ -157,7 +167,11 @@ class WorldMessageChannel < ApplicationCable::Channel
     actions.each do |action|
       if action[1] == "#attack"
         attacker = EventMonster.where(slug: action[0]).first
-        return false if attacker.has_played?
+        puts action[0]
+        puts attacker
+        if attacker.blank? || attacker.has_played?
+          return false
+        end
 
         target = EventMonster.where(slug: action[2]).first
         unless target.blank?
@@ -165,6 +179,7 @@ class WorldMessageChannel < ApplicationCable::Channel
           self.fight_message(fight, character, event_id, channel)
         else
           target = message.character.world.characters.where(slug: action[2]).first
+          puts target
           return false if target.blank?
           fight = attacker.attack(target)
           self.fight_message(fight, character, event_id, channel)

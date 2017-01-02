@@ -14,18 +14,17 @@ class WorldController < ApplicationController
   end
 
   def create
-    puts params.inspect
-    @world = World.new(params.require(:world).permit(:name, :public))
+    # @world = World.new(params.require(:world).permit(:name, :public))
+    name = params[:world][:name]
+    public = params[:world][:public]
+    @world = World.new(name: name, public: public)
     @world.user = current_user
     if @world.save
-      if request.xhr?
-        render :json => {
-          :world => @world
-        }
-      else
-        cookies[:current_world_id] = @world.id
-        redirect_to controller: "chapter", action: "new", :world_id => @world.id
-      end
+      narrator = CharacterType.find(1).characters.create(name: params[:world][:narrator_name],
+        user: current_user, world: @world)
+      puts narrator.errors.inspect
+      @world.narrator = narrator
+      redirect_to controller: "chapter", action: "new", :world_id => @world.id
     else
       render :new
     end

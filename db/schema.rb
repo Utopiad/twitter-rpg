@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20161218030427) do
     t.text     "description"
     t.string   "image"
     t.integer  "world_id"
-    t.integer  "active",      default: 0
+    t.integer  "active",      default: 1
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 20161218030427) do
   create_table "character_types", force: :cascade do |t|
     t.text     "name"
     t.integer  "world_id"
-    t.integer  "attack_min"
-    t.integer  "attack_max"
-    t.integer  "armor"
-    t.integer  "life"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "attack_min", default: 0
+    t.integer  "attack_max", default: 0
+    t.integer  "armor",      default: 0
+    t.integer  "life",       default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "characters", force: :cascade do |t|
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20161218030427) do
     t.text     "description"
     t.string   "image"
     t.integer  "chapter_id"
-    t.integer  "active",      default: 0
+    t.integer  "active",      default: 1
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20161218030427) do
     t.integer  "bonus_armor"
     t.integer  "bonus_life"
     t.string   "name"
+    t.string   "slug"
     t.string   "image"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -172,7 +173,8 @@ ActiveRecord::Schema.define(version: 20161218030427) do
   create_table "worlds", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "character_id"
-    t.text     "name"
+    t.string   "name"
+    t.text     "description"
     t.string   "image"
     t.integer  "public"
     t.integer  "max_character_count"

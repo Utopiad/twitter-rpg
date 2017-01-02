@@ -16,7 +16,7 @@
                 <h2> Vos scénarios </h2>
                 <div class="layout-left-container">
                   <!--  USER WORLDS CARDS-->
-                  <% @user_worlds.each do | scenar | %>
+                  <% @user_worlds.each do |world| %>
                       <div class="user-world-card">
                         <img src="http://lorempixel.com/332/171" alt="">
 
@@ -27,30 +27,32 @@
                             </div>
                             <div class="card-controls-right">
                               <span class="card-controls-right i i-play"></span>
-                              <%= link_to(:controller=>'world', :action=>'edit', :id=>scenar.id) do %>
+                              <%= link_to(controller: :world, action: :edit, id: world.id) do %>
                                 <span class="card-controls-right i i-edit"></span>
                               <% end %>
                               <span class="card-controls-right i i-share"></span>
                             </div>
                           </div>
-                          <%= link_to(:controller=>'world', :action=>'show', :id => scenar.id)  do %>
-                            <h4 class="world-card-title"><%= scenar.name  %></h4>
+                          <%= link_to(controller: :world, action: :show, id: world.id)  do %>
+                            <h4 class="world-card-title"><%= world.name  %></h4>
                           <% end %>
 
-                          <div class="world-card-creator"> Créateur: <%= User.where(id: scenar.user_id).name %></div>
+                          <div class="world-card-creator"> Créateur: <%= User.where(id: world.user_id).first.name %></div>
                         </div>
 
-                        <div class="world-card-description"><%# scenar.chapters.active.description %></div>
+                        <div class="world-card-description"><%# world.chapters.active.description %></div>
                         <span class="txt-personnage">Votre personnage</span>
                         <div class="world-character">
-                          <% if scenar.user_id == current_user.id %>
+                          <% if world.user_id == current_user.id %>
                               <span class="i i-mj"></span>
                           <% else %>
                               <%# image_tag 'ncage.jpg' %>
                           <% end %>
 
                           <div class="world-character-name">
-                            <%# current_user.character_for_world_id(scenar.id).name.to_s %>
+                            <%# current_user.character_for_world_id(world.id).name.to_s %>
+                          </div>
+                          <div>
                           </div>
                         </div>
                       </div>
@@ -65,26 +67,26 @@
           <div class="layout-right">
             <% if @joined_worlds %>
                 <h2> Parties en cours </h2>
-                <% @joined_worlds.each do | scenar | %>
+                <% @joined_worlds.each do |world| %>
                     <div class="world-joined-card">
                       <div class="info-left">
-                        <h4 class="world-card-title"><%= scenar.name  %></h4>
-                        <div class="world-card-creator"> Créateur: <%= User.where(id: scenar.user_id).name %></div>
-                        <div class="world-card-description"><%# scenar.chapters.active.description %></div>
+                        <h4 class="world-card-title"><%= world.name  %></h4>
+                        <div class="world-card-creator"> Créateur: <%= User.where(id: world.user_id).name %></div>
+                        <div class="world-card-description"><%# world.chapters.active.description %></div>
                       </div>
                       <img src="http://lorempixel.com/152/215" alt="">
 
 
                       <!-- <span class="txt-personnage">Votre personnage</span>
               <div class="world-character">
-                <% if scenar.user_id == current_user.id %>
+                <% if world.user_id == current_user.id %>
                   <span class="i i-mj"></span>
                 <% else %>
                   <%# image_tag 'ncage.jpg' %>
                 <% end %>
 
                 <div class="world-character-name">
-                  <%# current_user.character_for_world_id(scenar.id).name.to_s %>
+                  <%# current_user.character_for_world_id(world.id).name.to_s %>
                 </div>
               </div> -->
                     </div>

@@ -27,11 +27,11 @@
               </div>
             </div>
 
+            <%= f.hidden_field :world_id, value: @world_id %>
             <div class="scenario_content_form__more">
               <%= image_tag "more.svg" %>
             </div>
 
-            <%= hidden_field_tag :world_id, @world_id %>
 
             <div class="row">
               <%= f.button "Next step", :id => "newChapter",  :class => "scenario_content_form__submit" -%>

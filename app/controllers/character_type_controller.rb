@@ -11,13 +11,7 @@ class CharacterTypeController < ApplicationController
     world_id = params[:world_id]
     @character_type.world = World.where(id: world_id).first
     if @character_type.save
-      if request.xhr?
-        render :json => {
-          :world_id => params[:world_id]
-        }
-      else
         redirect_to controller: "monster", action: "new", :world_id => params[:world_id]
-      end
     else
       @errors = @character_type.errors
       render :new

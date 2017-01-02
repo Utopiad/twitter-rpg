@@ -6,18 +6,16 @@ class EventController < ApplicationController
   end
 
   def create
-    @event = Event.new(params.require(:event).permit(:title, :description, :picture, :chapter_id))
+    @event = Event.new(params.require(:event).permit(:title, :description,
+      :picture, :chapter_id))
+
+    world_id = params[:world_id]
+
     if @event.save
-      if request.xhr?
-        render :json => {
-          :world_id => params[:world_id],
-          :chapter_id => params[:chapter_id],
-          :event_id => @event.id
-        }
-      else
-        redirect_to controller: "reward", action: "new", :world_id => params[:world_id], :chapter_id => params[:chapter_id], :event_id => @event.id
-      end
+      redirect_to controller: :reward, action: :new, world_id: world_id,
+        chapter_id: params[:chapter_id], event_id: @event.id
     else
+      puts @events.error.inspect
       render :new
     end
   end

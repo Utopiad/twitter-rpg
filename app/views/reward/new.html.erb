@@ -39,9 +39,9 @@
               </div>
             </div>
 
-            <%= hidden_field_tag :world_id, @world_id %>
-            <%= hidden_field_tag :chapter_id, @chapter_id %>
-            <%= hidden_field_tag :event_id, @event_id %>
+            <%= f.hidden_field :world_id, value: @world_id %>
+            <%= f.hidden_field :chapter_id, value: @chapter_id %>
+            <%= f.hidden_field :event_id, value: @event_id %>
 
             <div class="row">
               <%= f.button "Next step", :id => "newReward", :class => "scenario_content_form__submit" -%>

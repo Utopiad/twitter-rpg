@@ -13,13 +13,7 @@ class MonsterController < ApplicationController
     @monster.world = World.where(id: world_id).first
 
     if @monster.save
-      if request.xhr?
-        render :json => {
-          :world_id => params[:world_id]
-        }
-      else
-        redirect_to root_path
-      end
+      redirect_to root_path
     else
       render :new
     end

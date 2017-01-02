@@ -20,6 +20,10 @@
                   <%= f.label :scenario_name %>
                   <%= f.text_field :name -%>
                 </div>
+                <div class="input-field">
+                  <%= label_tag :narrator_name %>
+                  <%= text_field_tag :narrator_name -%>
+                </div>
                 <div class="">
                   <%= f.check_box(:public) %>
                   <%= f.label(:public, "Make server as public ?") %>

@@ -1,5 +1,5 @@
 class CharacterType < ApplicationRecord
-  belongs_to :world
+  belongs_to :world, required: false
   has_many :characters, dependent: :destroy
 
   validates :name, presence: true

@@ -15,7 +15,6 @@
     <p><%= submit_tag "Create" %></p>
   <% end %>
 </div>
-
 <div class="game">
   <div class="world-image">
 
@@ -45,7 +44,8 @@
         <div class="event">
 
           <div class="left">
-            <h2><%= @current_event.title %></h2>
+
+            <h2>Les évènements</h2>
             <div class="event-desc"><%= @current_event.description %></div>
             <h2>Les monstres</h2>
             <div class="monsters-list">
@@ -83,7 +83,8 @@
 
             <% end %>
           </div>
-          <div class="messages-conv">
+
+          <div class="messages-conv" id="messages">
             <% @messages.each do |message| %>
               <%= render partial: "message/message", locals: { message: message } %>
             <% end %>
@@ -120,17 +121,23 @@
               <span>PV</span>
               <div class="life-bar"></div>
               <span class="life-indicator">
-                <%= @character.current_life %>/<%= @full_life %>
+                <span id="current_life"><%= @character.current_life %></span>/<%= @character.life %>
               </span>
             </div>
             <div class="bottom-section">
               <div class="attaque-info">
                 Attaque :
-                <%= @character_type.attack_min %> - <%= @character_type.attack_max %>
+                <span id="attack_min">
+                  <%= @character.attack_min %>
+                </span>  - 
+                <span id="attack_max">
+                  <%= @character.attack_max %>
+                </span>
               </div>
               <div class="armure-info">
-                Armure :
-                <%= @character_type.armor %>
+                Armure : <span id="armor">
+                  <%= @character.armor %>
+                </span>
               </div>
             </div>
           </div>
