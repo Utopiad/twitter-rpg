@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 load 'image_uploader.rb'
 
 class Chapter < ApplicationRecord
@@ -10,8 +12,9 @@ class Chapter < ApplicationRecord
   mount_uploader :image, ChapterImageUploader
 
   def activate_event!(event)
-    return false unless event.chapter.id == self.id && self.active?
-    self.events.where(active: 1).find_all.map{ |event| event.deactivate! }
+    return false unless event.chapter.id == id && active?
+
+    events.where(active: 1).find_all.map(&:deactivate!)
     event.activate!
   end
 end

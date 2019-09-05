@@ -1,5 +1,6 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
 
+source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -12,7 +13,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-#gem 'coffee-rails', '~> 4.2'
+# gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -38,12 +39,12 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
   gem 'listen', '~> 3.0.5'
+  gem 'web-console'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'rails-erd'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rails-erd'
   # gem 'pry-rails', :group => :development
 end
 
@@ -52,19 +53,19 @@ group :docker do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'devise'
 gem 'rspec'
 gem 'rspec-rails'
 
-gem 'materialize-sass'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
-gem 'fog', '>= 1.0.0'
-gem 'mini_magick'
 gem 'faye-websocket'
+gem 'fog', '>= 1.0.0'
+gem 'materialize-sass'
+gem 'mini_magick'
 
+gem 'bcrypt', '3.1.11', require: 'bcrypt' if Gem.win_platform?
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-gem 'bcrypt', '3.1.11', :require => 'bcrypt' if Gem.win_platform?
 
-ruby "2.3.1"
+ruby '2.3.1'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChapterController < ApplicationController
   def new
     @chapter = Chapter.new
@@ -6,7 +8,7 @@ class ChapterController < ApplicationController
 
   def create
     @chapter = Chapter.new(params.require(:chapter).permit(:picture,
-      :description, :world_id, :title))
+                                                           :description, :world_id, :title))
     puts params[:world_id]
     puts params.inspect
     if @chapter.save
@@ -19,6 +21,6 @@ class ChapterController < ApplicationController
 
   def show
     @chapter = Chapter.where(id: params[:id]).first
-    head 404 and return unless @chapter
+    head(404) && return unless @chapter
   end
 end

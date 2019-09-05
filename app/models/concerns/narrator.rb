@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Narrator
   extend ActiveSupport::Concern
 
@@ -6,17 +8,16 @@ module Narrator
   end
 
   def is_narrator?
-    self.is_narrator == 1
+    is_narrator == 1
   end
 
   def is_narrator!
     self.is_narrator = 1
-    self.save
+    save
   end
 
   def is_not_narrator!
     self.is_narrator = 0
-    self.save
+    save
   end
-
 end

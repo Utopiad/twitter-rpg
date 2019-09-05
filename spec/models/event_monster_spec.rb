@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe EventMonster, type: :model do
-
   it 'needs a world' do
-    u = User.new(email: "babar@gmail.com", password: "rabab")
+    u = User.new(email: 'babar@gmail.com', password: 'rabab')
     u.save
-    world = World.new(user: u, name: "bigelow")
+    world = World.new(user: u, name: 'bigelow')
     world.save
     monster = Monster.new(
       name: 'laidron',
@@ -25,9 +26,9 @@ RSpec.describe EventMonster, type: :model do
   end
 
   it 'can fight an event_monster' do
-    u = User.new(email: "babar@gmail.com", password: "rabab")
+    u = User.new(email: 'babar@gmail.com', password: 'rabab')
     u.save
-    world = World.new(user: u, name: "bigelow")
+    world = World.new(user: u, name: 'bigelow')
     world.save
     monster = Monster.new(
       name: 'gronul',
@@ -60,9 +61,9 @@ RSpec.describe EventMonster, type: :model do
   end
 
   it 'loses life in a fight' do
-    u = User.new(email: "babar@gmail.com", password: "rabab")
+    u = User.new(email: 'babar@gmail.com', password: 'rabab')
     u.save
-    world = World.new(user: u, name: "bigelow")
+    world = World.new(user: u, name: 'bigelow')
     world.save
     monster = Monster.new(
       name: 'Gronul',
@@ -97,9 +98,9 @@ RSpec.describe EventMonster, type: :model do
   end
 
   it 'can\'t fight itself' do
-    u = User.new(email: "babar@gmail.com", password: "rabab")
+    u = User.new(email: 'babar@gmail.com', password: 'rabab')
     u.save
-    world = World.new(user: u, name: "bigelow")
+    world = World.new(user: u, name: 'bigelow')
     world.save
     monster = Monster.new(
       name: 'gronul',
@@ -119,9 +120,9 @@ RSpec.describe EventMonster, type: :model do
   end
 
   it 'can\'t fight a user' do
-    u = User.new(email: "babar@gmail.com", password: "rabab")
+    u = User.new(email: 'babar@gmail.com', password: 'rabab')
     u.save
-    world = World.new(user: u, name: "bigelow")
+    world = World.new(user: u, name: 'bigelow')
     world.save
     monster = Monster.new(
       name: 'gronul',
@@ -141,9 +142,9 @@ RSpec.describe EventMonster, type: :model do
   end
 
   it 'can\'t fight a world' do
-    u = User.new(email: "babar@gmail.com", password: "rabab")
+    u = User.new(email: 'babar@gmail.com', password: 'rabab')
     u.save
-    world = World.new(user: u, name: "bigelow")
+    world = World.new(user: u, name: 'bigelow')
     world.save
     monster = Monster.new(
       name: 'gronul',
@@ -163,9 +164,9 @@ RSpec.describe EventMonster, type: :model do
   end
 
   it 'can\'t fight a monster' do
-    u = User.new(email: "babar@gmail.com", password: "rabab")
+    u = User.new(email: 'babar@gmail.com', password: 'rabab')
     u.save
-    world = World.new(user: u, name: "bigelow")
+    world = World.new(user: u, name: 'bigelow')
     world.save
     monster = Monster.new(
       name: 'gronul',

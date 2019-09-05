@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 module Player
   extend ActiveSupport::Concern
 
   def has_played?
-    self.has_played == 1
+    has_played == 1
   end
 
   def has_played!
     self.has_played = 1
-    self.save
+    save
   end
 
   def has_not_played!
     self.has_played = 0
-    self.save
+    save
   end
 end

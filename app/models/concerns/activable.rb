@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 module Activable
   extend ActiveSupport::Concern
 
   included do
-    scope :active, -> { where("active = ?", 1).first }
+    scope :active, -> { where('active = ?', 1).first }
   end
 
   def activate!
     self.active = 1
-    self.save
+    save
   end
 
   def deactivate!
     self.active = 0
-    self.save
+    save
   end
 
   def active?
-    self.active == 1
+    active == 1
   end
 end

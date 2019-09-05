@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CharacterType < ApplicationRecord
   belongs_to :world, required: false
   has_many :characters, dependent: :destroy

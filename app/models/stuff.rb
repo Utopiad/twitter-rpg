@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 load 'image_uploader.rb'
 
 class Stuff < ApplicationRecord

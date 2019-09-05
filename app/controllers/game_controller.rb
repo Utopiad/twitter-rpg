@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 class GameController < ApplicationController
   def index
     @world = World.where(id: params[:world_id]).first
-    head 404 and return unless @world
+    head(404) && return unless @world
     @current_chapter = @world.current_chapter
     @current_event = @world.current_event
     @messages = @current_event.messages.order(created_at: :desc)
 
     if current_user == @world.game_master
       cookies.signed[:current_user_id] = current_user.id
-      puts "game master"
+      puts 'game master'
     end
 
     if current_user.joined_worlds.pluck(:id).include?(@world.id)

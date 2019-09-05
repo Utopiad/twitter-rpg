@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -10,7 +12,6 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
   config.action_cable.disable_request_forgery_protection = true
-
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
@@ -39,7 +40,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   config.action_cable.url = 'wss://twitter-rpg.herokuapp.com/cable'
-  config.action_cable.allowed_request_origins = [ 'http://twitter-rpg.herokuapp.com', 'https://twitter-rpg.herokuapp.com' ]
+  config.action_cable.allowed_request_origins = ['http://twitter-rpg.herokuapp.com', 'https://twitter-rpg.herokuapp.com']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -49,7 +50,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -77,13 +78,13 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  config.action_cable.allowed_request_origins = ["http://twitter-rpg.herokuapp.com"]
+  config.action_cable.allowed_request_origins = ['http://twitter-rpg.herokuapp.com']
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module Usable
   extend ActiveSupport::Concern
 
   def use!
     self.used = 1
-    self.save
+    save
   end
 
   def used?
-    self.used == 1
+    used == 1
   end
 end

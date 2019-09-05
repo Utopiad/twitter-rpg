@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # require 'pry'
 
 module Fighter
@@ -8,7 +10,7 @@ module Fighter
     #   return false
     # end
 
-    hit = rand(self.attack_min..self.attack_max)
+    hit = rand(attack_min..attack_max)
 
     if hit > target.armor
       inc_malus_life = hit - target.armor
@@ -20,9 +22,9 @@ module Fighter
     fight = Fight.new(attacker: self, defender: target, hit: hit)
     fight.save
 
-    self.has_played!
+    has_played!
 
-    return fight
+    fight
   end
 
   # def heal(target:, amount:)

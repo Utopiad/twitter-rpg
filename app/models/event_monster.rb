@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventMonster < ApplicationRecord
   include Fighter
   include Player
@@ -7,30 +9,29 @@ class EventMonster < ApplicationRecord
   belongs_to :monster
   belongs_to :event
 
-  delegate :world, :to => :monster
-  delegate :name, :to => :monster
-  delegate :slug, :to => :monster
+  delegate :world, to: :monster
+  delegate :name, to: :monster
+  delegate :slug, to: :monster
 
   validates_uniqueness_of :name
 
-
   def current_life
-    self.life - self.malus_life
+    life - malus_life
   end
 
   def life
-    self.monster.life + self.bonus_life
+    monster.life + bonus_life
   end
 
   def armor
-    self.monster.armor + self.bonus_armor
+    monster.armor + bonus_armor
   end
 
   def attack_min
-    self.monster.attack_min + self.bonus_attack
+    monster.attack_min + bonus_attack
   end
 
   def attack_max
-    self.monster.attack_max + self.bonus_attack
+    monster.attack_max + bonus_attack
   end
 end

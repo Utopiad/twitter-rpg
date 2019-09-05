@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 load 'image_uploader.rb'
 
 class Character < ApplicationRecord
@@ -26,42 +28,42 @@ class Character < ApplicationRecord
   validates_uniqueness_of :name
 
   def user_not_in_world
-    if !user.joined_worlds.empty?
+    unless user.joined_worlds.empty?
       if user.joined_worlds.pluck(:id).include?(world.id)
-        errors.add(:user, "is in world")
+        errors.add(:user, 'is in world')
       end
     end
   end
 
   def user_not_world_game_master
-    if !user.joined_worlds.empty?
+    unless user.joined_worlds.empty?
       if user.worlds.pluck(:id).include?(world.id)
-        errors.add(:user, "is game master")
+        errors.add(:user, 'is game master')
       end
     end
   end
 
   def world_not_full
-    errors.add(:world, "is full") if world.max_character_count == world.characters.count
+    errors.add(:world, 'is full') if world.max_character_count == world.characters.count
   end
 
   def current_life
-    self.life - self.malus_life
+    life - malus_life
   end
 
   def life
-    self.character_type.life + self.bonus_life + self.life_stuffs_bonus
+    character_type.life + bonus_life + life_stuffs_bonus
   end
 
   def armor
-    self.character_type.armor + self.bonus_armor + self.armor_stuffs_bonus
+    character_type.armor + bonus_armor + armor_stuffs_bonus
   end
 
   def attack_min
-    self.character_type.attack_min + self.bonus_attack + self.attack_stuffs_bonus
+    character_type.attack_min + bonus_attack + attack_stuffs_bonus
   end
 
   def attack_max
-    self.character_type.attack_max + self.bonus_attack + self.attack_stuffs_bonus
+    character_type.attack_max + bonus_attack + attack_stuffs_bonus
   end
 end

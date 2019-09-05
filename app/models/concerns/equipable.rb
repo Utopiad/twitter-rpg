@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module Equipable
   extend ActiveSupport::Concern
 
   def equip!
     self.equiped = 1
-    self.save
+    save
   end
 
   def equiped?
-    self.equiped == 1
+    equiped == 1
   end
 end

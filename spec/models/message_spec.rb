@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Message, type: :model do
-
   it 'has a message and comes from a character' do
     text_piece = "Let\'s smash them hard!"
     message = Message.new(message: text_piece)
@@ -9,20 +10,20 @@ RSpec.describe Message, type: :model do
     expect(message.save).to eq(false)
 
     u = User.new(
-      email:'holamaster@gmail.fr',
+      email: 'holamaster@gmail.fr',
       password: 'zezette09'
     )
     u.save
 
     gamer = User.new(
-      email:'sombrero_amarillo@gmail.fr',
+      email: 'sombrero_amarillo@gmail.fr',
       password: 'jgvhfcjhnlk'
     )
     gamer.save
 
     w = World.new(
       user_id: u.id,
-      name:"Equestria",
+      name: 'Equestria',
       public: 0,
       max_character_count: 5
     )
@@ -41,14 +42,14 @@ RSpec.describe Message, type: :model do
     character = Character.new(
       user_id: gamer.id,
       character_type_id: race.id,
-      name: "Vraële"
+      name: 'Vraële'
     )
     character.save
 
     chapter = Chapter.new(
-      title: "Ragnarok",
-      description: "Apocalypse Now",
-      image: "c_la_fin.jpg",
+      title: 'Ragnarok',
+      description: 'Apocalypse Now',
+      image: 'c_la_fin.jpg',
       world_id: w.id
     )
     chapter.save
@@ -68,22 +69,21 @@ RSpec.describe Message, type: :model do
   end
 
   it 'doesn\'t save empty messages' do
-
     u = User.new(
-      email:'holamaster@gmail.fr',
+      email: 'holamaster@gmail.fr',
       password: 'zezette09'
     )
     u.save
 
     gamer = User.new(
-      email:'sombrero_amarillo@gmail.fr',
+      email: 'sombrero_amarillo@gmail.fr',
       password: 'jgvhfcjhnlk'
     )
     gamer.save
 
     w = World.new(
       user_id: u.id,
-      name:"Equestria",
+      name: 'Equestria',
       public: 0,
       max_character_count: 5
     )
@@ -102,14 +102,14 @@ RSpec.describe Message, type: :model do
     character = Character.new(
       user_id: gamer.id,
       character_type_id: race.id,
-      name: "Vraële"
+      name: 'Vraële'
     )
     character.save
 
     chapter = Chapter.new(
-      title: "Ragnarok",
-      description: "Apocalypse Now",
-      image: "c_la_fin.jpg",
+      title: 'Ragnarok',
+      description: 'Apocalypse Now',
+      image: 'c_la_fin.jpg',
       world_id: w.id
     )
     chapter.save
@@ -133,20 +133,20 @@ RSpec.describe Message, type: :model do
 
   it 'is accessible by word reference' do
     u = User.new(
-      email:'holamaster@gmail.fr',
+      email: 'holamaster@gmail.fr',
       password: 'zezette09'
     )
     u.save
 
     gamer = User.new(
-      email:'sombrero_amarillo@gmail.fr',
+      email: 'sombrero_amarillo@gmail.fr',
       password: 'jgvhfcjhnlk'
     )
     gamer.save
 
     w = World.new(
       user_id: u.id,
-      name:"Equestria",
+      name: 'Equestria',
       public: 0,
       max_character_count: 5
     )
@@ -165,14 +165,14 @@ RSpec.describe Message, type: :model do
     character = Character.new(
       user_id: gamer.id,
       character_type_id: race.id,
-      name: "Vraële"
+      name: 'Vraële'
     )
     character.save
 
     chapter = Chapter.new(
-      title: "Ragnarok",
-      description: "Apocalypse Now",
-      image: "c_la_fin.jpg",
+      title: 'Ragnarok',
+      description: 'Apocalypse Now',
+      image: 'c_la_fin.jpg',
       world_id: w.id
     )
     chapter.save
@@ -194,9 +194,7 @@ RSpec.describe Message, type: :model do
     message.save
 
     w.messages.each do |txt|
-      if txt.id == message.id
-        expect(txt.message).to eq("Hello there !")
-      end
+      expect(txt.message).to eq('Hello there !') if txt.id == message.id
     end
   end
 end

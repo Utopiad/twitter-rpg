@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 load 'image_uploader.rb'
 
 class Event < ApplicationRecord
@@ -13,28 +15,28 @@ class Event < ApplicationRecord
 
   has_many :messages
 
-  delegate :world, :to => :chapter
+  delegate :world, to: :chapter
 
   mount_uploader :image, EventImageUploader
 
   before_create :start_turn
 
   def start_turn
-    self.turns.new
+    turns.new
   end
 
   def grouped_monsters
-    self.event_monsters.group_by{|m| m.monster_id}
+    event_monsters.group_by(&:monster_id)
   end
 
   def current_turn
-    self.turns.where(finished: 0).first
+    turns.where(finished: 0).first
   end
 
   def pass_turn
-    self.current_turn.finish!
-    self.world.characters.find_all.map{ |c| c.has_not_played! }
-    self.world.current_event.event_monsters.find_all.map{ |em| em.has_not_played! }
-    self.turns.new.save
+    current_turn.finish!
+    world.characters.find_all.map(&:has_not_played!)
+    world.current_event.event_monsters.find_all.map(&:has_not_played!)
+    turns.new.save
   end
 end

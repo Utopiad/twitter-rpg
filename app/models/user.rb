@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 load 'image_uploader.rb'
 
 class User < ApplicationRecord
@@ -12,10 +14,10 @@ class User < ApplicationRecord
   mount_uploader :image, UserImageUploader
 
   def joined_worlds
-    self.characters.map{ |c| c.world }
+    characters.map(&:world)
   end
 
   def character_for_world_id(world_id)
-    self.characters.where(world_id: world_id).first
+    characters.where(world_id: world_id).first
   end
 end

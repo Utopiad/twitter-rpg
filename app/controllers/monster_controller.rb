@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MonsterController < ApplicationController
   def new
     @monster = Monster.new
@@ -6,7 +8,7 @@ class MonsterController < ApplicationController
 
   def create
     @monster = Monster.new(params.require(:monster).permit(:name,
-      :attack_min, :attack_max, :armor, :life))
+                                                           :attack_min, :attack_max, :armor, :life))
 
     world_id = params[:world_id]
 
@@ -21,6 +23,6 @@ class MonsterController < ApplicationController
 
   def show
     @monster = Monster.where(id: params[:id]).first
-    head 404 and return unless @monster
+    head(404) && return unless @monster
   end
 end

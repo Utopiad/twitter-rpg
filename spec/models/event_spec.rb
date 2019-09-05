@@ -1,20 +1,22 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
   it 'needs a chapter' do
-    u = User.new(email:"master_guy@life.com", password:"bamboulabambouli")
+    u = User.new(email: 'master_guy@life.com', password: 'bamboulabambouli')
     u.save
-    world = World.new(user:u, name:'bigelow')
+    world = World.new(user: u, name: 'bigelow')
     world.save
     chapter = Chapter.new(
       world: world,
-      title:"Elections Présidentielles 2017",
-      description: "Marine Le Pen passera-t-elle ?",
+      title: 'Elections Présidentielles 2017',
+      description: 'Marine Le Pen passera-t-elle ?',
       world_id: world.id
     )
     chapter.save
     event = Event.new(
-      title: 'A l\'assaut !',
+      title: 'A l\'assaut !'
     )
     expect(event.save).to eq(false)
     event.chapter_id = chapter.id
@@ -22,14 +24,14 @@ RSpec.describe Event, type: :model do
   end
 
   it 'can have an event_monster' do
-    u = User.new(email:"master_guy@life.com", password:"bamboulabambouli")
+    u = User.new(email: 'master_guy@life.com', password: 'bamboulabambouli')
     u.save
-    world = World.new(user:u, name:'bigelow')
+    world = World.new(user: u, name: 'bigelow')
     world.save
     chapter = Chapter.new(
       world: world,
-      title:"Elections Présidentielles 2017",
-      description: "Marine Le Pen passera-t-elle ?",
+      title: 'Elections Présidentielles 2017',
+      description: 'Marine Le Pen passera-t-elle ?',
       world_id: world.id
     )
     chapter.save
@@ -66,5 +68,4 @@ RSpec.describe Event, type: :model do
   it 'destroys itself if all events_monster are dead' do
     puts 'something to do'
   end
-
 end

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   resources :world do
-    post "/activate_chapter" => "game#activate_chapter"
-    post "/activate_event" => "game#activate_event"
+    post '/activate_chapter' => 'game#activate_chapter'
+    post '/activate_event' => 'game#activate_event'
     resources :character
     resources :stuff
     resources :character_type
@@ -17,8 +19,6 @@ Rails.application.routes.draw do
       # post "world#activate_chapter"
     end
   end
-
-
 
   devise_for :users
 
